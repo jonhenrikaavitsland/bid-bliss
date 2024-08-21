@@ -1,7 +1,7 @@
 {
-  "name": "start-aavits",
+  "name": "bidbliss",
   "version": "0.0.4",
-  "description": "A starter for any custom project of mine",
+  "description": "The project is a website built for my Semester Project 2.",
   "type": "module",
   "main": "index.js",
   "scripts": {
@@ -17,7 +17,7 @@
     "lint": "eslint src/**/*.{js,mjs}",
     "lint-fix": "eslint src/**/*.{js,mjs} --cache --fix"
   },
-  "author": "Jon Henrik Åvitsland (\"https://www.linkedin.com/in/jon-henrik-aavitsland-abaa872b7/\")",
+  "author": "Jon Henrik Aavitsland (\"https://www.linkedin.com/in/jon-henrik-aavitsland-abaa872b7/\")",
   "license": "ISC",
   "devDependencies": {
     "@babel/core": "^7.19.3",
