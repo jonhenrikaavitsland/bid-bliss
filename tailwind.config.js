@@ -3,6 +3,16 @@ export default {
   content: ['./**/index.html', './src/**/*.{js,ts,jsx,tsx,mjs,cjs}'],
   theme: {
     extend: {},
+    colors: {
+      transparent: 'transparent',
+      white: '#FFF',
+      neutralBg: '#ECF0F1',
+      primary: '#2C3E50',
+      secondary: '#3498DB',
+      neutralTxt: '#7F8C8D',
+      error: '#E74C3C',
+      correct: '#2ECC71',
+    },
   },
   plugins: [],
 };
