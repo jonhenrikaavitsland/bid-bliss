@@ -41,13 +41,15 @@
     "vite": "^5.3.5"
   },
   "lint-staged": {
-    "*.{js,mjs}": "prettier --write",
+    "*.{js,mjs}": [
+      "prettier --write",
+      "eslint --cache --fix"
+    ],
     "*.html": [
       "prettier --write"
     ],
     "*.scss": [
       "prettier --write"
-    ],
-    "*.js": "eslint --cache --fix"
+    ]
   }
 }
