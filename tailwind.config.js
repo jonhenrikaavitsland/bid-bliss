@@ -28,7 +28,7 @@ export default {
       neutralBg: '#ECF0F1',
       primary: '#2C3E50',
       secondary: '#3498DB',
-      neutralTxt: '#7F8C8D',
+      neutralTxt: '#151717',
       error: '#E74C3C',
       correct: '#2ECC71',
       hoverPrimary: '#3C4F64',
