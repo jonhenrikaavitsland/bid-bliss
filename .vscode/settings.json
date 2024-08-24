@@ -7,10 +7,5 @@
   "eslint.validate": [
     "javascript"
   ],
-  "cSpell.words": [
-    "Aavitsland",
-    "bidbliss",
-    "mochawesome",
-    "tailwindcss"
-  ]
+  "cSpell.words": ["Aavitsland", "bidbliss", "mochawesome", "Roboto", "tailwindcss"]
 }
