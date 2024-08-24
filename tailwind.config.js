@@ -3,7 +3,7 @@
 const defaultTheme = require('tailwindcss/defaultTheme');
 
 export default {
-  content: ['./**/index.html', './src/**/*.{js,ts,jsx,tsx,mjs,cjs}'],
+  content: ['./index.html', './src/**/*.{js,ts,jsx,tsx,mjs,cjs}'],
   theme: {
     extend: {
       fontFamily: {
@@ -51,19 +51,19 @@ export default {
   plugins: [
     function ({ addUtilities }) {
       const newUtilities = {
-        'animation-delay-0': {
+        '.animation-delay-0': {
           'animation-delay': '0s',
         },
-        'animation-delay-4': {
+        '.animation-delay-4': {
           'animation-delay': '-0.4s',
         },
-        'animation-delay-8': {
+        '.animation-delay-8': {
           'animation-delay': '-0.8s',
         },
-        'animation-delay-12': {
+        '.animation-delay-12': {
           'animation-delay': '-1.2s',
         },
-        'animation-delay-16': {
+        '.animation-delay-16': {
           'animation-delay': '-1.6s',
         },
       };
