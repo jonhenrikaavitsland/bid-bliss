@@ -19,13 +19,13 @@
         <button class="font-serif text-neutralBg font-medium uppercase py-2 px-4 hover:bg-hoverPrimary rounded-xl" data-modal="loginModalOpen">Login</button>
       </nav>
     </header>
-    <main class="grow">
+    <main class="flex flex-col grow pb-5">
       <h1 class="invisible">Our Auctions</h1>
       <div class="flex flex-col p-5 gap-5">
         <form>
           <label class="invisible" for="searchField">search</label>
           <div class="flex rounded-xl shadow-customShadow">
-            <input class="h-9 rounded-l-xl grow" type="text" id="searchField" />
+            <input class="h-9 rounded-l-xl min-w-20 grow" type="text" id="searchField" />
             <button class="uppercase font-serif font-medium text-white bg-secondary h-9 rounded-r-xl px-4 hover:bg-hoverSecondary">search</button>
           </div>
         </form>
@@ -33,7 +33,7 @@
           <button class="flex gap-2 bg-white py-2 px-4 rounded-xl shadow-customShadow">Sort by: <img class="w-4" src="./src/images/circle-chevron-down-solid.svg" alt="sorting options" /></button>
         </div>
       </div>
-      <div class="flex justify-center" data-modal="auctionModalDisplayListings">
+      <div class="flex justify-center grow" data-modal="auctionModalDisplayListings">
         <div class="lds-grid text-primary inline-block relative w-20 h-20">
           <div class="animation-properties animate-loaderAnimation animation-delay-0elay0 top-2 left-2"></div>
           <div class="animation-properties animate-loaderAnimation animation-delay-4 top-2 left-8"></div>
@@ -46,7 +46,10 @@
           <div class="animation-properties animate-loaderAnimation animation-delay-16 top-14 left-14"></div>
         </div>
       </div>
+      <div class="flex justify-center pt-10">
+        <button class="uppercase bg-secondary text-white hover:bg-hoverSecondary shadow-customShadow py-2 px-4 rounded-xl font-serif font-medium">view more</button>
+      </div>
     </main>
-    <footer class="flex justify-center text-neutralTxt">&copy; <span>2004 BidBliss</span></footer>
+    <footer class="flex justify-center gap-0.5 pb-4 text-neutralTxt">&copy; <span>2024 BidBliss</span></footer>
   </body>
 </html>
