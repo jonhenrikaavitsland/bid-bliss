@@ -19,18 +19,18 @@
         <button class="font-serif text-neutralBg font-medium uppercase py-2 px-4 hover:bg-hoverPrimary rounded-xl md:text-lg md:py-3 md:px-6" data-modal="loginModalOpen">Login</button>
       </nav>
     </header>
-    <main class="flex flex-col grow pb-5">
-      <h1 class="invisible">Our Auctions</h1>
-      <div class="flex flex-col p-5 gap-5">
+    <main class="flex flex-col grow pb-5 md:pt-8 md:px-8 md:pb-12">
+      <h1 class="invisible leading-none h-0">Our Auctions</h1>
+      <div class="flex flex-col p-5 gap-5 md:p-0 md:gap-8">
         <form>
-          <label class="invisible" for="searchField">search</label>
+          <label class="sr-only" for="searchField">search</label>
           <div class="flex rounded-xl shadow-customShadow">
-            <input class="h-9 rounded-l-xl min-w-20 grow" type="text" id="searchField" />
-            <button class="uppercase font-serif font-medium text-white bg-secondary h-9 rounded-r-xl px-4 hover:bg-hoverSecondary">search</button>
+            <input class="rounded-l-xl min-w-20 grow" type="text" id="searchField" />
+            <button class="uppercase font-serif font-medium text-white bg-secondary rounded-r-xl py-3 px-4 hover:bg-hoverSecondary md:text-xl md:py-3 md:px-6">search</button>
           </div>
         </form>
         <div class="flex justify-end">
-          <button class="flex gap-2 bg-white py-2 px-4 rounded-xl shadow-customShadow">Sort by: <img class="w-4" src="./src/images/circle-chevron-down-solid.svg" alt="sorting options" /></button>
+          <button class="flex gap-2 bg-white py-2 px-4 rounded-xl shadow-customShadow md:text-lg md:py-3 md:px-6">Sort by: <img class="w-4 md:w-5" src="./src/images/circle-chevron-down-solid.svg" alt="sorting options" /></button>
         </div>
       </div>
       <div class="flex justify-center grow" data-modal="auctionModalDisplayListings">
@@ -47,9 +47,9 @@
         </div>
       </div>
       <div class="flex justify-center pt-10">
-        <button class="uppercase bg-secondary text-white hover:bg-hoverSecondary shadow-customShadow py-2 px-4 rounded-xl font-serif font-medium">view more</button>
+        <button class="uppercase bg-secondary text-white hover:bg-hoverSecondary shadow-customShadow py-2 px-4 rounded-xl font-serif font-medium md:text-xl md:py-3 md:px-6">view more</button>
       </div>
     </main>
-    <footer class="flex justify-center gap-0.5 pb-4 text-neutralTxt">&copy; <span>2024 BidBliss</span></footer>
+    <footer class="flex justify-center gap-0.5 pb-4 text-neutralTxt md:pb-5">&copy; <span>2024 BidBliss</span></footer>
   </body>
 </html>
