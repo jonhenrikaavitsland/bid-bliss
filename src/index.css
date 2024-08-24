@@ -50,4 +50,17 @@
     font-display: swap;
     src: url("/src/fonts/robotSlab/RobotoSlab-VariableFont_wght.ttf") format('ttf');
   }
+
+  form,
+  footer,
+  label,
+  button {
+    @apply leading-none;
+  }
 } 
+
+@layer components {
+  .animation-properties {
+    @apply absolute w-4 h-4 rounded-full bg-current
+  }
+}
