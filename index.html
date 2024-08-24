@@ -19,9 +19,9 @@
         <button class="font-serif text-neutralBg font-medium uppercase py-2 px-4 hover:bg-hoverPrimary rounded-xl md:text-lg md:py-3 md:px-6" data-modal="loginModalOpen">Login</button>
       </nav>
     </header>
-    <main class="flex flex-col grow pb-5 md:pt-8 md:px-8 md:pb-12">
-      <h1 class="invisible leading-none h-0">Our Auctions</h1>
+    <main class="flex flex-col grow pb-5 md:pt-8 md:px-8 md:pb-12 md:gap-8">
       <div class="flex flex-col p-5 gap-5 md:p-0 md:gap-8">
+        <h1 class="sr-only leading-none h-0">Our Auctions</h1>
         <form>
           <label class="sr-only" for="searchField">search</label>
           <div class="flex rounded-xl shadow-customShadow">
@@ -33,7 +33,7 @@
           <button class="flex gap-2 bg-white py-2 px-4 rounded-xl shadow-customShadow md:text-lg md:py-3 md:px-6">Sort by: <img class="w-4 md:w-5" src="./src/images/circle-chevron-down-solid.svg" alt="sorting options" /></button>
         </div>
       </div>
-      <div class="flex justify-center grow" data-modal="auctionModalDisplayListings">
+      <div class="flex justify-center grow md:pb-5" data-modal="auctionModalDisplayListings">
         <div class="lds-grid text-primary inline-block relative w-20 h-20">
           <div class="animation-properties animate-loaderAnimation animation-delay-0elay0 top-2 left-2"></div>
           <div class="animation-properties animate-loaderAnimation animation-delay-4 top-2 left-8"></div>
@@ -46,7 +46,7 @@
           <div class="animation-properties animate-loaderAnimation animation-delay-16 top-14 left-14"></div>
         </div>
       </div>
-      <div class="flex justify-center pt-10">
+      <div class="flex justify-center pt-10 md:pt-2">
         <button class="uppercase bg-secondary text-white hover:bg-hoverSecondary shadow-customShadow py-2 px-4 rounded-xl font-serif font-medium md:text-xl md:py-3 md:px-6">view more</button>
       </div>
     </main>
