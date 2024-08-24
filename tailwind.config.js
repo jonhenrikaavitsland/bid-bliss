@@ -1,8 +1,16 @@
 /** @type {import('tailwindcss').Config} */
+
+const defaultTheme = require('tailwindcss/defaultTheme');
+
 export default {
   content: ['./**/index.html', './src/**/*.{js,ts,jsx,tsx,mjs,cjs}'],
   theme: {
-    extend: {},
+    extend: {
+      fontFamily: {
+        sans: ['Roboto', ...defaultTheme.fontFamily.sans],
+        serif: ['Roboto Slab', ...defaultTheme.fontFamily.serif],
+      },
+    },
     screens: {
       md: '834px',
       lg: '1440px',
