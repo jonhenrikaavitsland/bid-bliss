@@ -6,6 +6,7 @@ A webpage were users can buy and sell items for credits.
 
 - Vite: bundler
 - TailwindCSS
+- PostCSS
 - Prettier
 - Eslint
 - Jest
