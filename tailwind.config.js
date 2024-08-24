@@ -3,6 +3,10 @@ export default {
   content: ['./**/index.html', './src/**/*.{js,ts,jsx,tsx,mjs,cjs}'],
   theme: {
     extend: {},
+    screens: {
+      md: '834px',
+      lg: '1440px',
+    },
     colors: {
       transparent: 'transparent',
       white: '#FFF',
