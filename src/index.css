@@ -50,4 +50,8 @@
     font-display: swap;
     src: url("/src/fonts/robotSlab/RobotoSlab-VariableFont_wght.ttf") format('ttf');
   }
+
+  button {
+    @apply leading-none;
+  }
 } 
