@@ -11,6 +11,13 @@ export default {
         serif: ['Roboto Slab', ...defaultTheme.fontFamily.serif],
       },
     },
+    fontSize: {
+      sm: ['0.875rem', '0.875rem'],
+      base: ['1rem', '1rem'],
+      lg: ['1.25rem', '1.25rem'],
+      xl: ['1.5rem', '1.5rem'],
+      xxl: ['2rem', '2rem'],
+    },
     screens: {
       md: '834px',
       lg: '1440px',
