@@ -52,7 +52,6 @@
   }
 
   footer,
-  span,
   label,
   button {
     @apply leading-none;
