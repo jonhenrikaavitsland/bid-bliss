@@ -13,6 +13,15 @@ export default {
       boxShadow: {
         customShadow: '0px 4px 4px 0px rgba(0, 0, 0, 0.25)',
       },
+      keyframes: {
+        loaderAnimation: {
+          '0%, 100%': { opacity: '1' },
+          '50%': { opacity: '0.5' },
+        },
+      },
+      animation: {
+        loaderAnimation: 'loaderAnimation 1.2s linear infinite',
+      },
     },
     fontSize: {
       sm: ['0.875rem', '0.875rem'],
@@ -27,6 +36,7 @@ export default {
     },
     colors: {
       transparent: 'transparent',
+      current: 'currentColor',
       white: '#FFF',
       neutralBg: '#ECF0F1',
       primary: '#2C3E50',
