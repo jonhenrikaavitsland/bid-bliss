@@ -10,6 +10,9 @@ export default {
         sans: ['Roboto', ...defaultTheme.fontFamily.sans],
         serif: ['Roboto Slab', ...defaultTheme.fontFamily.serif],
       },
+      boxShadow: {
+        customShadow: '0px 4px 4px 0px rgba(0, 0, 0, 0.25)',
+      },
     },
     fontSize: {
       sm: ['0.875rem', '0.875rem'],
