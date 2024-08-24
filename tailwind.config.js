@@ -31,6 +31,8 @@ export default {
       neutralTxt: '#7F8C8D',
       error: '#E74C3C',
       correct: '#2ECC71',
+      hoverPrimary: '#3C4F64',
+      hoverSecondary: '#2A86C1',
     },
   },
   plugins: [],
