@@ -51,6 +51,7 @@
     src: url("/src/fonts/robotSlab/RobotoSlab-VariableFont_wght.ttf") format('ttf');
   }
 
+  label,
   button {
     @apply leading-none;
   }
