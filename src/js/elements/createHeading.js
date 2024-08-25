@@ -1,4 +1,4 @@
-export function createHeadingElement(level, textContent, ...classes) {
+export function createHeading(level, textContent, ...classes) {
   if (level < 1 || level > 6) {
     throw new Error('Heading level must be between 1 and 6');
   }
