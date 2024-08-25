@@ -40,7 +40,7 @@
     font-style: normal;
     font-weight: 400;
     font-display: swap;
-    src: url("/src/fonts/robotSlab/RobotoSlab-VariableFont_wght.ttf") format('ttf');
+    src: url("/src/fonts/robotSlab/RobotoSlab-Regular.ttf") format('ttf');
   }
 
   @font-face {
@@ -48,9 +48,18 @@
     font-style: normal;
     font-weight: 500;
     font-display: swap;
-    src: url("/src/fonts/robotSlab/RobotoSlab-VariableFont_wght.ttf") format('ttf');
+    src: url("/src/fonts/robotSlab/RobotoSlab-Medium.ttf") format('ttf');
   }
 
+  @font-face {
+    font-family: 'Roboto Slab';
+    font-style: normal;
+    font-weight: 600;
+    font-display: swap;
+    src: url("/src/fonts/robotSlab/RobotoSlab-SemiBold.ttf") format('ttf');
+  }
+
+  h1, h2, h3,
   form,
   footer,
   label,
