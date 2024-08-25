@@ -3,6 +3,6 @@ export function openModal(target) {
   console.log(modal);
 
   modal.classList.remove('hidden');
-  modal.classList.add('flex');
+  modal.classList.add('flex', 'items-center', 'justify-center', 'px-5');
   modal.append(target);
 }
