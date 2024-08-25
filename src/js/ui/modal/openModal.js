@@ -3,5 +3,6 @@ export function openModal(target) {
   console.log(modal);
 
   modal.classList.remove('hidden');
+  modal.classList.add('flex');
   modal.append(target);
 }
