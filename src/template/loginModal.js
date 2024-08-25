@@ -27,7 +27,7 @@ export function loginModal() {
   const wrap = createDiv('mx-auto');
   const cta = createBtn('login', 'uppercase', 'bg-primary', 'hover:bg-hoverPrimary', 'rounded-xl', 'py-2', 'px-4', 'md:py-3', 'md:px-6', 'font-serif', 'text-neutralBg', 'shadow-customShadow', 'font-medium', 'md:text-lg');
   const regText1 = createTextNode('Not yet a member? ');
-  const regText2 = createSpan('Register', 'text-secondary');
+  const regText2 = createSpan('Register', 'text-secondary', 'hover:text-hoverSecondary');
   const regText3 = createTextNode(' now!');
   const regCta = createAnchor('#', '', '', 'text-center', 'py-2');
 
