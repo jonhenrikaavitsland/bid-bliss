@@ -1,10 +1,3 @@
-import { loginModal } from '../template/loginModal';
-import { openModal } from './ui/modal/openModal';
+import { runModal } from './ui/modal/runModal';
 
-let state = true;
-
-const login = loginModal();
-
-if (state === true) {
-  openModal(login);
-}
+runModal(true, 'login');
