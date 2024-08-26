@@ -1,3 +1,3 @@
-import { runModal } from './ui/modal/runModal';
+import { loginBtnListener } from './listeners/loginBtnListener';
 
-runModal(true, 'login');
+loginBtnListener();
