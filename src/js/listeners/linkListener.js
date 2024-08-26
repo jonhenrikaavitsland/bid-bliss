@@ -2,8 +2,11 @@ import { modal } from '../data/constants.js';
 import { runModal } from '../ui/modal/runModal.js';
 
 export function linkListener(target) {
-  const currentModal = modal.querySelector('a');
-  currentModal.addEventListener('click', () => {
+  const currentModalLink = modal.querySelector('a');
+
+  if (!currentModalLink) return;
+
+  currentModalLink.addEventListener('click', () => {
     if (target === 'login') {
       modal.innerHTML = '';
       runModal(true, 'register');
