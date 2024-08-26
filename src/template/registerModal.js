@@ -13,7 +13,7 @@ import { createTextNode } from '../js/elements/createTextNode.js';
 export function registerModal() {
   const element = createSection('flex', 'flex-col', 'bg-neutralBg', 'p-8', 'rounded-xl', 'lg:pt-10', 'lg:px-10', 'pb-16', 'shadow-customShadow');
 
-  const imageWrap = createDiv('max-w-96', 'mx-auto');
+  const imageWrap = createDiv('max-w-48', 'md:max-w-72', 'mx-auto');
   const image = createImg('/src/images/auctioneer-signup.png', 'auctioneer presenting a signup form');
   const heading = createHeading(2, `"1000 credits signup bonus!"`, 'font-serif', 'text-primary', 'text-center', 'mt-0.5', 'lg:mt-1', 'text-primary', 'font-semibold', 'uppercase', 'md:text-xxl');
   const formElement = createForm('api', 'register', 'flex', 'flex-col', 'gap-5', 'mt-9', 'mb-16', 'text-primary', 'md:gap-7');
