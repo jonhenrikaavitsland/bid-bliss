@@ -4,8 +4,6 @@
   "editor.codeActionsOnSave": {
     "source.fixAll.eslint": "always"
   },
-  "eslint.validate": [
-    "javascript"
-  ],
-  "cSpell.words": ["Aavitsland", "bidbliss", "mochawesome", "Roboto", "tailwindcss"]
+  "eslint.validate": ["javascript"],
+  "cSpell.words": ["Aavitsland", "bidbliss", "datetime", "mochawesome", "Roboto", "tailwindcss"]
 }
