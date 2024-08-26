@@ -1,5 +1,5 @@
-import { loginModal } from '../../template/loginModal.js';
-import { registerModal } from '../../template/registerModal.js';
+import { loginModal } from '../template/loginModal.js';
+import { registerModal } from '../template/registerModal.js';
 
 export function modalRouter(modalValue) {
   const modalLogin = loginModal();
