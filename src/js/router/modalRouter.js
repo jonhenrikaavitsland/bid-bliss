@@ -10,5 +10,7 @@ export function modalRouter(modalValue) {
       return modalLogin;
     case 'register':
       return modalRegister;
+    default:
+      throw console.error('No modal were matched in the router!');
   }
 }
