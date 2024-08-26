@@ -1,14 +1,14 @@
-import { createAnchor } from '../js/elements/createAnchor.js';
-import { createBtn } from '../js/elements/createBtn.js';
-import { createDiv } from '../js/elements/createDiv.js';
-import { createForm } from '../js/elements/createForm.js';
-import { createHeading } from '../js/elements/createHeading.js';
-import { createImg } from '../js/elements/createImg.js';
-import { createInput } from '../js/elements/createInput.js';
-import { createLabel } from '../js/elements/createLabel.js';
-import { createSection } from '../js/elements/createSection.js';
-import { createSpan } from '../js/elements/createSpan.js';
-import { createTextNode } from '../js/elements/createTextNode.js';
+import { createAnchor } from '../elements/createAnchor.js';
+import { createBtn } from '../elements/createBtn.js';
+import { createDiv } from '../elements/createDiv.js';
+import { createForm } from '../elements/createForm.js';
+import { createHeading } from '../elements/createHeading.js';
+import { createImg } from '../elements/createImg.js';
+import { createInput } from '../elements/createInput.js';
+import { createLabel } from '../elements/createLabel.js';
+import { createSection } from '../elements/createSection.js';
+import { createSpan } from '../elements/createSpan.js';
+import { createTextNode } from '../elements/createTextNode.js';
 
 export function registerModal() {
   const element = createSection('flex', 'flex-col', 'bg-neutralBg', 'p-8', 'rounded-xl', 'lg:pt-10', 'lg:px-10', 'pb-16', 'shadow-customShadow');
