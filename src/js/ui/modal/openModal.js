@@ -1,9 +1,8 @@
-import { closeModal } from './closeModal';
+import { closeModal } from './closeModal.js';
+import { modal } from '../../data/constants.js';
 
 export function openModal(target) {
-  const modal = document.querySelector(`[data-modal="modalObject"]`);
-
-  if (!target) closeModal();
+  if (!target) closeModal(modal);
 
   modal.classList.remove('hidden');
   modal.classList.add('flex', 'items-center', 'justify-center', 'px-5');
