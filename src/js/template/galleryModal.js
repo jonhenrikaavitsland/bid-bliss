@@ -8,7 +8,7 @@ const DEFAULT_IMAGE_ALT = 'listing item';
 export function galleryModal() {
   const media = load('media');
 
-  const galleryContainer = createDiv('flex', 'flex-col', 'gap-10');
+  const galleryContainer = createDiv('flex', 'flex-col', 'gap-10', 'overflow-y-auto', 'h-[90%]', 'max-h-screen');
 
   const activeImage = createImg(media[0].url || DEFAULT_IMAGE_URL, media[0].alt || DEFAULT_IMAGE_ALT, 'rounded-xl', 'aspect-square', 'object-contain', 'object-bottom');
 

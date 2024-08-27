@@ -11,7 +11,7 @@ import { createSpan } from '../elements/createSpan.js';
 import { createTextNode } from '../elements/createTextNode.js';
 
 export function registerModal() {
-  const element = createSection('flex', 'flex-col', 'bg-neutralBg', 'p-8', 'rounded-xl', 'lg:pt-10', 'lg:px-10', 'pb-16', 'shadow-customShadow');
+  const element = createSection('flex', 'flex-col', 'bg-neutralBg', 'p-8', 'rounded-xl', 'lg:pt-10', 'lg:px-10', 'pb-16', 'shadow-customShadow', 'overflow-y-auto', 'h-[90%]', 'max-h-screen');
 
   const imageWrap = createDiv('max-w-48', 'md:max-w-72', 'mx-auto');
   const image = createImg('/src/images/auctioneer-signup.png', 'auctioneer presenting a signup form');
