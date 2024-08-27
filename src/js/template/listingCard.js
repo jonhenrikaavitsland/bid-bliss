@@ -17,13 +17,13 @@ const DEFAULT_TIME_FORMAT = 'invalid date';
 export function listingCard(data) {
   const { id, endsAt, title, media = [], _count: { bids = 0 } = {} } = data;
 
-  const element = createArticle('flex', 'flex-col', 'gap-2.5', 'shadow-customShadow', 'p-5', 'bg-white', 'cursor-pointer');
+  const element = createArticle('flex', 'flex-col', 'gap-2.5', 'shadow-customShadow', 'p-5', 'bg-white', 'cursor-pointer', 'max-w-lg', 'md:max-w-[367px]');
   element.addEventListener('click', () => {
+    save('listingID', id);
     runModal(true, 'listing');
-    save('listingId', id);
   });
 
-  const image = createImg(media?.[0]?.url || DEFAULT_IMAGE_URL, media?.[0]?.alt || DEFAULT_IMAGE_ALT, 'rounded-xl');
+  const image = createImg(media?.[0]?.url || DEFAULT_IMAGE_URL, media?.[0]?.alt || DEFAULT_IMAGE_ALT, 'rounded-xl', 'aspect-square', 'object-cover');
 
   const section = createSection('flex', 'flex-col');
 
