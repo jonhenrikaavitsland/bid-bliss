@@ -27,7 +27,7 @@ export function listingCard(data) {
 
   const section = createSection('flex', 'flex-col');
 
-  const listingTitle = createHeading(2, title || DEFAULT_TITLE, 'font-serif', 'font-medium', 'capitalize');
+  const listingTitle = createHeading(2, title || DEFAULT_TITLE, 'font-serif', 'font-semibold', 'capitalize');
 
   const infoWrap = createDiv('flex', 'justify-between', 'text-sm');
 
