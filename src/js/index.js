@@ -5,3 +5,5 @@ import { renderListings } from './render/renderListings';
 renderListings(listings.data);
 
 loginBtnListener();
+
+console.log(listings);
