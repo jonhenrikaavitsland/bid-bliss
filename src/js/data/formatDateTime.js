@@ -10,7 +10,6 @@ export function formatDateTime(datetimeString) {
     hour: 'numeric',
     minute: 'numeric',
     timeZone: 'Europe/Oslo',
-    timeZoneName: 'short',
   };
 
   return date.toLocaleString('nb-NO', options);
