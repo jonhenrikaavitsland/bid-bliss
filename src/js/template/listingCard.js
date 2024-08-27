@@ -17,7 +17,7 @@ const DEFAULT_TIME_FORMAT = 'invalid date';
 export function listingCard(data) {
   const { id, endsAt, title, media = [], _count: { bids = 0 } = {} } = data;
 
-  const element = createArticle('flex', 'flex-col', 'gap-2.5', 'shadow-customShadow', 'p-5');
+  const element = createArticle('flex', 'flex-col', 'gap-2.5', 'shadow-customShadow', 'p-5', 'bg-white', 'cursor-pointer');
   element.addEventListener('click', () => {
     runModal(true, 'listing');
     save('listingId', id);
