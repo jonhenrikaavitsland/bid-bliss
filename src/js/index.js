@@ -1,3 +1,9 @@
-import { runModal } from './ui/modal/runModal';
+import { listings } from './data/listings';
+import { loginBtnListener } from './listeners/loginBtnListener';
+import { renderListings } from './render/renderListings';
 
-runModal(true, 'login');
+renderListings(listings.data);
+
+loginBtnListener();
+
+console.log(listings);

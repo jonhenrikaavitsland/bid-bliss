@@ -1,5 +1,5 @@
 <!doctype html>
-<html lang="en">
+<html lang="en" class="scroll-smooth">
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
@@ -37,7 +37,7 @@
           <button class="flex gap-2 bg-white py-2 px-4 rounded-xl shadow-customShadow md:text-lg md:py-3 md:px-6">Sort by: <img class="w-4 md:w-5" src="./src/images/circle-chevron-down-solid.svg" alt="sorting options" /></button>
         </div>
       </div>
-      <div class="flex justify-center grow md:pb-5 lg:pb-0" data-modal="auctionModalDisplayListings">
+      <div class="flex flex-col md:flex-row flex-wrap gap-8 md:gap-10 mx-auto md:justify-center grow md:pb-5 lg:pb-0" data-modal="auctionModalDisplayListings">
         <div class="lds-grid text-primary inline-block relative w-20 h-20">
           <div class="animation-properties animate-loaderAnimation animation-delay-0elay0 top-2 left-2"></div>
           <div class="animation-properties animate-loaderAnimation animation-delay-4 top-2 left-8"></div>
@@ -48,6 +48,7 @@
           <div class="animation-properties animate-loaderAnimation animation-delay-8 top-14 left-2"></div>
           <div class="animation-properties animate-loaderAnimation animation-delay-12 top-14 left-8"></div>
           <div class="animation-properties animate-loaderAnimation animation-delay-16 top-14 left-14"></div>
+          <!-- Loading animation inspiration was gathered from https://loading.io/css/ under the CC0 License which make them free to use -->
         </div>
       </div>
       <div class="flex justify-center pt-10 md:pt-2 lg:pt-8">
