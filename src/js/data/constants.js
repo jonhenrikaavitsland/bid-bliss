@@ -1,4 +1,5 @@
 export const modal = document.querySelector(`[data-modal="modalObject"]`);
+export const gallery = document.querySelector(`[data-modal="galleryObject"]`);
 
 export const API_Base = 'https://v2.api.noroff.dev';
 export const API_Auth = '/auth';
