@@ -37,7 +37,7 @@ export function listingCard(data) {
   const timeFormatted = formatDateTime(endsAt);
   const listEnding = createTime(endsAt || '0000-00-00T00:00:00Z', timeFormatted || DEFAULT_TIME_FORMAT);
 
-  const bidInfo = createSpan(`Bids: #${bids || 0}`);
+  const bidInfo = createSpan(`Bids: ${bids || 0}`);
 
   timeSpan.append(listEnding);
   infoWrap.append(timeSpan, bidInfo);
