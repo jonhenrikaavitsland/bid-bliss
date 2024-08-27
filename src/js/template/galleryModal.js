@@ -14,11 +14,16 @@ export function galleryModal() {
 
   const allImages = createDiv('flex', 'justify-between');
 
-  media.forEach((image) => {
-    const imageObject = createImg(image.url || DEFAULT_IMAGE_URL, image.alt || DEFAULT_IMAGE_ALT, 'rounded-xl', 'cursor-pointer', 'max-w-24');
+  media.forEach((image, index) => {
+    const isActive = index === 0;
+    const imageObject = createImg(image.url || DEFAULT_IMAGE_URL, image.alt || DEFAULT_IMAGE_ALT, 'rounded-xl', 'cursor-pointer', 'max-w-24', 'aspect-square', 'object-cover');
+    if (isActive) imageObject.classList.add('blur-sm');
     imageObject.addEventListener('click', () => {
       activeImage.src = image.url || DEFAULT_IMAGE_URL;
       activeImage.alt = image.alt || DEFAULT_IMAGE_ALT;
+
+      allImages.childNodes.forEach((img) => img.classList.add('blur-sm'));
+      imageObject.classList.remove('blur-sm');
     });
 
     allImages.append(imageObject);
