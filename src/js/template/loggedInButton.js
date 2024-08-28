@@ -1,0 +1,36 @@
+import { createDiv } from '../elements/createDiv';
+import { createHeading } from '../elements/createHeading';
+import { createImg } from '../elements/createImg';
+import { createSection } from '../elements/createSection';
+import { createSpan } from '../elements/createSpan';
+import { load } from '../localStorage/load';
+
+export function loggedInButton() {
+  const {
+    data: {
+      name,
+      avatar: { url: avatarUrl, alt: avatarAlt },
+      credits,
+      bio,
+    },
+  } = load('profile');
+  const placeholderImg = '/src/images/placeholder.jpg';
+  const placeholderAlt = name;
+
+  const element = createDiv('rounded-full', 'border', 'border-neutralBg', 'flex', 'h-10', 'lg:h-28', 'w-36', 'lg:w-72', 'justify-between', 'cursor-pointer');
+
+  const infoWrap = createSection('flex', 'flex-col', 'justify-center', 'text-center', 'ps-5', 'gap-0.5', 'grow');
+
+  const username = createHeading(2, name, 'uppercase', 'font-serif', 'text-neutralBg', 'text-sm', 'lg:text-xl');
+
+  const biography = createSpan(bio, 'hidden', 'md:block', 'italic');
+
+  const creditsContainer = createSpan(`Cr. ${credits}`, 'text-neutralBg', 'text-sm', 'lg:text-xl');
+
+  const image = createImg(avatarUrl || placeholderImg, avatarAlt || placeholderAlt, 'rounded-full', 'border', 'border-neutralBg');
+
+  infoWrap.append(username, biography, creditsContainer);
+  element.append(infoWrap, image);
+
+  return element;
+}
