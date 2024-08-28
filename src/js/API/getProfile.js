@@ -15,7 +15,6 @@ export async function getProfile() {
       'X-Noroff-API-Key': API_Key,
     },
   });
-  console.log(profile);
 
   save('profile', profile);
 }
