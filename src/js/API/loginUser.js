@@ -15,6 +15,5 @@ export async function loginUser(email, password) {
     const { accessToken, ...profile } = response.data;
     save('token', accessToken);
     save('profile', profile);
-    window.location.href = '/';
   }
 }
