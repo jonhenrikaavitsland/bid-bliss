@@ -6,4 +6,4 @@ renderListings(listings.data);
 
 loginBtnListener();
 
-console.log(listings);
+console.log('Listings:', listings);
