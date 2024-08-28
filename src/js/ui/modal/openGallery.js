@@ -1,4 +1,5 @@
 import { gallery } from '../../data/constants';
+import { modal } from '../../data/constants';
 import { closeGallery } from './closeGallery';
 
 export function openGallery(target) {
@@ -12,7 +13,7 @@ export function openGallery(target) {
   gallery.append(target);
 
   gallery.addEventListener('click', (event) => {
-    if (event.target === gallery) {
+    if (event.target === gallery || event.target === modal) {
       closeGallery(gallery);
     } else {
       return;
