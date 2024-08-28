@@ -12,11 +12,11 @@ export function galleryModal() {
 
   const activeImage = createImg(media[0].url || DEFAULT_IMAGE_URL, media[0].alt || DEFAULT_IMAGE_ALT, 'rounded-xl', 'aspect-square', 'object-contain', 'object-bottom');
 
-  const allImages = createDiv('flex', 'justify-center', 'flex-wrap', 'gap-5', 'md:gap-8', 'lg:gap-10');
+  const allImages = createDiv('flex', 'justify-center', 'flex-wrap', 'gap-8', 'md:gap-10', 'lg:gap-12');
 
   media.forEach((image, index) => {
     const isActive = index === 0;
-    const imageObject = createImg(image.url || DEFAULT_IMAGE_URL, image.alt || DEFAULT_IMAGE_ALT, 'rounded-xl', 'cursor-pointer', 'max-w-10', 'aspect-square', 'object-cover', 'border-2', 'border-white', 'blur-sm');
+    const imageObject = createImg(image.url || DEFAULT_IMAGE_URL, image.alt || DEFAULT_IMAGE_ALT, 'rounded-xl', 'cursor-pointer', 'max-w-10', 'md:max-w-16', 'lg:max-w-24', 'aspect-square', 'object-cover', 'border-2', 'border-white', 'blur-sm');
     if (isActive) imageObject.classList.remove('blur-sm');
     imageObject.addEventListener('click', () => {
       activeImage.src = image.url || DEFAULT_IMAGE_URL;
