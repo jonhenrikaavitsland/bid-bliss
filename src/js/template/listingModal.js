@@ -9,6 +9,8 @@ import { formatDate } from '../data/formateDate';
 import { createImg } from '../elements/createImg';
 import { createParagraph } from '../elements/createParagraph';
 import { formatDateTime } from '../data/formatDateTime';
+import { runModal } from '../ui/modal/runModal';
+import { save } from '../localStorage/save';
 
 const DEFAULT_TIME_FORMAT = 'invalid date';
 const DEFAULT_IMAGE_URL = '/src/images/placeholderItem.png';
@@ -20,8 +22,10 @@ export function listingModal(listings) {
   const currentListingID = load('listingID');
   console.log(listings);
   const currentListing = listings.find((listing) => listing.id === currentListingID);
+  console.log(currentListing);
+  save('media', currentListing.media);
 
-  const element = createArticle('rounded-xl', 'grow', 'bg-neutralBg');
+  const element = createArticle('rounded-xl', 'grow', 'bg-neutralBg', 'overflow-y-auto', 'max-h-[90%]', 'max-w-lg', 'md:max-w-2xl');
 
   const titleTop = createSection('bg-secondary', 'rounded-t-xl');
 
@@ -37,7 +41,12 @@ export function listingModal(listings) {
 
   const bidInfo = createSpan(`Bids: ${currentListing._count.bids || 0}`);
 
-  const image = createImg(currentListing.media[0]?.url || DEFAULT_IMAGE_URL, currentListing.media[0]?.alt || DEFAULT_IMAGE_ALT, 'cursor-pointer');
+  const imageWrap = createDiv('w-full', 'aspect-square', 'overflow-hidden', 'flex', 'items-center', 'justify-center');
+  imageWrap.addEventListener('click', () => {
+    runModal(true, 'gallery');
+  });
+
+  const image = createImg(currentListing.media[0]?.url || DEFAULT_IMAGE_URL, currentListing.media[0]?.alt || DEFAULT_IMAGE_ALT, 'cursor-pointer', 'object-cover', 'w-full', 'h-full');
 
   const InfoWrap = createSection('p-2.5', 'md:p-5', 'flex', 'flex-col');
 
@@ -86,9 +95,10 @@ export function listingModal(listings) {
   timeWrap2.append(timeCreatedOrUpdated);
   InfoWrap.append(headingMiddle, timeWrap2);
   timeWrap.append(listEnding);
+  imageWrap.append(image);
   subTopContainer.append(timeWrap, bidInfo);
   titleTop.append(headingTop);
-  element.append(titleTop, subTopContainer, image, InfoWrap, auctionDetailsWrap, interactionWrap);
+  element.append(titleTop, subTopContainer, imageWrap, InfoWrap, auctionDetailsWrap, interactionWrap);
 
   return element;
 }
