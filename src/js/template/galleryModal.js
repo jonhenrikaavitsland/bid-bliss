@@ -12,7 +12,7 @@ export function galleryModal() {
 
   const activeImage = createImg(media[0].url || DEFAULT_IMAGE_URL, media[0].alt || DEFAULT_IMAGE_ALT, 'rounded-xl', 'aspect-square', 'object-contain', 'object-bottom');
 
-  const allImages = createDiv('flex', 'justify-between');
+  const allImages = createDiv('flex', 'justify-center', 'gap-5', 'md:gap-8', 'lg:gap-10');
 
   media.forEach((image, index) => {
     const isActive = index === 0;
@@ -22,7 +22,7 @@ export function galleryModal() {
       activeImage.src = image.url || DEFAULT_IMAGE_URL;
       activeImage.alt = image.alt || DEFAULT_IMAGE_ALT;
 
-      allImages.childNodes.forEach((img) => img.classList.add('blur-sm'));
+      allImages.childNodes.forEach((img) => img.classList.add('blur-sm', 'border-2', 'border-white'));
       imageObject.classList.remove('blur-sm');
     });
 
