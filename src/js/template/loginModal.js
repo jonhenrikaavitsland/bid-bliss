@@ -25,7 +25,8 @@ export function loginModal() {
   const passwordInput = createInput('password', '*****', 'password', 'h-8', 'md:h-10', 'pl-2', 'rounded-xl', 'shadow-customShadow');
   const ctaGroup = createDiv('flex', 'flex-col', 'mx-auto', 'gap-5');
   const wrap = createDiv('mx-auto');
-  const cta = createBtn('login', 'uppercase', 'bg-primary', 'hover:bg-hoverPrimary', 'rounded-xl', 'py-2', 'px-4', 'md:py-3', 'md:px-6', 'font-serif', 'text-neutralBg', 'shadow-customShadow', 'font-medium', 'md:text-lg');
+  const cta = createInput('submit', '', '', 'uppercase', 'cursor-pointer', 'bg-primary', 'hover:bg-hoverPrimary', 'rounded-xl', 'py-2', 'px-4', 'md:py-3', 'md:px-6', 'font-serif', 'text-neutralBg', 'shadow-customShadow', 'font-medium', 'md:text-lg');
+  cta.value = 'login';
   const regText1 = createTextNode('Not yet a member? ');
   const regText2 = createSpan('Register', 'text-secondary', 'hover:text-hoverSecondary');
   const regText3 = createTextNode(' now!');
@@ -33,10 +34,10 @@ export function loginModal() {
 
   regCta.append(regText1, regText2, regText3);
   wrap.append(cta);
-  ctaGroup.append(wrap, regCta);
+  ctaGroup.append(regCta);
   passwordGroup.append(labelPassword, passwordInput);
   emailGroup.append(labelEmail, emailInput);
-  formElement.append(emailGroup, passwordGroup);
+  formElement.append(emailGroup, passwordGroup, wrap);
   imageWrap.append(image);
   element.append(imageWrap, heading, formElement, ctaGroup);
 
