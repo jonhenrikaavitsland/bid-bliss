@@ -14,5 +14,8 @@ export async function getProfile() {
     },
   });
 
-  save('profile', profile);
+  const {
+    data: { ...user },
+  } = profile;
+  save('profile', user);
 }

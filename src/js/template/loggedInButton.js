@@ -7,12 +7,10 @@ import { load } from '../localStorage/load';
 
 export function loggedInButton() {
   const {
-    data: {
-      name,
-      avatar: { url: avatarUrl, alt: avatarAlt },
-      credits,
-      bio,
-    },
+    name,
+    avatar: { url: avatarUrl, alt: avatarAlt },
+    credits,
+    bio,
   } = load('profile');
   const placeholderImg = '/src/images/placeholder.jpg';
   const placeholderAlt = name;
