@@ -5,9 +5,7 @@ import { fetchData } from './fetchData';
 import { API_Key } from '../data/constants';
 
 export async function getProfile() {
-  const {
-    data: { name },
-  } = load('profile');
+  const { name } = load('profile');
 
   const profile = await fetchData(`${API_Base}${API_Profiles}/${name}`, {
     headers: {
