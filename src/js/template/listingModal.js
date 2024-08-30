@@ -25,7 +25,7 @@ export function listingModal(listings) {
   console.log(currentListing);
   save('media', currentListing.media);
 
-  const element = createArticle('rounded-xl', 'grow', 'bg-neutralBg', 'overflow-y-auto', 'max-h-[90%]', 'max-w-lg', 'md:max-w-2xl');
+  const element = createArticle('rounded-xl', 'grow', 'bg-neutralBg', 'overflow-y-auto', 'max-h-[90%]', 'max-w-lg', 'md:max-w-2xl', 'pb-10');
 
   const titleTop = createSection('bg-secondary', 'rounded-t-xl');
 
