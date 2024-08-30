@@ -16,5 +16,4 @@ export function ifLoggedIn() {
     const links = navLinks();
     nav.append(links);
   }
-  console.log(navLinks);
 }
