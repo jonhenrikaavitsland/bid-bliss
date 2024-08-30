@@ -8,7 +8,7 @@
     font-style: normal;
     font-weight: 400;
     font-display: swap;
-    src: url("/src/fonts/roboto/Roboto-Regular.ttf") format('ttf');
+    src: url('/src/fonts/roboto/Roboto-Regular.ttf') format('truetype');
   }
 
   @font-face {
@@ -16,7 +16,7 @@
     font-style: normal;
     font-weight: 500;
     font-display: swap;
-    src: url("/src/fonts/roboto/Roboto-Medium.ttf") format('ttf');
+    src: url('/src/fonts/roboto/Roboto-Medium.ttf') format('truetype');
   }
 
   @font-face {
@@ -24,7 +24,7 @@
     font-style: normal;
     font-weight: 700;
     font-display: swap;
-    src: url("/src/fonts/roboto/Roboto-Bold.ttf") format('ttf');
+    src: url('/src/fonts/roboto/Roboto-Bold.ttf') format('truetype');
   }
 
   @font-face {
@@ -32,7 +32,7 @@
     font-style: italic;
     font-weight: 400;
     font-display: swap;
-    src: url("/src/fonts/roboto/Roboto-Italic.ttf") format('ttf');
+    src: url('/src/fonts/roboto/Roboto-Italic.ttf') format('truetype');
   }
 
   @font-face {
@@ -40,7 +40,7 @@
     font-style: normal;
     font-weight: 400;
     font-display: swap;
-    src: url("/src/fonts/robotSlab/RobotoSlab-Regular.ttf") format('ttf');
+    src: url('/src/fonts/robotSlab/RobotoSlab-Regular.ttf') format('truetype');
   }
 
   @font-face {
@@ -48,7 +48,7 @@
     font-style: normal;
     font-weight: 500;
     font-display: swap;
-    src: url("/src/fonts/robotSlab/RobotoSlab-Medium.ttf") format('ttf');
+    src: url('/src/fonts/robotSlab/RobotoSlab-Medium.ttf') format('truetype');
   }
 
   @font-face {
@@ -56,21 +56,24 @@
     font-style: normal;
     font-weight: 600;
     font-display: swap;
-    src: url("/src/fonts/robotSlab/RobotoSlab-SemiBold.ttf") format('ttf');
+    src: url('/src/fonts/robotSlab/RobotoSlab-SemiBold.ttf') format('truetype');
   }
 
-  a, p,
-  h1, h2, h3,
+  a,
+  p,
+  h1,
+  h2,
+  h3,
   form,
   footer,
   label,
   button {
     @apply leading-none;
   }
-} 
+}
 
 @layer components {
   .animation-properties {
-    @apply absolute w-4 h-4 rounded-full bg-current
+    @apply absolute w-4 h-4 rounded-full bg-current;
   }
 }
