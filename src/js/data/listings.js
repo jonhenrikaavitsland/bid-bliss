@@ -1,4 +1,4 @@
 import { fetchData } from '../API/fetchData';
 import { API_Base, API_Listings } from './constants';
 
-export const listings = await fetchData(`${API_Base}${API_Listings}`);
+export const listings = await fetchData(`${API_Base}${API_Listings}?_seller=true&_bids=true`);

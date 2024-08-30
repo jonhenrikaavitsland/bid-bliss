@@ -33,6 +33,8 @@ export default {
     screens: {
       md: '834px',
       lg: '1440px',
+      xsm: { max: '450px' },
+      sm: { min: '451px' },
     },
     colors: {
       transparent: 'transparent',
