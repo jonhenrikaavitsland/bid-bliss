@@ -28,7 +28,7 @@ export function listingModal(listings) {
   console.log(currentListing);
   save('media', currentListing.media);
 
-  const element = createArticle('rounded-xl', 'grow', 'bg-neutralBg', 'overflow-y-auto', 'max-h-[90%]', 'max-w-lg', 'md:max-w-2xl', 'pb-10');
+  const element = createArticle('rounded-xl', 'grow', 'overflow-y-auto', 'max-h-[90%]', 'max-w-lg', 'md:max-w-2xl');
 
   const titleTop = createSection('bg-secondary', 'rounded-t-xl');
 
@@ -51,7 +51,7 @@ export function listingModal(listings) {
 
   const image = createImg(currentListing.media[0]?.url || DEFAULT_IMAGE_URL, currentListing.media[0]?.alt || DEFAULT_IMAGE_ALT, 'cursor-pointer', 'object-cover', 'w-full', 'h-full');
 
-  const InfoWrap = createSection('p-2.5', 'md:p-5', 'flex', 'flex-col');
+  const InfoWrap = createSection('p-2.5', 'md:p-5', 'flex', 'flex-col', 'bg-neutralBg');
 
   const headingMiddle = createHeading(3, `Auction# ${currentListing.id}`, 'font-serif');
 
@@ -68,13 +68,13 @@ export function listingModal(listings) {
 
   const timeCreatedOrUpdated = createTime(currentListing.endsAt || '0000-00-00T00:00:00Z', timeFormattedCreatedOrUpdated || DEFAULT_TIME_FORMAT);
 
-  const auctionDetailsWrap = createSection('p-2.5', 'md:p-5', 'flex', 'flex-col', 'gap-2');
+  const auctionDetailsWrap = createSection('p-2.5', 'md:p-5', 'flex', 'flex-col', 'gap-2', 'bg-neutralBg', 'pb-4');
 
   const auctionTitle = createHeading(2, currentListing.title || DEFAULT_TITLE, 'font-serif', 'font-semibold', 'text-lg', 'capitalize');
 
   const auctionDescription = createParagraph(currentListing.description);
 
-  const interactionWrap = createSection('flex', 'flex-col', 'p-2.5', 'md:p-5', 'mt-2.5');
+  const interactionWrap = createSection('flex', 'flex-col', 'p-2.5', 'md:p-5', 'bg-neutralBg');
 
   const auctionEndingWrap = createSpan('font-serif', 'font-semibold', 'text-lg', 'flex', 'flex-col', 'text-center');
   auctionEndingWrap.textContent = 'Auction ends at ';
@@ -108,6 +108,28 @@ export function listingModal(listings) {
     'shadow-customShadow',
   );
 
+  const bidsContainer = createDiv('mt-20', 'flex', 'flex-col', 'pb-10');
+
+  if (currentListing.bids) {
+    const reversedBids = [...currentListing.bids].reverse();
+    reversedBids.forEach((bid, index) => {
+      const bidsList = createDiv('flex', 'flex-col', 'text-center', 'gap-0.5', 'py-2');
+      if (index % 2 !== 1) {
+        bidsList.classList.add('bg-white');
+      }
+
+      const bidId = createSpan(bid.id);
+
+      const bidFormatted = formatDateTime(bid.created);
+      const bidPlaced = createTime(bid.created || '0000-00-00T00:00:00Z', bidFormatted || DEFAULT_TIME_FORMAT);
+
+      const bidSize = createSpan(`${bid.amount} Cr.`);
+
+      bidsList.append(bidId, bidPlaced, bidSize);
+      bidsContainer.append(bidsList);
+    });
+  }
+
   bidWrap.append(bidContainer, submitBtn);
 
   interactionWrap.append(auctionEndingWrap);
@@ -116,10 +138,9 @@ export function listingModal(listings) {
   }
 
   if (isActive) {
-    interactionWrap.append(bidWrap);
+    interactionWrap.append(bidWrap, bidsContainer);
   }
 
-  // IF logged in, bid function.
   // If logged in, view bids on listing.
 
   auctionEndingWrap.append(auctionEndingTime);
