@@ -15,7 +15,7 @@ export function loggedInButton() {
   const placeholderImg = '/src/images/placeholder.jpg';
   const placeholderAlt = name;
 
-  const element = createDiv('rounded-full', 'border', 'border-neutralBg', 'flex', 'h-10', 'lg:h-28', 'w-36', 'lg:w-72', 'justify-between', 'cursor-pointer');
+  const element = createDiv('rounded-full', 'border-2', 'border-neutralBg', 'flex', 'h-10', 'lg:h-20', 'w-36', 'lg:w-72', 'justify-between', 'cursor-pointer');
 
   const infoWrap = createSection('flex', 'flex-col', 'justify-center', 'text-center', 'ps-5', 'gap-0.5', 'grow');
 
@@ -25,7 +25,7 @@ export function loggedInButton() {
 
   const creditsContainer = createSpan(`Cr. ${credits}`, 'text-neutralBg', 'text-sm', 'lg:text-xl');
 
-  const image = createImg(avatarUrl || placeholderImg, avatarAlt || placeholderAlt, 'rounded-full', 'border', 'border-neutralBg');
+  const image = createImg(avatarUrl || placeholderImg, avatarAlt || placeholderAlt, 'rounded-full');
 
   infoWrap.append(username, biography, creditsContainer);
   element.append(infoWrap, image);
