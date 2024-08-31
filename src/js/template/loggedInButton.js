@@ -4,6 +4,7 @@ import { createImg } from '../elements/createImg';
 import { createSection } from '../elements/createSection';
 import { createSpan } from '../elements/createSpan';
 import { load } from '../localStorage/load';
+import { runModal } from '../ui/modal/runModal';
 
 export function loggedInButton() {
   const {
@@ -16,6 +17,9 @@ export function loggedInButton() {
   const placeholderAlt = name;
 
   const element = createDiv('rounded-full', 'border-2', 'border-neutralBg', 'flex', 'h-10', 'lg:h-20', 'w-36', 'lg:w-72', 'justify-between', 'cursor-pointer');
+  element.addEventListener('click', () => {
+    runModal(true, 'profile');
+  });
 
   const infoWrap = createSection('flex', 'flex-col', 'justify-center', 'text-center', 'ps-5', 'gap-0.5', 'grow');
 
