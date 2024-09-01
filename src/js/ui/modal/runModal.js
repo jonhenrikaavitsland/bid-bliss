@@ -9,6 +9,8 @@ export function runModal(state = 'false', modalValue) {
 
   if (state === true && modalValue === 'gallery') {
     openGallery(currentModal);
+  } else if (state === true && modalValue === 'profile') {
+    openModal(currentModal);
   } else if (state === true) {
     openModal(currentModal);
     linkListener(modalValue);
