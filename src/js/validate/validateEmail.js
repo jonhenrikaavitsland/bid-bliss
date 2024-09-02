@@ -6,8 +6,7 @@ export function validateEmail(target) {
   const emailInput = email.value.trim();
   let validationMessage = '';
 
-  const emailPattern = REG_Email;
-  if (!emailPattern.test(emailInput)) {
+  if (!REG_Email.test(emailInput)) {
     validationMessage = MSG_Email;
     emailInput.setCustomValidity(validationMessage);
   } else {
