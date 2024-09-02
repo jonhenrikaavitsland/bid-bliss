@@ -8,3 +8,6 @@ export const API_Login = '/login';
 export const API_Profiles = '/auction/profiles';
 export const API_Listings = '/auction/listings';
 export const API_Key = '469afe69-d51d-4f51-8e40-618b936a4e1a';
+
+export const REG_email = /^[a-zA-Z0-9._%+-]+@stud\.noroff\.no$/;
+export const MSG_email = 'Email must be a @stud.noroff.no address and cannot contain illegal characters.';
