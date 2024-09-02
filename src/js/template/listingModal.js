@@ -30,9 +30,9 @@ export function listingModal(listings) {
 
   const element = createArticle('rounded-xl', 'grow', 'overflow-y-auto', 'max-h-[90%]', 'max-w-lg', 'md:max-w-2xl');
 
-  const titleTop = createSection('bg-secondary', 'rounded-t-xl');
+  const titleTop = createSection('bg-secondary', 'rounded-t-xl', 'px-2.5', 'py-2', 'md:px-5', 'md:py-4');
 
-  const headingTop = createHeading(2, currentListing.title, 'font-serif', 'font-semibold', 'capitalize', 'md:text-lg', 'text-neutralBg', 'px-2.5', 'py-2', 'md:px-5', 'md:py-4');
+  const headingTop = createHeading(2, currentListing.title, 'font-serif', 'font-semibold', 'capitalize', 'md:text-lg', 'text-neutralBg');
 
   const subTopContainer = createDiv('bg-primary', 'text-neutralBg', 'px-2.5', 'py-2', 'md:px-5', 'md:py-4', 'flex', 'justify-between');
 
