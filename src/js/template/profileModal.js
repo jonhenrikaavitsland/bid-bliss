@@ -9,6 +9,7 @@ import { createParagraph } from '../elements/createParagraph';
 import { createSection } from '../elements/createSection';
 import { createSpan } from '../elements/createSpan';
 import { load } from '../localStorage/load';
+import { logout } from '../ui/logoutBtn/logout';
 
 const DEFAULT_IMAGE_URL = '/src/images/placeholder.jpg';
 const DEFAULT_IMAGE_ALT = 'my avatar';
@@ -45,7 +46,8 @@ export function profileModal() {
   const uploadInput = createInput('text', 'image URL', 'uploadAvatar', 'bg-white', 'xsm:rounded-t-xl', 'xsm:px-3', 'xsm:py-2', 'xsm:text-center', 'sm:rounded-s-xl', 'grow', 'sm:ps-3', 'shadow-customShadow');
   const uploadBtn = createBtn('upload', 'uppercase', 'xsm:rounded-b-xl', 'sm:rounded-e-xl', 'bg-primary', 'py-2', 'px-3', 'md:py-4', 'md:px-6', 'hover:bg-hoverPrimary', 'text-white', 'shadow-customShadow');
 
-  const logOutBtn = createBtn('log out', 'bg-primary', 'hover:bg-hoverPrimary', 'rounded-xl', 'py-2', 'px-3', 'md:py-4', 'md:px-6', 'uppercase', 'text-white', 'mx-auto', 'mt-4', 'shadow-customShadow');
+  const logOutBtn = createBtn('log out', 'bg-primary', 'hover:bg-hoverPrimary', 'rounded-xl', 'py-2', 'px-3', 'md:py-4', 'md:px-6', 'uppercase', 'text-white', 'mx-auto', 'mt-4', 'shadow-customShadow', 'lg:hidden');
+  logOutBtn.addEventListener('click', () => logout());
 
   uploadWrap.append(uploadInput, uploadBtn);
   uploadForm.append(uploadInfo, uploadWrap);

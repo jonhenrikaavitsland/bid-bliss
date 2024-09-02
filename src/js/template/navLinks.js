@@ -1,6 +1,7 @@
 import { createBtn } from '../elements/createBtn';
 import { createLi } from '../elements/createLi';
 import { createUl } from '../elements/createUl';
+import { logout } from '../ui/logoutBtn/logout';
 import { runModal } from '../ui/modal/runModal';
 
 export function navLinks() {
@@ -13,13 +14,11 @@ export function navLinks() {
     const button = createBtn(btn, 'uppercase', 'py-3', 'px-6', 'hover:bg-hoverPrimary', 'rounded-xl');
     button.setAttribute('data-nav', index);
     if (btn === 'profile') {
-      button.addEventListener('click', () => {
-        runModal(true, 'profile');
-      });
+      button.addEventListener('click', () => runModal(true, 'profile'));
     } else if (btn === 'new auction') {
-      button.addEventListener('click', () => {
-        runModal(true, 'newListing');
-      });
+      button.addEventListener('click', () => runModal(true, 'newListing'));
+    } else if (btn === 'logout') {
+      button.addEventListener('click', () => logout());
     }
     ButtonWrap.append(button);
     element.append(ButtonWrap);
