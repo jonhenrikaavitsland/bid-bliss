@@ -12,3 +12,4 @@ export const API_Key = '469afe69-d51d-4f51-8e40-618b936a4e1a';
 export const REG_Email = /^[a-zA-Z0-9._%+-]+@stud\.noroff\.no$/;
 export const REG_Password = /[<>/]/;
 export const MSG_Email = 'Email must be a @stud.noroff.no address and cannot contain illegal characters.';
+export const MSG_Password = 'Password must be at least 8 characters long and must not contain illegal characters.';
