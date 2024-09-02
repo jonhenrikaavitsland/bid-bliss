@@ -1,7 +1,7 @@
 import { MSG_Password, REG_Password } from '../data/constants';
 
-export function validatePassword(target) {
-  const validateContainer = document.querySelector(`[data-validate="${target}"]`);
+export function validatePassword() {
+  const validateContainer = document.querySelector(`[data-validate="password"]`);
   const password = document.querySelector(`input[type="password"]`);
   const passwordInput = password.value.trim();
   let validationMessage = '';

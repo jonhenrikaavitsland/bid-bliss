@@ -1,7 +1,7 @@
 import { MSG_Email, REG_Email } from '../data/constants';
 
-export function validateEmail(target) {
-  const validateContainer = document.querySelector(`[data-validate="${target}"]`);
+export function validateEmail() {
+  const validateContainer = document.querySelector(`[data-validate="email"]`);
   const email = document.querySelector(`input[type="email"]`);
   const emailInput = email.value.trim();
   let validationMessage = '';
