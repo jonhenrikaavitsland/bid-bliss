@@ -23,13 +23,13 @@ export function registerModal() {
   const labelEmail = createLabel('email', 'Email:', 'md:text-xl');
   const emailInput = createInput('email', 'your-email@stud.noroff.no', 'email', 'h-8', 'md:h-10', 'pl-2', 'rounded-xl', 'shadow-customShadow');
   const emailValidate = createDiv('relative');
-  emailValidate.setAttribute('data-validate', 'regEmail');
+  emailValidate.setAttribute('data-validate', 'email');
 
   const passwordGroup = createDiv('flex', 'flex-col', 'gap-1.5');
   const labelPassword = createLabel('password', 'Password:', 'md:text-xl');
   const passwordInput = createInput('password', '*****', 'password', 'h-8', 'md:h-10', 'pl-2', 'rounded-xl', 'shadow-customShadow');
   const passwordValidate = createDiv('relative');
-  passwordValidate.setAttribute('data-validate', 'regPassword');
+  passwordValidate.setAttribute('data-validate', 'password');
 
   const ctaGroup = createDiv('flex', 'flex-col', 'mx-auto', 'gap-5');
   const wrap = createDiv('mx-auto');
