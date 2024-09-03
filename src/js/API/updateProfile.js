@@ -9,7 +9,7 @@ export async function updateProfile(url) {
 
   const options = {
     method: 'PUT',
-    Headers: {
+    headers: {
       Authorization: `Bearer ${token}`,
       'X-Noroff-API-Key': API_Key,
       'Content-Type': 'application/json',
@@ -21,7 +21,12 @@ export async function updateProfile(url) {
 
   try {
     const response = await fetchData(`${API_Base}${API_Profiles}/${name}`, options);
-    console.log('profile updated successfully:', response);
+
+    if (!response || response.status === 401) {
+      console.error(`Error updating profile: ${response?.status || 'Unknown error'}`, response);
+      throw new Error(`Error updating profile: ${response?.status || 'Error'}`);
+    }
+
     return true;
   } catch (error) {
     console.error('Error updating profile', error);
