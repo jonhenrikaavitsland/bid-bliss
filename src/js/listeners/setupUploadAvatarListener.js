@@ -24,6 +24,7 @@ export function setupUploadAvatarListener() {
       avatarImage.alt = updateProfile.name;
       avatarBtn.src = url;
       avatarBtn.alt = updateProfile.name;
+      uploadInput.value = '';
       uploadInput.classList.remove('border-error');
       uploadInput.classList.add('border-2', 'border-correct');
     }
