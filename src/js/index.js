@@ -1,10 +1,11 @@
 import { listings } from './data/listings';
 import { loginBtnListener } from './listeners/loginBtnListener';
 import { renderListings } from './render/renderListings';
+import { renderLoginBtn } from './render/renderLoginBtn';
 import { ifLoggedIn } from './ui/loggedIn/ifLoggedIn';
-import { load } from './localStorage/load';
 
 renderListings(listings.data);
+renderLoginBtn();
 loginBtnListener();
 ifLoggedIn();
 

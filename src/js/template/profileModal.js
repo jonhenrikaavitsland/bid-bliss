@@ -27,6 +27,7 @@ export function profileModal() {
   const element = createDiv('bg-neutralBg', 'rounded-xl', 'pt-5', 'px-5', 'pb-10', 'md:pt-8', 'md:px-8', 'md:pb-16', 'shadow-customShadow', 'flex', 'flex-col', 'grow', 'gap-5', 'max-w-xl');
 
   const image = createImg(url || DEFAULT_IMAGE_URL, alt || DEFAULT_IMAGE_ALT, 'w-28', 'md:w-40', 'rounded-full', 'mx-auto', 'border', 'border-secondary');
+  image.setAttribute('data-avatar', 'img');
 
   const infoWrap = createDiv('flex', 'flex-col', 'gap-2.5', 'text-center');
 
@@ -44,7 +45,9 @@ export function profileModal() {
   const uploadInfo = createLabel('uploadAvatar', 'Change avatar:', 'text-sm', 'md:text-base');
   const uploadWrap = createDiv('flex', 'xsm:flex-col');
   const uploadInput = createInput('text', 'image URL', 'uploadAvatar', 'bg-white', 'xsm:rounded-t-xl', 'xsm:px-3', 'xsm:py-2', 'xsm:text-center', 'sm:rounded-s-xl', 'grow', 'sm:ps-3', 'shadow-customShadow');
+  uploadInput.setAttribute('data-upload', 'input');
   const uploadBtn = createBtn('upload', 'uppercase', 'xsm:rounded-b-xl', 'sm:rounded-e-xl', 'bg-primary', 'py-2', 'px-3', 'md:py-4', 'md:px-6', 'hover:bg-hoverPrimary', 'text-white', 'shadow-customShadow');
+  uploadBtn.setAttribute('data-upload', 'btn');
 
   const logOutBtn = createBtn('log out', 'bg-primary', 'hover:bg-hoverPrimary', 'rounded-xl', 'py-2', 'px-3', 'md:py-4', 'md:px-6', 'uppercase', 'text-white', 'mx-auto', 'mt-4', 'shadow-customShadow', 'lg:hidden');
   logOutBtn.addEventListener('click', () => logout());

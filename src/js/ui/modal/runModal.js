@@ -1,4 +1,5 @@
 import { linkListener } from '../../listeners/linkListener.js';
+import { setupUploadAvatarListener } from '../../listeners/setupUploadAvatarListener.js';
 import { modalRouter } from '../../router/modalRouter.js';
 import { gatherUserData } from '../login Form/gatherUserData.js';
 import { openGallery } from './openGallery.js';
@@ -16,6 +17,9 @@ export function runModal(state = 'false', modalValue) {
       console.log('Test-1');
       console.log(document.querySelector('#email'));
       gatherUserData();
+    }
+    if (modalValue === 'profile') {
+      setupUploadAvatarListener();
     }
   }
 }

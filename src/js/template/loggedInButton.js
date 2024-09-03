@@ -16,7 +16,7 @@ export function loggedInButton() {
   const placeholderImg = '/src/images/placeholder.jpg';
   const placeholderAlt = name;
 
-  const element = createDiv('rounded-full', 'border-2', 'border-neutralBg', 'flex', 'h-10', 'lg:h-20', 'w-36', 'lg:w-72', 'justify-between', 'cursor-pointer');
+  const element = createDiv('hidden', 'rounded-full', 'border-2', 'border-neutralBg', 'lg:flex', 'h-10', 'lg:h-20', 'w-36', 'lg:w-72', 'justify-between', 'cursor-pointer');
   element.addEventListener('click', () => {
     runModal(true, 'profile');
   });
