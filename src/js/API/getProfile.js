@@ -3,6 +3,7 @@ import { load } from '../localStorage/load';
 import { save } from '../localStorage/save';
 import { fetchData } from './fetchData';
 import { API_Key } from '../data/constants';
+import { swapAvatar } from '../localStorage/swapAvatar';
 
 export async function getProfile() {
   const { name } = load('profile');
@@ -18,4 +19,5 @@ export async function getProfile() {
     data: { ...user },
   } = profile;
   save('profile', user);
+  swapAvatar();
 }
