@@ -6,9 +6,9 @@ import { addBtn } from './addBtn';
 
 const nav = document.querySelector('nav');
 
-export function ifLoggedIn() {
+export async function ifLoggedIn() {
   if (load('token') && load('profile')) {
-    getProfile();
+    await getProfile();
     addBtn();
     const loggedInNavMobile = loggedInButton();
     nav.innerHTML = '';
