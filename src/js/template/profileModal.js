@@ -27,6 +27,7 @@ export function profileModal() {
   const element = createDiv('bg-neutralBg', 'rounded-xl', 'pt-5', 'px-5', 'pb-10', 'md:pt-8', 'md:px-8', 'md:pb-16', 'shadow-customShadow', 'flex', 'flex-col', 'grow', 'gap-5', 'max-w-xl');
 
   const image = createImg(url || DEFAULT_IMAGE_URL, alt || DEFAULT_IMAGE_ALT, 'w-28', 'md:w-40', 'rounded-full', 'mx-auto', 'border', 'border-secondary');
+  image.setAttribute('data-avatar', 'img');
 
   const infoWrap = createDiv('flex', 'flex-col', 'gap-2.5', 'text-center');
 
