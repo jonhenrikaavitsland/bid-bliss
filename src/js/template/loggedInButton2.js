@@ -15,6 +15,7 @@ export function loggedInButton2() {
   });
 
   const img = createImg(profile.avatar.url, profile.avatar.alt, 'rounded-full', 'shadow-customShadow');
+  img.setAttribute('data-avatar', 'btn');
 
   element.append(img);
   return element;
