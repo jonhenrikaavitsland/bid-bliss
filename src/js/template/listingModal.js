@@ -14,8 +14,9 @@ import { save } from '../localStorage/save';
 import { createForm } from '../elements/createForm';
 import { createBtn } from '../elements/createBtn';
 import { createInput } from '../elements/createInput';
+import { handleBid } from '../ui/bid/handleBid';
 
-const DEFAULT_TIME_FORMAT = 'invalid date';
+export const DEFAULT_TIME_FORMAT = 'invalid date';
 const DEFAULT_IMAGE_URL = '/src/images/placeholderItem.png';
 const DEFAULT_IMAGE_ALT = 'listing item';
 const DEFAULT_TITLE = 'Unknown item';
@@ -23,9 +24,7 @@ const DEFAULT_TITLE = 'Unknown item';
 export function listingModal(listings) {
   const isActive = load('profile');
   const currentListingID = load('listingID');
-  console.log(listings);
   const currentListing = listings.find((listing) => listing.id === currentListingID);
-  console.log(currentListing);
   save('media', currentListing.media);
 
   const element = createArticle('rounded-xl', 'grow', 'overflow-y-auto', 'max-h-[90%]', 'max-w-lg', 'md:max-w-2xl');
@@ -83,8 +82,11 @@ export function listingModal(listings) {
   const auctionEndingTime = createTime(currentListing.endsAt || '0000-00-00T00:00:00Z', timeFormattedFull || DEFAULT_TIME_FORMAT);
 
   const callToAction = createHeading(3, 'Login to interact with this auction!', 'font-semibold', 'text-lg', 'mt-9', 'pb-10');
-
+  const listingID = load('listingID');
   const bidWrap = createForm('bid', 'place-bid', 'w-1/2', 'flex', 'mx-auto', 'mt-4', 'xsm:flex-col', 'xsm:items-center');
+  bidWrap.addEventListener('submit', (event) => {
+    handleBid(event, listingID, bidsContainer);
+  });
 
   const bidContainer = createInput('number ', '0 cr.', 'bid', 'bg-white', 'capitalize', 'w-1/2', 'xsm:px-4', 'xsm:py-2', 'xsm:rounded-t-xl', 'xsm:w-full', 'text-center', 'sm:rounded-s-xl', 'sm:shadow-customShadow');
 
@@ -140,8 +142,6 @@ export function listingModal(listings) {
   if (isActive) {
     interactionWrap.append(bidWrap, bidsContainer);
   }
-
-  // If logged in, view bids on listing.
 
   auctionEndingWrap.append(auctionEndingTime);
 
