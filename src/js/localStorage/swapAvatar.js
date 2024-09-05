@@ -19,5 +19,7 @@ export function swapAvatar() {
     newProfile = { name, email, bio, avatar: { url: '/src/images/placeholder.jpg', alt: name }, credits, _count: { listings, wins } };
 
     save('profile', newProfile);
+  } else {
+    return;
   }
 }
