@@ -46,7 +46,8 @@ export function newListingModal() {
   const imgWrap = createDiv('flex', 'xsm:flex-col');
   const imageInput = createInput('text', 'https://www.img.com/image.jpg', 'newListingImages', 'grow', 'xsm:rounded-t-xl', 'xsm:py-2.5', 'xsm:px-2', 'sm:rounded-s-xl', 'sm:ps-2', 'sm:shadow-customShadow');
   const imageBtn = createBtn('save', 'uppercase', 'font-serif', 'font-semibold', 'bg-secondary', 'hover:bg-hoverSecondary', 'py-2', 'px-4', 'text-white', 'shadow-customShadow', 'xsm:rounded-b-xl', 'sm:rounded-e-xl');
-  const images = createDiv();
+  const images = createDiv('mt-2');
+  images.setAttribute('id', 'imagePreviewContainer');
   const imageValidate = createDiv('relative');
 
   const cta = createBtn('create listing', 'uppercase', 'bg-secondary', 'hover:bg-hoverSecondary', 'py-2', 'px-4', 'rounded-xl', 'text-white', 'shadow-customShadow', 'mx-auto', 'font-serif', 'font-medium', 'mt-5');
