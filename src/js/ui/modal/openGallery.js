@@ -3,7 +3,6 @@ import { modal } from '../../data/constants';
 import { closeGallery } from './closeGallery';
 
 export function openGallery(target) {
-  console.log(target);
   if (!target) closeGallery(gallery);
   const scrollPosition = window.scrollY || document.documentElement.scrollTop;
 
