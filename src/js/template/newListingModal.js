@@ -1,6 +1,7 @@
 import { fetchData } from '../API/fetchData';
 import { API_Base, API_Key, API_Listings } from '../data/constants';
 import { getTimeAhead } from '../data/getTimeAhead';
+import { hasValidImageExtension } from '../data/hasValidImageExtension';
 import { isValidUrl } from '../data/isValidUrl';
 import { createBtn } from '../elements/createBtn';
 import { createDiv } from '../elements/createDiv';
@@ -156,7 +157,7 @@ export function newListingModal() {
         return;
       }
 
-      if (!isValidUrl(imageUrl)) {
+      if (!isValidUrl(imageUrl) || !hasValidImageExtension(imageUrl)) {
         setError(imageValidate, 'Please enter a valid and accessible image URL');
         return;
       }
