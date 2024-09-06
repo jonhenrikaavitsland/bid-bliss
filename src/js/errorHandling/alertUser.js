@@ -1,3 +1,4 @@
+import { loginAlertMessage } from './loginAlertMessage';
 import { registerAlertMessage } from './registerAlertMessage';
 import { showAlert } from './showAlert';
 
@@ -8,6 +9,8 @@ export function alertUser(alertType, alertStatus) {
     case 'register':
       message = registerAlertMessage(alertStatus);
       break;
+    case 'login':
+      message = loginAlertMessage(alertStatus);
   }
 
   if (message) showAlert(message);
