@@ -1,6 +1,7 @@
 import { updateProfile } from '../API/updateProfile';
 import { hasValidImageExtension } from '../data/hasValidImageExtension';
 import { isValidUrl } from '../data/isValidUrl';
+import { showAlert } from '../errorHandling/showAlert';
 
 export function setupUploadAvatarListener() {
   const uploadBtn = document.querySelector(`[data-upload="btn"]`);
@@ -17,6 +18,7 @@ export function setupUploadAvatarListener() {
     if (!isValidUrl(url) || !hasValidImageExtension(url)) {
       uploadInput.classList.add('border-2', 'border-error');
       uploadInput.classList.remove('border-correct');
+      showAlert('Image URL must be a valid and accessible URL.');
       return;
     }
 
