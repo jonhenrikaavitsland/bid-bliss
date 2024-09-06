@@ -7,11 +7,11 @@ import { createDiv } from '../../elements/createDiv';
 import { createNewBid } from './createNewBid';
 import { cleanListingID } from '../../data/cleanListingID';
 
-export async function handleBid(event, rawListingID, bidsContainer) {
+export async function handleBid(event, rawListingID, bidsContainer, currentHigh) {
   event.preventDefault();
 
   const bid = document.querySelector('#bid');
-  validateBid(bid);
+  validateBid(bid, currentHigh);
 
   if (!bid.classList.contains('border-correct')) return;
 
@@ -40,7 +40,7 @@ export async function handleBid(event, rawListingID, bidsContainer) {
       body: JSON.stringify({ amount: parseFloat(sanitizedBidAmount) }),
     };
 
-    const response = await fetchData(url, options);
+    const response = await fetchData(url, options, 'bid');
 
     const newBid = createNewBid(response.data, sanitizedBidAmount);
     bidsContainer.prepend(newBid);
@@ -48,8 +48,6 @@ export async function handleBid(event, rawListingID, bidsContainer) {
     bid.value = '';
     bid.classList.remove('border-correct');
   } catch (error) {
-    const errorMessage = createDiv('text-error', 'text-center');
-    errorMessage.textContent = `Error: ${error.message}`;
-    bidsContainer.prepend(errorMessage);
+    console.error('Error placing bid:', error);
   }
 }

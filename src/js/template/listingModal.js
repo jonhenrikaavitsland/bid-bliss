@@ -15,6 +15,7 @@ import { createForm } from '../elements/createForm';
 import { createBtn } from '../elements/createBtn';
 import { createInput } from '../elements/createInput';
 import { handleBid } from '../ui/bid/handleBid';
+import { getHighestBid } from '../ui/bid/getHighestBid';
 
 export const DEFAULT_TIME_FORMAT = 'invalid date';
 const DEFAULT_IMAGE_URL = '/src/images/placeholderItem.png';
@@ -84,8 +85,10 @@ export function listingModal(listings) {
   const callToAction = createHeading(3, 'Login to interact with this auction!', 'font-semibold', 'text-lg', 'mt-9', 'pb-10');
   const listingID = load('listingID');
   const bidWrap = createForm('bid', 'place-bid', 'w-1/2', 'flex', 'mx-auto', 'mt-4', 'xsm:flex-col', 'xsm:items-center');
+  const highestBid = getHighestBid(currentListing);
+
   bidWrap.addEventListener('submit', (event) => {
-    handleBid(event, listingID, bidsContainer);
+    handleBid(event, listingID, bidsContainer, highestBid.amount);
   });
 
   const bidContainer = createInput('number ', '0 cr.', 'bid', 'bg-white', 'capitalize', 'w-1/2', 'xsm:px-4', 'xsm:py-2', 'xsm:rounded-t-xl', 'xsm:w-full', 'text-center', 'sm:rounded-s-xl', 'sm:shadow-customShadow');
