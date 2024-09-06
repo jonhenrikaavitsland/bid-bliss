@@ -30,6 +30,7 @@ export function loggedInButton() {
   const creditsContainer = createSpan(`Cr. ${credits}`, 'text-neutralBg', 'text-sm', 'lg:text-xl');
 
   const image = createImg(avatarUrl || placeholderImg, avatarAlt || placeholderAlt, 'rounded-full');
+  image.setAttribute('data-avatar', 'desktop');
 
   infoWrap.append(username, biography, creditsContainer);
   element.append(infoWrap, image);
