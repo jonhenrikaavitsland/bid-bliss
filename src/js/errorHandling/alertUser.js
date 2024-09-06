@@ -9,5 +9,6 @@ export function alertUser(alertType, alertStatus) {
       message = registerAlertMessage(alertStatus);
       break;
   }
-  showAlert(message);
+
+  if (message) showAlert(message);
 }
