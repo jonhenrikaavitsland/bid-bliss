@@ -1,3 +1,5 @@
+import { remove } from '../localStorage/remove';
+
 export function showAlert(message) {
   const alertContainer = document.getElementById('custom-alert');
   const alertMessage = document.getElementById('alert-message');
@@ -14,5 +16,7 @@ export function showAlert(message) {
     alertContainer.classList.add('hidden');
 
     document.body.classList.remove('overflow-hidden');
+
+    remove(status);
   };
 }
