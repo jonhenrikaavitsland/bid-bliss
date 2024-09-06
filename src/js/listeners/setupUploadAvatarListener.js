@@ -37,12 +37,16 @@ export function setupUploadAvatarListener() {
   uploadInput.addEventListener('input', () => {
     const url = uploadInput.value.trim();
 
-    if (isValidUrl(url)) {
+    if (isValidUrl(url) && hasValidImageExtension(url)) {
       uploadInput.classList.remove('border-error');
       uploadInput.classList.add('border-2', 'border-correct');
     } else {
       uploadInput.classList.add('border-2', 'border-error');
       uploadInput.classList.remove('border-correct');
+    }
+
+    if (!url) {
+      uploadInput.classList.remove('border-2');
     }
   });
 }
