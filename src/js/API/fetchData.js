@@ -1,4 +1,4 @@
-import { save } from '../localStorage/save';
+import { alertUser } from '../errorHandling/alertUser';
 
 /**
  * Fetches data from a given URL using the provided options.
@@ -12,11 +12,11 @@ import { save } from '../localStorage/save';
  * @returns {Promise<Object>} A promise that resolves to the JSON-parsed response data.
  * @throws {Error} If the HTTP response is not OK, an error with the response status is thrown.
  */
-export async function fetchData(url, object) {
+export async function fetchData(url, object, alertType) {
   const response = await fetch(url, object);
   const result = await response.json();
 
-  save('status', response.status);
+  alertUser(alertType, response.status);
 
   if (!response.ok) {
     throw new Error(response.status);
