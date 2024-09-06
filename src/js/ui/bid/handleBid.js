@@ -7,11 +7,11 @@ import { createDiv } from '../../elements/createDiv';
 import { createNewBid } from './createNewBid';
 import { cleanListingID } from '../../data/cleanListingID';
 
-export async function handleBid(event, rawListingID, bidsContainer) {
+export async function handleBid(event, rawListingID, bidsContainer, currentHigh) {
   event.preventDefault();
 
   const bid = document.querySelector('#bid');
-  validateBid(bid);
+  validateBid(bid, currentHigh);
 
   if (!bid.classList.contains('border-correct')) return;
 
