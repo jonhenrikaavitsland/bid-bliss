@@ -92,13 +92,11 @@ export function newListingModal() {
         body: JSON.stringify(payload),
       });
 
-      console.log('Response:', response);
-
       listingContents.reset();
       imageContainer = [];
       images.innerHTML = '';
 
-      const listings = await fetchData(`${API_Base}${API_Listings}?_seller=true&_bids=true`);
+      const listings = await fetchData(`${API_Base}${API_Listings}?_seller=true&_bids=true`, {}, 'newListing');
       renderListings(listings.data);
     } catch (error) {
       console.error('Error during form submission:', error);
