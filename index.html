@@ -9,9 +9,15 @@
     <script type="module" src="./src/js/index.js"></script>
     <title>Home | BidBliss</title>
   </head>
-  <body class="bg-neutralBg flex flex-col h-screen">
+  <body class="bg-neutralBg flex flex-col h-screen text-primary">
     <div class="absolute bg-neutralTxt w-full h-full z-20 bg-opacity-50 hidden" data-modal="modalObject"></div>
     <div class="absolute bg-neutralTxt w-full h-full z-30 hidden" data-modal="galleryObject"></div>
+    <div class="fixed top-0 left-0 w-full h-full bg-neutralTxt bg-opacity-50 justify-center items-center border-2 border-error z-50 hidden" id="custom-alert">
+      <div class="bg-white p-5 rounded-xl text-center shadow-customShadow">
+        <p id="aøert-button">This is a custom alert!</p>
+        <button class="mt-2.5 py-2.5 px-5 bg-error hover:bg-opacity-90 text-white rounded-xl shadow-customShadow font-serif" id="alert-button">OK</button>
+      </div>
+    </div>
     <header class="bg-primary flex flex-col gap-2.5">
       <div class="lg:container lg:mx-auto lg:flex lg:flex-row lg:justify-between h-28 pt-5 px-5 pb-2.5 md:px-8 md:pb-4 md:h-32 lg:p-8 lg:h-40">
         <div class="w-52 lg:w-96 mx-auto lg:mx-0">
