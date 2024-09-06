@@ -27,7 +27,7 @@
       </div>
     </header>
     <main class="flex flex-col grow pb-5 md:pt-8 md:px-8 md:pb-12 md:gap-8 lg:container lg:mx-auto lg:p-10 lg:gap-10">
-      <div class="flex flex-col p-5 gap-5 md:p-0 md:gap-8 lg:flex-row lg:gap-20">
+      <div class="flex flex-col p-5 md:p-0">
         <h1 class="sr-only leading-none h-0">Our Auctions</h1>
         <form class="grow" data-form="search">
           <label class="sr-only" for="searchField">search</label>
@@ -36,9 +36,6 @@
             <button class="uppercase font-serif font-medium text-white bg-secondary rounded-r-xl py-3 px-4 hover:bg-hoverSecondary md:text-xl md:py-3 md:px-6" type="submit">search</button>
           </div>
         </form>
-        <div class="flex justify-end" data-buttons="newAuction">
-          <button class="flex gap-2 bg-white py-2 px-4 rounded-xl shadow-customShadow md:text-lg md:py-3 md:px-6 items-center order-2">Sort by: <img class="w-4 md:w-5" src="./src/images/circle-chevron-down-solid.svg" alt="sorting options" /></button>
-        </div>
       </div>
       <div class="flex flex-col md:flex-row flex-wrap gap-8 md:gap-10 mx-auto md:justify-center grow md:pb-5 lg:pb-0" data-modal="auctionModalDisplayListings">
         <div class="lds-grid text-primary inline-block relative w-20 h-20">
