@@ -6,6 +6,7 @@ export function setupUploadAvatarListener() {
   const uploadInput = document.querySelector(`[data-upload="input"]`);
   const avatarImage = document.querySelector(`[data-avatar="img"]`);
   const avatarBtn = document.querySelector(`[data-avatar="btn"]`);
+  const desktopAvatarImage = document.querySelector(`[data-avatar="desktop"]`);
 
   uploadBtn.addEventListener('click', async (event) => {
     event.preventDefault();
@@ -24,6 +25,8 @@ export function setupUploadAvatarListener() {
       avatarImage.alt = updateProfile.name;
       avatarBtn.src = url;
       avatarBtn.alt = updateProfile.name;
+      desktopAvatarImage.src = url;
+      desktopAvatarImage.alt = updateProfile.name;
       uploadInput.value = '';
       uploadInput.classList.remove('border-error');
       uploadInput.classList.add('border-2', 'border-correct');
