@@ -1,3 +1,5 @@
+import { save } from '../localStorage/save';
+
 /**
  * Fetches data from a given URL using the provided options.
  *
@@ -13,6 +15,8 @@
 export async function fetchData(url, object) {
   const response = await fetch(url, object);
   const result = await response.json();
+
+  save('status', response.status);
 
   if (!response.ok) {
     throw new Error(response.status);
