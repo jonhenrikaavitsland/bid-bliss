@@ -40,7 +40,7 @@ export async function handleBid(event, rawListingID, bidsContainer) {
       body: JSON.stringify({ amount: parseFloat(sanitizedBidAmount) }),
     };
 
-    const response = await fetchData(url, options);
+    const response = await fetchData(url, options, 'bid');
 
     const newBid = createNewBid(response.data, sanitizedBidAmount);
     bidsContainer.prepend(newBid);
@@ -48,8 +48,6 @@ export async function handleBid(event, rawListingID, bidsContainer) {
     bid.value = '';
     bid.classList.remove('border-correct');
   } catch (error) {
-    const errorMessage = createDiv('text-error', 'text-center');
-    errorMessage.textContent = `Error: ${error.message}`;
-    bidsContainer.prepend(errorMessage);
+    console.error('Error placing bid:', error);
   }
 }
