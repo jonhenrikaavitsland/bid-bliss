@@ -6,13 +6,10 @@ export function registerAlertMessage(alertStatus) {
       message = 'Registration successful! Your profile has been created.';
       break;
     case 400: // Bad Request
-      message = 'There was an issue with your registration request. Please review your input and try again.';
+      message = 'An account with this email already exists. Please use a different email.';
       break;
     case 401: // Unauthorized
       message = 'You are not authorized to perform this action. Please ensure you are logged in properly.';
-      break;
-    case 409: // Conflict
-      message = 'An account with this email or username already exists. Please use a different email or username.';
       break;
     case 429: // Too Many Requests
       message = 'You have made too many requests in a short time. Please wait a moment and try again.';
