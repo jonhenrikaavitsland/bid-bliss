@@ -1,4 +1,5 @@
 import { updateProfile } from '../API/updateProfile';
+import { hasValidImageExtension } from '../data/hasValidImageExtension';
 import { isValidUrl } from '../data/isValidUrl';
 
 export function setupUploadAvatarListener() {
@@ -13,7 +14,7 @@ export function setupUploadAvatarListener() {
 
     const url = uploadInput.value.trim();
 
-    if (!isValidUrl(url)) {
+    if (!isValidUrl(url) || !hasValidImageExtension(url)) {
       uploadInput.classList.add('border-2', 'border-error');
       uploadInput.classList.remove('border-correct');
       return;
