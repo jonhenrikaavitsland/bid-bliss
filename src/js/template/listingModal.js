@@ -17,6 +17,8 @@ import { createInput } from '../elements/createInput';
 import { handleBid } from '../ui/bid/handleBid';
 import { getHighestBid } from '../ui/bid/getHighestBid';
 import { getProfile } from '../API/getProfile';
+import { loggedInButton } from './loggedInButton';
+import { navLinks } from './navLinks';
 
 export const DEFAULT_TIME_FORMAT = 'invalid date';
 const DEFAULT_IMAGE_URL = '/src/images/placeholderItem.png';
@@ -90,7 +92,14 @@ export function listingModal(listings) {
 
   bidWrap.addEventListener('submit', (event) => {
     handleBid(event, listingID, bidsContainer, highestBid.amount);
-    getProfile();
+    setTimeout(getProfile, 500);
+    setTimeout(() => {
+      const navElement = document.querySelector('nav');
+      navElement.innerHTML = '';
+      navElement.append(loggedInButton());
+      const links = navLinks();
+      navElement.append(links);
+    }, 1000);
   });
 
   const bidContainer = createInput('number ', '0 cr.', 'bid', 'bg-white', 'capitalize', 'w-1/2', 'xsm:px-4', 'xsm:py-2', 'xsm:rounded-t-xl', 'xsm:w-full', 'text-center', 'sm:rounded-s-xl', 'sm:shadow-customShadow');
