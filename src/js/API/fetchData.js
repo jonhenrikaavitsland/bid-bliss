@@ -19,6 +19,7 @@ export async function fetchData(url, object, alertType) {
   alertUser(alertType, response.status);
 
   if (!response.ok) {
+    console.error(response.status);
     throw new Error(response.status);
   }
 
