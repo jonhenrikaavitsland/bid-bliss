@@ -19,6 +19,9 @@ import { getHighestBid } from '../ui/bid/getHighestBid';
 import { getProfile } from '../API/getProfile';
 import { loggedInButton } from './loggedInButton';
 import { navLinks } from './navLinks';
+import { renderListings } from '../render/renderListings';
+import { listingService } from '../data/listingService';
+import { initializeListings } from '../data/initializeListings';
 
 export const DEFAULT_TIME_FORMAT = 'invalid date';
 const DEFAULT_IMAGE_URL = '/src/images/placeholderItem.png';
@@ -88,15 +91,20 @@ export function listingModal(listings) {
   const hasEnded = new Date(currentListing.endsAt) < new Date();
 
   if (!hasEnded) {
-    bidWrap.addEventListener('submit', (event) => {
+    bidWrap.addEventListener('submit', async (event) => {
       handleBid(event, listingID, bidsContainer, highestBid.amount);
       setTimeout(getProfile, 500);
-      setTimeout(() => {
+      setTimeout(async () => {
         const navElement = document.querySelector('nav');
         navElement.innerHTML = '';
         navElement.append(loggedInButton());
         const links = navLinks();
         navElement.append(links);
+
+        await listingService.fetchListings();
+        const newListings = await initializeListings();
+        console.log('NEW:', newListings);
+        renderListings(newListings);
       }, 1000);
     });
   }
