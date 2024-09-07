@@ -132,6 +132,7 @@ export function newListingModal() {
   const timeInput = createInput('datetime-local', '', 'newListingTime', 'bg-white', 'rounded-xl', 'shadow-customShadow', 'py-2.5', 'px-2', 'cursor-pointer');
   timeInput.value = getTimeAhead(60);
   timeInput.min = getTimeAhead(60);
+  timeInput.max = getTimeAhead(364);
   timeInput.addEventListener('click', (event) => {
     event.preventDefault();
     timeInput.showPicker();
