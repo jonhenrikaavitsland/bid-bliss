@@ -29,9 +29,13 @@ const DEFAULT_IMAGE_ALT = 'listing item';
 const DEFAULT_TITLE = 'Unknown item';
 
 export function listingModal(listings) {
+  console.log('listingModal:', listings);
+
   const isActive = load('profile');
   const currentListingID = load('listingID');
   const currentListing = listings.find((listing) => listing.id === currentListingID);
+  console.log('Current:', currentListing);
+
   save('media', currentListing.media);
 
   const element = createArticle('rounded-xl', 'grow', 'overflow-y-auto', 'max-h-[90%]', 'max-w-lg', 'md:max-w-2xl');

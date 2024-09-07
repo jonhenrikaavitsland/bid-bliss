@@ -1,4 +1,6 @@
 export function sortListings(listings) {
+  console.log('Sort:', listings);
+
   const sortedListings = listings.data.sort((a, b) => {
     const now = new Date();
 

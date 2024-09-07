@@ -99,8 +99,9 @@ export function newListingModal() {
       imageContainer = [];
       images.innerHTML = '';
 
-      await listingService.fetchListings();
-      const newListings = await initializeListings();
+      listingService.updateListings(await listingService.fetchListings());
+      let newListings = await initializeListings();
+      console.log('New Listings:', newListings);
       renderListings(newListings);
     } catch (error) {
       console.error('Error during form submission:', error);
