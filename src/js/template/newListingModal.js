@@ -176,7 +176,6 @@ export function newListingModal() {
 
       const imageObject = { url: imageUrl, alt: '' };
       imageContainer.push(imageObject);
-      console.log('Image added', imageObject);
 
       imageInput.value = '';
 
