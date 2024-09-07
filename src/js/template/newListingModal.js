@@ -1,7 +1,7 @@
 import { fetchData } from '../API/fetchData';
+import { isImageAccessible } from '../API/isImageAccessible';
 import { API_Base, API_Key, API_Listings } from '../data/constants';
 import { getTimeAhead } from '../data/getTimeAhead';
-import { hasValidImageExtension } from '../data/hasValidImageExtension';
 import { isValidUrl } from '../data/isValidUrl';
 import { createBtn } from '../elements/createBtn';
 import { createDiv } from '../elements/createDiv';
@@ -149,7 +149,7 @@ export function newListingModal() {
 
   const cta = createBtn('create listing', 'uppercase', 'bg-secondary', 'hover:bg-hoverSecondary', 'py-2', 'px-4', 'rounded-xl', 'text-white', 'shadow-customShadow', 'mx-auto', 'font-serif', 'font-medium', 'mt-5');
 
-  imageBtn.addEventListener('click', () => {
+  imageBtn.addEventListener('click', async () => {
     try {
       const imageUrl = sanitizeInput(imageInput.value.trim());
       if (!imageUrl) {
@@ -157,7 +157,7 @@ export function newListingModal() {
         return;
       }
 
-      if (!isValidUrl(imageUrl)) {
+      if (!isValidUrl(imageUrl) || !(await isImageAccessible(imageUrl))) {
         setError(imageValidate, 'Please enter a valid and accessible image URL');
         return;
       }
