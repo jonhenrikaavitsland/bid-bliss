@@ -152,12 +152,16 @@ export function listingModal(listings) {
   }
 
   interactionWrap.append(auctionEndingWrap);
+
   if (!isActive) {
     interactionWrap.append(callToAction);
   }
 
-  if (isActive && !hasEnded) {
-    interactionWrap.append(bidWrap, bidsContainer);
+  if (isActive) {
+    if (!hasEnded) {
+      interactionWrap.append(bidWrap);
+    }
+    interactionWrap.append(bidsContainer);
   }
 
   auctionEndingWrap.append(auctionEndingTime);
