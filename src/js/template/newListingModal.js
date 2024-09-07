@@ -157,7 +157,7 @@ export function newListingModal() {
         return;
       }
 
-      if (!isValidUrl(imageUrl) || !hasValidImageExtension(imageUrl)) {
+      if (!isValidUrl(imageUrl)) {
         setError(imageValidate, 'Please enter a valid and accessible image URL');
         return;
       }
@@ -167,20 +167,30 @@ export function newListingModal() {
       const imageElement = createDiv('flex', 'gap-2', 'items-center', 'mb-2');
       const imgPreview = createImg(imageUrl, 'image preview', 'w-20', 'h-20', 'object-cover', 'rounded-xl');
       const altInput = createInput('text', 'Alt text', '', 'bg-white', 'rounded-xl', 'shadow-customShadow', 'py-2', 'px-4');
+      const removeBtn = createBtn('Remove', 'uppercase', 'font-serif', 'font-semibold', 'bg-error', 'hover:bg-opacity-90', 'py-2', 'px-4', 'text-white', 'rounded-xl');
 
       imageElement.appendChild(imgPreview);
       imageElement.appendChild(altInput);
+      imageElement.appendChild(removeBtn);
       images.appendChild(imageElement);
 
-      imageContainer.push({ url: imageUrl, alt: '' });
-      console.log('Image added', { url: imageUrl, alt: '' });
+      const imageObject = { url: imageUrl, alt: '' };
+      imageContainer.push(imageObject);
+      console.log('Image added', imageObject);
 
       imageInput.value = '';
 
       altInput.addEventListener('input', (event) => {
         const index = Array.from(images.children).indexOf(imageElement);
         imageContainer[index].alt = event.target.value;
-        console.log('Alt text updated', imageContainer[index]);
+      });
+
+      removeBtn.addEventListener('click', () => {
+        const index = Array.from(images.children).indexOf(imageElement);
+        if (index > -1) {
+          imageContainer.splice(index, 1);
+          images.removeChild(imageElement);
+        }
       });
     } catch (error) {
       console.error('Error while adding image:', error);
