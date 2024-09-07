@@ -14,5 +14,6 @@ export function showAlert(message) {
     alertContainer.classList.add('hidden');
 
     document.body.classList.remove('overflow-hidden');
+    console.clear();
   };
 }
