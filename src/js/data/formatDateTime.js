@@ -12,5 +12,5 @@ export function formatDateTime(datetimeString) {
     timeZone: 'Europe/Oslo',
   };
 
-  return date.toLocaleString('nb-NO', options);
+  return date.toLocaleString('en-GB', options);
 }
