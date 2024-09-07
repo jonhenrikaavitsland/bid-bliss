@@ -5,7 +5,7 @@ import { renderLoginBtn } from './render/renderLoginBtn';
 import { ifLoggedIn } from './ui/loggedIn/ifLoggedIn';
 import { search } from './ui/search/search';
 
-renderListings(listings.data);
+renderListings(listings);
 search();
 renderLoginBtn();
 loginBtnListener();
