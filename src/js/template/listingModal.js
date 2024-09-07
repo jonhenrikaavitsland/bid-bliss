@@ -34,11 +34,9 @@ export function listingModal(listings) {
   const element = createArticle('rounded-xl', 'grow', 'overflow-y-auto', 'max-h-[90%]', 'max-w-lg', 'md:max-w-2xl');
 
   const titleTop = createSection('bg-secondary', 'rounded-t-xl', 'px-2.5', 'py-2', 'md:px-5', 'md:py-4');
-
   const headingTop = createHeading(2, currentListing.title, 'font-serif', 'font-semibold', 'capitalize', 'md:text-lg', 'text-neutralBg');
 
   const subTopContainer = createDiv('bg-primary', 'text-neutralBg', 'px-2.5', 'py-2', 'md:px-5', 'md:py-4', 'flex', 'justify-between');
-
   const timeWrap = createSpan();
   timeWrap.textContent = 'Ends: ';
 
@@ -55,7 +53,6 @@ export function listingModal(listings) {
   const image = createImg(currentListing.media[0]?.url || DEFAULT_IMAGE_URL, currentListing.media[0]?.alt || DEFAULT_IMAGE_ALT, 'cursor-pointer', 'object-cover', 'w-full', 'h-full');
 
   const InfoWrap = createSection('p-2.5', 'md:p-5', 'flex', 'flex-col', 'bg-neutralBg');
-
   const headingMiddle = createHeading(3, `Auction# ${currentListing.id}`, 'font-serif');
 
   const timeWrap2 = createSpan();
@@ -72,9 +69,7 @@ export function listingModal(listings) {
   const timeCreatedOrUpdated = createTime(currentListing.endsAt || '0000-00-00T00:00:00Z', timeFormattedCreatedOrUpdated || DEFAULT_TIME_FORMAT);
 
   const auctionDetailsWrap = createSection('p-2.5', 'md:p-5', 'flex', 'flex-col', 'gap-2', 'bg-neutralBg', 'pb-4');
-
   const auctionTitle = createHeading(2, currentListing.title || DEFAULT_TITLE, 'font-serif', 'font-semibold', 'text-lg', 'capitalize');
-
   const auctionDescription = createParagraph(currentListing.description);
 
   const interactionWrap = createSection('flex', 'flex-col', 'p-2.5', 'md:p-5', 'bg-neutralBg');
@@ -90,20 +85,23 @@ export function listingModal(listings) {
   const bidWrap = createForm('bid', 'place-bid', 'w-1/2', 'flex', 'mx-auto', 'mt-4', 'xsm:flex-col', 'xsm:items-center');
   const highestBid = getHighestBid(currentListing) || { amount: 0 };
 
-  bidWrap.addEventListener('submit', (event) => {
-    handleBid(event, listingID, bidsContainer, highestBid.amount);
-    setTimeout(getProfile, 500);
-    setTimeout(() => {
-      const navElement = document.querySelector('nav');
-      navElement.innerHTML = '';
-      navElement.append(loggedInButton());
-      const links = navLinks();
-      navElement.append(links);
-    }, 1000);
-  });
+  const hasEnded = new Date(currentListing.endsAt) < new Date();
+
+  if (!hasEnded) {
+    bidWrap.addEventListener('submit', (event) => {
+      handleBid(event, listingID, bidsContainer, highestBid.amount);
+      setTimeout(getProfile, 500);
+      setTimeout(() => {
+        const navElement = document.querySelector('nav');
+        navElement.innerHTML = '';
+        navElement.append(loggedInButton());
+        const links = navLinks();
+        navElement.append(links);
+      }, 1000);
+    });
+  }
 
   const bidContainer = createInput('number ', '0 cr.', 'bid', 'bg-white', 'capitalize', 'w-1/2', 'xsm:px-4', 'xsm:py-2', 'xsm:rounded-t-xl', 'xsm:w-full', 'text-center', 'sm:rounded-s-xl', 'sm:shadow-customShadow');
-
   const submitBtn = createBtn(
     'place bid',
     'uppercase',
@@ -146,14 +144,19 @@ export function listingModal(listings) {
     });
   }
 
-  bidWrap.append(bidContainer, submitBtn);
+  if (hasEnded) {
+    auctionEndingWrap.classList.add('text-error');
+    auctionEndingWrap.textContent = 'Auction has ended!';
+  } else {
+    bidWrap.append(bidContainer, submitBtn);
+  }
 
   interactionWrap.append(auctionEndingWrap);
   if (!isActive) {
     interactionWrap.append(callToAction);
   }
 
-  if (isActive) {
+  if (isActive && !hasEnded) {
     interactionWrap.append(bidWrap, bidsContainer);
   }
 
