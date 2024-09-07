@@ -7,6 +7,9 @@ export function bidAlertMessage(alertStatus) {
     case 400: // Unauthorized
       message = 'Your bid must be higher than the current bid.';
       break;
+    case 403:
+      message = 'You cannot bid on your own listing';
+      break;
     default: // Any other status
       message = 'An unknown error occurred. Please try again.';
       break;
