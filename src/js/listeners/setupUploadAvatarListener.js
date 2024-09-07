@@ -1,5 +1,5 @@
+import { isImageAccessible } from '../API/isImageAccessible';
 import { updateProfile } from '../API/updateProfile';
-import { hasValidImageExtension } from '../data/hasValidImageExtension';
 import { isValidUrl } from '../data/isValidUrl';
 import { showAlert } from '../errorHandling/showAlert';
 
@@ -15,7 +15,7 @@ export function setupUploadAvatarListener() {
 
     const url = uploadInput.value.trim();
 
-    if (!isValidUrl(url) || !hasValidImageExtension(url)) {
+    if (!isValidUrl(url) || !(await isImageAccessible(url))) {
       uploadInput.classList.add('border-2', 'border-error');
       uploadInput.classList.remove('border-correct');
       showAlert('Image URL must be a valid and accessible URL.');
@@ -39,7 +39,7 @@ export function setupUploadAvatarListener() {
   uploadInput.addEventListener('input', () => {
     const url = uploadInput.value.trim();
 
-    if (isValidUrl(url) && hasValidImageExtension(url)) {
+    if (isValidUrl(url)) {
       uploadInput.classList.remove('border-error');
       uploadInput.classList.add('border-2', 'border-correct');
     } else {
