@@ -2,7 +2,9 @@ import { fetchData } from '../API/fetchData';
 import { isImageAccessible } from '../API/isImageAccessible';
 import { API_Base, API_Key, API_Listings } from '../data/constants';
 import { getTimeAhead } from '../data/getTimeAhead';
+import { initializeListings } from '../data/initializeListings';
 import { isValidUrl } from '../data/isValidUrl';
+import { listingService } from '../data/listingService';
 import { createBtn } from '../elements/createBtn';
 import { createDiv } from '../elements/createDiv';
 import { createForm } from '../elements/createForm';
@@ -97,8 +99,9 @@ export function newListingModal() {
       imageContainer = [];
       images.innerHTML = '';
 
-      const listings = await fetchData(`${API_Base}${API_Listings}?_seller=true&_bids=true`, {}, 'newListing');
-      renderListings(listings.data);
+      await listingService.fetchListings();
+      const newListings = await initializeListings();
+      renderListings(newListings);
     } catch (error) {
       console.error('Error during form submission:', error);
 
