@@ -2,7 +2,6 @@ export async function isImageAccessible(url) {
   try {
     const response = await fetch(url, {
       method: 'HEAD',
-      mode: 'no-cors',
     });
 
     if (response.ok) {
