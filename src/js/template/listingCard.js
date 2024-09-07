@@ -18,6 +18,13 @@ export function listingCard(data) {
   const { id, endsAt, title, media = [], _count: { bids = 0 } = {} } = data;
 
   const element = createArticle('flex', 'flex-col', 'gap-2.5', 'shadow-customShadow', 'p-5', 'bg-white', 'cursor-pointer', 'max-w-lg', 'md:max-w-[367px]');
+
+  const currentTime = new Date();
+  const endTime = new Date(endsAt);
+  if (endTime < currentTime) {
+    element.classList.add('grayscale');
+  }
+
   element.addEventListener('click', () => {
     save('listingID', id);
     runModal(true, 'listing');
