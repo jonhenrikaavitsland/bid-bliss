@@ -48,10 +48,10 @@ export function profileModal() {
   const uploadWrap = createDiv('flex', 'xsm:flex-col');
   const uploadInput = createInput('text', 'image URL', 'uploadAvatar', 'bg-white', 'xsm:rounded-t-xl', 'xsm:px-3', 'xsm:py-2', 'xsm:text-center', 'sm:rounded-s-xl', 'grow', 'sm:ps-3', 'shadow-customShadow');
   uploadInput.setAttribute('data-upload', 'input');
-  const uploadBtn = createBtn('upload', 'uppercase', 'xsm:rounded-b-xl', 'sm:rounded-e-xl', 'bg-primary', 'py-2', 'px-3', 'md:py-4', 'md:px-6', 'hover:bg-hoverPrimary', 'text-white', 'shadow-customShadow');
+  const uploadBtn = createBtn('upload', 'uppercase', 'xsm:rounded-b-xl', 'sm:rounded-e-xl', 'bg-primary', 'py-3', 'px-4', 'md:px-6', 'font-serif', 'md:text-lg', 'hover:bg-hoverPrimary', 'text-white', 'shadow-customShadow');
   uploadBtn.setAttribute('data-upload', 'btn');
 
-  const logOutBtn = createBtn('log out', 'bg-primary', 'hover:bg-hoverPrimary', 'rounded-xl', 'py-2', 'px-3', 'md:py-4', 'md:px-6', 'uppercase', 'text-white', 'mx-auto', 'mt-4', 'shadow-customShadow', 'lg:hidden');
+  const logOutBtn = createBtn('log out', 'bg-primary', 'hover:bg-hoverPrimary', 'font-serif', 'rounded-xl', 'py-3', 'px-4', 'md:px-6', 'md:text-lg', 'uppercase', 'text-white', 'mx-auto', 'mt-4', 'shadow-customShadow', 'lg:hidden');
   logOutBtn.addEventListener('click', () => logout());
 
   const closeBtn = createBtn('', 'absolute', 'top-2.5', 'right-2.5', 'backdrop-invert', 'rounded-full', 'shadow-customShadow', 'hover:animate-pulse');

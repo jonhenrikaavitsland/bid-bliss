@@ -21,7 +21,7 @@ import { setError } from '../validate/setError';
 export function newListingModal() {
   const element = createDiv('relative', 'rounded-xl', 'shadow-customShadow', 'flex', 'flex-col', 'grow', 'overflow-y-auto', 'max-h-[90%]', 'max-w-lg', 'md:max-w-2xl');
 
-  const headingTopWrap = createSection('bg-secondary', 'text-white', 'uppercase', 'font-serif', 'font-medium', 'px-2.5', 'py-2', 'md:px-5', 'md:py-4');
+  const headingTopWrap = createSection('bg-secondary', 'text-white', 'uppercase', 'font-serif', 'text-lg', 'font-medium', 'px-2.5', 'py-2.5', 'md:px-5', 'md:py-4');
   const headingTop = createHeading(2, 'create auction');
 
   const listingContents = createForm('new-listing', 'create', 'flex', 'flex-col', 'gap-5', 'pt-5', 'px-2.5', 'pb-8', 'bg-neutralBg');
@@ -143,13 +143,13 @@ export function newListingModal() {
   const imageLabel = createLabel('newListingImages', 'images:', 'capitalize');
   const imgWrap = createDiv('flex', 'xsm:flex-col');
   const imageInput = createInput('text', 'https://www.img.com/image.jpg', 'newListingImages', 'grow', 'xsm:rounded-t-xl', 'xsm:py-2.5', 'xsm:px-2', 'sm:rounded-s-xl', 'sm:ps-2', 'sm:shadow-customShadow');
-  const imageBtn = createBtn('save', 'uppercase', 'font-serif', 'font-semibold', 'bg-secondary', 'hover:bg-hoverSecondary', 'py-2', 'px-4', 'text-white', 'shadow-customShadow', 'xsm:rounded-b-xl', 'sm:rounded-e-xl');
+  const imageBtn = createBtn('save', 'uppercase', 'font-serif', 'font-semibold', 'bg-secondary', 'hover:bg-hoverSecondary', 'py-3', 'px-4', 'md:px-6', 'md:text-lg', 'text-white', 'shadow-customShadow', 'xsm:rounded-b-xl', 'sm:rounded-e-xl');
   imageBtn.setAttribute('type', 'button');
   const images = createDiv('mt-2');
   images.setAttribute('id', 'imagePreviewContainer');
   const imageValidate = createDiv('relative');
 
-  const cta = createBtn('create listing', 'uppercase', 'bg-secondary', 'hover:bg-hoverSecondary', 'py-2', 'px-4', 'rounded-xl', 'text-white', 'shadow-customShadow', 'mx-auto', 'font-serif', 'font-medium', 'mt-5');
+  const cta = createBtn('create listing', 'uppercase', 'bg-secondary', 'hover:bg-hoverSecondary', 'py-3', 'px-4', 'md:px-6', 'md:text-lg', 'rounded-xl', 'text-white', 'shadow-customShadow', 'mx-auto', 'font-serif', 'font-medium', 'mt-5');
 
   const closeBtn = createBtn('', 'absolute', 'top-2.5', 'right-2.5', 'backdrop-invert', 'rounded-full', 'shadow-customShadow', 'hover:animate-pulse');
   const closeImg = createImg('/src/images/close.svg', 'close', 'size-5');
