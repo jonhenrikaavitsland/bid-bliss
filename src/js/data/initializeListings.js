@@ -2,10 +2,12 @@ import { listingService } from './listingService';
 import { sortListings } from './sortListings';
 
 export async function initializeListings() {
-  await listingService.fetchListings();
-
-  let listings = listingService.getListings() || [];
-
-  const sortedListings = sortListings(listings);
-  return sortedListings;
+  try {
+    await listingService.fetchListings();
+    const listings = listingService.getListings() || [];
+    return sortListings(listings);
+  } catch (error) {
+    console.error('Error initializing listings:', error);
+    return [];
+  }
 }

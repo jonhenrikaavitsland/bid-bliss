@@ -7,17 +7,26 @@ class ListingService {
   }
 
   async fetchListings() {
-    this.listings = await fetchData(`${API_Base}${API_Listings}?_seller=true&_bids=true`);
+    try {
+      const response = await fetchData(`${API_Base}${API_Listings}?_seller=true&_bids=true`);
+      this.listings = response || [];
+    } catch (error) {
+      console.error('Error fetching listings:', error);
+      this.listings = [];
+    }
   }
 
   getListings() {
-    return this.listings;
+    return this.listings || [];
   }
 
   updateListings(newData) {
+    if (!Array.isArray(newData)) {
+      console.error('Invalid data format. Listings should be an array.');
+      return;
+    }
     this.listings = newData;
   }
 }
 
 export const listingService = new ListingService();
-await listingService.fetchListings();

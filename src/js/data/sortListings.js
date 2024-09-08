@@ -1,9 +1,13 @@
+// sortUtils.js
 export function sortListings(listings) {
-  console.log('Sort:', listings);
+  if (!listings || !Array.isArray(listings.data)) {
+    console.error('Invalid listings data provided.');
+    return [];
+  }
 
-  const sortedListings = listings.data.sort((a, b) => {
-    const now = new Date();
+  const now = new Date();
 
+  return listings.data.sort((a, b) => {
     const dateA = new Date(a.endsAt);
     const dateB = new Date(b.endsAt);
 
@@ -20,5 +24,4 @@ export function sortListings(listings) {
       return dateB - dateA;
     }
   });
-  return sortedListings;
 }
