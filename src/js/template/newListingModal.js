@@ -3,7 +3,9 @@ import { isImageAccessible } from '../API/isImageAccessible';
 import { API_Base, API_Key, API_Listings } from '../data/constants';
 import { getTimeAhead } from '../data/getTimeAhead';
 import { initializeListings } from '../data/initializeListings';
+
 import { isValidUrl } from '../data/isValidUrl';
+import { listings } from '../data/listings';
 import { listingService } from '../data/listingService';
 import { createBtn } from '../elements/createBtn';
 import { createDiv } from '../elements/createDiv';
@@ -15,6 +17,7 @@ import { createLabel } from '../elements/createLabel';
 import { createSection } from '../elements/createSection';
 import { createTextarea } from '../elements/createTextarea';
 import { load } from '../localStorage/load';
+import { save } from '../localStorage/save';
 import { renderListings } from '../render/renderListings';
 import { clearError } from '../validate/clearError';
 import { sanitizeInput } from '../validate/sanitize/sanitizeInput';
@@ -99,10 +102,9 @@ export function newListingModal() {
       imageContainer = [];
       images.innerHTML = '';
 
-      listingService.updateListings(await listingService.fetchListings());
-      let newListings = await initializeListings();
-      console.log('New Listings:', newListings);
-      renderListings(newListings);
+      setTimeout(() => {
+        window.location.href = '/';
+      }, 500);
     } catch (error) {
       console.error('Error during form submission:', error);
 
