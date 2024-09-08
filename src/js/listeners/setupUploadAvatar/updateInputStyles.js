@@ -1,10 +1,30 @@
 export function updateInputStyles(isValid) {
   const uploadInput = document.querySelector('[data-upload="input"]');
+
+  if (!uploadInput) {
+    console.error('Upload input element not found');
+    return;
+  }
+
   if (isValid) {
-    uploadInput.classList.remove('border-error');
-    uploadInput.classList.add('border-2', 'border-correct');
+    if (uploadInput.classList.contains('border-error')) {
+      uploadInput.classList.remove('border-error');
+    }
+    if (!uploadInput.classList.contains('border-2')) {
+      uploadInput.classList.add('border-2');
+    }
+    if (!uploadInput.classList.contains('border-correct')) {
+      uploadInput.classList.add('border-correct');
+    }
   } else {
-    uploadInput.classList.add('border-2', 'border-error');
-    uploadInput.classList.remove('border-correct');
+    if (!uploadInput.classList.contains('border-2')) {
+      uploadInput.classList.add('border-2');
+    }
+    if (!uploadInput.classList.contains('border-error')) {
+      uploadInput.classList.add('border-error');
+    }
+    if (uploadInput.classList.contains('border-correct')) {
+      uploadInput.classList.remove('border-correct');
+    }
   }
 }
