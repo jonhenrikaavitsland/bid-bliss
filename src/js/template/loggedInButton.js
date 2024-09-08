@@ -16,7 +16,7 @@ export function loggedInButton() {
   const placeholderImg = '/src/images/placeholder.jpg';
   const placeholderAlt = name;
 
-  const element = createDiv('hidden', 'rounded-full', 'border-2', 'border-neutralBg', 'lg:flex', 'h-10', 'lg:h-20', 'w-36', 'lg:w-72', 'justify-between', 'cursor-pointer');
+  const element = createDiv('hidden', 'rounded-full', 'border-2', 'border-neutralBg', 'lg:flex', 'h-10', 'lg:h-20', 'w-36', 'lg:w-72', 'justify-between', 'cursor-pointer', 'hover:bg-hoverPrimary');
   element.addEventListener('click', () => {
     runModal(true, 'profile');
   });
@@ -30,6 +30,7 @@ export function loggedInButton() {
   const creditsContainer = createSpan(`Cr. ${credits}`, 'text-neutralBg', 'text-sm', 'lg:text-xl');
 
   const image = createImg(avatarUrl || placeholderImg, avatarAlt || placeholderAlt, 'rounded-full');
+  image.setAttribute('data-avatar', 'desktop');
 
   infoWrap.append(username, biography, creditsContainer);
   element.append(infoWrap, image);

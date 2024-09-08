@@ -22,7 +22,7 @@ export function modalRouter(modalValue) {
       modalRegister = registerModal();
       return modalRegister;
     case 'listing':
-      modalListing = listingModal(listings.data);
+      modalListing = listingModal(listings);
       return modalListing;
     case 'gallery':
       modalGallery = galleryModal();

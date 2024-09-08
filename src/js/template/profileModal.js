@@ -1,3 +1,4 @@
+import { modal } from '../data/constants';
 import { createBtn } from '../elements/createBtn';
 import { createDiv } from '../elements/createDiv';
 import { createForm } from '../elements/createForm';
@@ -10,6 +11,7 @@ import { createSection } from '../elements/createSection';
 import { createSpan } from '../elements/createSpan';
 import { load } from '../localStorage/load';
 import { logout } from '../ui/logoutBtn/logout';
+import { closeModal } from '../ui/modal/closeModal';
 
 const DEFAULT_IMAGE_URL = '/src/images/placeholder.jpg';
 const DEFAULT_IMAGE_ALT = 'my avatar';
@@ -24,7 +26,7 @@ export function profileModal() {
     _count: { listings, wins },
   } = load('profile');
 
-  const element = createDiv('bg-neutralBg', 'rounded-xl', 'pt-5', 'px-5', 'pb-10', 'md:pt-8', 'md:px-8', 'md:pb-16', 'shadow-customShadow', 'flex', 'flex-col', 'grow', 'gap-5', 'max-w-xl');
+  const element = createDiv('relative', 'bg-neutralBg', 'rounded-xl', 'pt-5', 'px-5', 'pb-10', 'md:pt-8', 'md:px-8', 'md:pb-16', 'shadow-customShadow', 'flex', 'flex-col', 'grow', 'gap-5', 'max-w-xl');
 
   const image = createImg(url || DEFAULT_IMAGE_URL, alt || DEFAULT_IMAGE_ALT, 'w-28', 'md:w-40', 'rounded-full', 'mx-auto', 'border', 'border-secondary');
   image.setAttribute('data-avatar', 'img');
@@ -52,11 +54,19 @@ export function profileModal() {
   const logOutBtn = createBtn('log out', 'bg-primary', 'hover:bg-hoverPrimary', 'rounded-xl', 'py-2', 'px-3', 'md:py-4', 'md:px-6', 'uppercase', 'text-white', 'mx-auto', 'mt-4', 'shadow-customShadow', 'lg:hidden');
   logOutBtn.addEventListener('click', () => logout());
 
+  const closeBtn = createBtn('', 'absolute', 'top-2.5', 'right-2.5', 'backdrop-invert', 'rounded-full', 'shadow-customShadow', 'hover:animate-pulse');
+  const closeImg = createImg('/src/images/close.svg', 'close', 'size-5');
+  closeBtn.addEventListener('click', () => {
+    closeModal(modal);
+  });
+
+  closeBtn.append(closeImg);
+
   uploadWrap.append(uploadInput, uploadBtn);
   uploadForm.append(uploadInfo, uploadWrap);
   countWrap.append(activeListings, winnings);
   nameWrap.append(title, bioInfo);
   infoWrap.append(nameWrap, creditCount, countWrap);
-  element.append(image, infoWrap, uploadForm, logOutBtn);
+  element.append(image, infoWrap, uploadForm, logOutBtn, closeBtn);
   return element;
 }

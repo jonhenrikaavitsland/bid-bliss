@@ -1,4 +1,3 @@
-import { fetchData } from '../API/fetchData';
-import { API_Base, API_Listings } from './constants';
+import { initializeListings } from './initializeListings';
 
-export const listings = await fetchData(`${API_Base}${API_Listings}?_seller=true&_bids=true`);
+export let listings = await initializeListings();

@@ -18,6 +18,13 @@ export function listingCard(data) {
   const { id, endsAt, title, media = [], _count: { bids = 0 } = {} } = data;
 
   const element = createArticle('flex', 'flex-col', 'gap-2.5', 'shadow-customShadow', 'p-5', 'bg-white', 'cursor-pointer', 'max-w-lg', 'md:max-w-[367px]');
+
+  const currentTime = new Date();
+  const endTime = new Date(endsAt);
+  if (endTime < currentTime) {
+    element.classList.add('grayscale');
+  }
+
   element.addEventListener('click', () => {
     save('listingID', id);
     runModal(true, 'listing');
@@ -25,7 +32,7 @@ export function listingCard(data) {
 
   const image = createImg(media?.[0]?.url || DEFAULT_IMAGE_URL, media?.[0]?.alt || DEFAULT_IMAGE_ALT, 'rounded-xl', 'aspect-square', 'object-cover');
 
-  const section = createSection('flex', 'flex-col');
+  const section = createSection('flex', 'flex-col', 'gap-1');
 
   const listingTitle = createHeading(2, title || DEFAULT_TITLE, 'font-serif', 'font-semibold', 'capitalize');
 

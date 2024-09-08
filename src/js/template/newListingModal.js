@@ -1,5 +1,6 @@
 import { fetchData } from '../API/fetchData';
-import { API_Base, API_Key, API_Listings } from '../data/constants';
+import { isImageAccessible } from '../API/isImageAccessible';
+import { API_Base, API_Key, API_Listings, modal } from '../data/constants';
 import { getTimeAhead } from '../data/getTimeAhead';
 import { isValidUrl } from '../data/isValidUrl';
 import { createBtn } from '../elements/createBtn';
@@ -12,13 +13,13 @@ import { createLabel } from '../elements/createLabel';
 import { createSection } from '../elements/createSection';
 import { createTextarea } from '../elements/createTextarea';
 import { load } from '../localStorage/load';
-import { renderListings } from '../render/renderListings';
+import { closeModal } from '../ui/modal/closeModal';
 import { clearError } from '../validate/clearError';
 import { sanitizeInput } from '../validate/sanitize/sanitizeInput';
 import { setError } from '../validate/setError';
 
 export function newListingModal() {
-  const element = createDiv('rounded-xl', 'shadow-customShadow', 'flex', 'flex-col', 'grow', 'overflow-y-auto', 'max-h-[90%]', 'max-w-lg', 'md:max-w-2xl');
+  const element = createDiv('relative', 'rounded-xl', 'shadow-customShadow', 'flex', 'flex-col', 'grow', 'overflow-y-auto', 'max-h-[90%]', 'max-w-lg', 'md:max-w-2xl');
 
   const headingTopWrap = createSection('bg-secondary', 'text-white', 'uppercase', 'font-serif', 'font-medium', 'px-2.5', 'py-2', 'md:px-5', 'md:py-4');
   const headingTop = createHeading(2, 'create auction');
@@ -96,8 +97,9 @@ export function newListingModal() {
       imageContainer = [];
       images.innerHTML = '';
 
-      const listings = await fetchData(`${API_Base}${API_Listings}?_seller=true&_bids=true`, {}, 'newListing');
-      renderListings(listings.data);
+      setTimeout(() => {
+        window.location.href = '/';
+      }, 500);
     } catch (error) {
       console.error('Error during form submission:', error);
 
@@ -131,6 +133,7 @@ export function newListingModal() {
   const timeInput = createInput('datetime-local', '', 'newListingTime', 'bg-white', 'rounded-xl', 'shadow-customShadow', 'py-2.5', 'px-2', 'cursor-pointer');
   timeInput.value = getTimeAhead(60);
   timeInput.min = getTimeAhead(60);
+  timeInput.max = getTimeAhead(364);
   timeInput.addEventListener('click', (event) => {
     event.preventDefault();
     timeInput.showPicker();
@@ -148,7 +151,15 @@ export function newListingModal() {
 
   const cta = createBtn('create listing', 'uppercase', 'bg-secondary', 'hover:bg-hoverSecondary', 'py-2', 'px-4', 'rounded-xl', 'text-white', 'shadow-customShadow', 'mx-auto', 'font-serif', 'font-medium', 'mt-5');
 
-  imageBtn.addEventListener('click', () => {
+  const closeBtn = createBtn('', 'absolute', 'top-2.5', 'right-2.5', 'backdrop-invert', 'rounded-full', 'shadow-customShadow', 'hover:animate-pulse');
+  const closeImg = createImg('/src/images/close.svg', 'close', 'size-5');
+  closeBtn.addEventListener('click', () => {
+    closeModal(modal);
+  });
+
+  closeBtn.append(closeImg);
+
+  imageBtn.addEventListener('click', async () => {
     try {
       const imageUrl = sanitizeInput(imageInput.value.trim());
       if (!imageUrl) {
@@ -156,7 +167,7 @@ export function newListingModal() {
         return;
       }
 
-      if (!isValidUrl(imageUrl)) {
+      if (!isValidUrl(imageUrl) || !(await isImageAccessible(imageUrl))) {
         setError(imageValidate, 'Please enter a valid and accessible image URL');
         return;
       }
@@ -166,20 +177,29 @@ export function newListingModal() {
       const imageElement = createDiv('flex', 'gap-2', 'items-center', 'mb-2');
       const imgPreview = createImg(imageUrl, 'image preview', 'w-20', 'h-20', 'object-cover', 'rounded-xl');
       const altInput = createInput('text', 'Alt text', '', 'bg-white', 'rounded-xl', 'shadow-customShadow', 'py-2', 'px-4');
+      const removeBtn = createBtn('Remove', 'uppercase', 'font-serif', 'font-semibold', 'bg-error', 'hover:bg-opacity-90', 'py-2', 'px-4', 'text-white', 'rounded-xl');
 
       imageElement.appendChild(imgPreview);
       imageElement.appendChild(altInput);
+      imageElement.appendChild(removeBtn);
       images.appendChild(imageElement);
 
-      imageContainer.push({ url: imageUrl, alt: '' });
-      console.log('Image added', { url: imageUrl, alt: '' });
+      const imageObject = { url: imageUrl, alt: '' };
+      imageContainer.push(imageObject);
 
       imageInput.value = '';
 
       altInput.addEventListener('input', (event) => {
         const index = Array.from(images.children).indexOf(imageElement);
         imageContainer[index].alt = event.target.value;
-        console.log('Alt text updated', imageContainer[index]);
+      });
+
+      removeBtn.addEventListener('click', () => {
+        const index = Array.from(images.children).indexOf(imageElement);
+        if (index > -1) {
+          imageContainer.splice(index, 1);
+          images.removeChild(imageElement);
+        }
       });
     } catch (error) {
       console.error('Error while adding image:', error);
@@ -195,6 +215,6 @@ export function newListingModal() {
   titleWrap.append(titleLabel, titleInput, titleValidate);
   listingContents.append(titleWrap, descriptionWrap, tagsWrap, timeWrap, imageWrap, cta);
   headingTopWrap.append(headingTop);
-  element.append(headingTopWrap, listingContents);
+  element.append(headingTopWrap, listingContents, closeBtn);
   return element;
 }

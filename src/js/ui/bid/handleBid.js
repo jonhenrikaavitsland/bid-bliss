@@ -10,8 +10,10 @@ import { cleanListingID } from '../../data/cleanListingID';
 export async function handleBid(event, rawListingID, bidsContainer, currentHigh) {
   event.preventDefault();
 
+  const highestBid = currentHigh && currentHigh.amount ? currentHigh.amount : 0;
+
   const bid = document.querySelector('#bid');
-  validateBid(bid, currentHigh);
+  validateBid(bid, highestBid);
 
   if (!bid.classList.contains('border-correct')) return;
 

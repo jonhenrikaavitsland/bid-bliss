@@ -16,6 +16,14 @@ import { createBtn } from '../elements/createBtn';
 import { createInput } from '../elements/createInput';
 import { handleBid } from '../ui/bid/handleBid';
 import { getHighestBid } from '../ui/bid/getHighestBid';
+import { getProfile } from '../API/getProfile';
+import { loggedInButton } from './loggedInButton';
+import { navLinks } from './navLinks';
+import { renderListings } from '../render/renderListings';
+import { listingService } from '../data/listingService';
+import { initializeListings } from '../data/initializeListings';
+import { closeModal } from '../ui/modal/closeModal';
+import { modal } from '../data/constants';
 
 export const DEFAULT_TIME_FORMAT = 'invalid date';
 const DEFAULT_IMAGE_URL = '/src/images/placeholderItem.png';
@@ -23,19 +31,21 @@ const DEFAULT_IMAGE_ALT = 'listing item';
 const DEFAULT_TITLE = 'Unknown item';
 
 export function listingModal(listings) {
+  console.log('listingModal:', listings);
+
   const isActive = load('profile');
   const currentListingID = load('listingID');
   const currentListing = listings.find((listing) => listing.id === currentListingID);
+  console.log('Current:', currentListing);
+
   save('media', currentListing.media);
 
-  const element = createArticle('rounded-xl', 'grow', 'overflow-y-auto', 'max-h-[90%]', 'max-w-lg', 'md:max-w-2xl');
+  const element = createArticle('relative', 'rounded-xl', 'grow', 'overflow-y-auto', 'max-h-[90%]', 'max-w-lg', 'md:max-w-2xl');
 
   const titleTop = createSection('bg-secondary', 'rounded-t-xl', 'px-2.5', 'py-2', 'md:px-5', 'md:py-4');
-
   const headingTop = createHeading(2, currentListing.title, 'font-serif', 'font-semibold', 'capitalize', 'md:text-lg', 'text-neutralBg');
 
   const subTopContainer = createDiv('bg-primary', 'text-neutralBg', 'px-2.5', 'py-2', 'md:px-5', 'md:py-4', 'flex', 'justify-between');
-
   const timeWrap = createSpan();
   timeWrap.textContent = 'Ends: ';
 
@@ -52,7 +62,6 @@ export function listingModal(listings) {
   const image = createImg(currentListing.media[0]?.url || DEFAULT_IMAGE_URL, currentListing.media[0]?.alt || DEFAULT_IMAGE_ALT, 'cursor-pointer', 'object-cover', 'w-full', 'h-full');
 
   const InfoWrap = createSection('p-2.5', 'md:p-5', 'flex', 'flex-col', 'bg-neutralBg');
-
   const headingMiddle = createHeading(3, `Auction# ${currentListing.id}`, 'font-serif');
 
   const timeWrap2 = createSpan();
@@ -69,9 +78,7 @@ export function listingModal(listings) {
   const timeCreatedOrUpdated = createTime(currentListing.endsAt || '0000-00-00T00:00:00Z', timeFormattedCreatedOrUpdated || DEFAULT_TIME_FORMAT);
 
   const auctionDetailsWrap = createSection('p-2.5', 'md:p-5', 'flex', 'flex-col', 'gap-2', 'bg-neutralBg', 'pb-4');
-
   const auctionTitle = createHeading(2, currentListing.title || DEFAULT_TITLE, 'font-serif', 'font-semibold', 'text-lg', 'capitalize');
-
   const auctionDescription = createParagraph(currentListing.description);
 
   const interactionWrap = createSection('flex', 'flex-col', 'p-2.5', 'md:p-5', 'bg-neutralBg');
@@ -85,14 +92,30 @@ export function listingModal(listings) {
   const callToAction = createHeading(3, 'Login to interact with this auction!', 'font-semibold', 'text-lg', 'mt-9', 'pb-10');
   const listingID = load('listingID');
   const bidWrap = createForm('bid', 'place-bid', 'w-1/2', 'flex', 'mx-auto', 'mt-4', 'xsm:flex-col', 'xsm:items-center');
-  const highestBid = getHighestBid(currentListing);
+  const highestBid = getHighestBid(currentListing) || { amount: 0 };
 
-  bidWrap.addEventListener('submit', (event) => {
-    handleBid(event, listingID, bidsContainer, highestBid.amount);
-  });
+  const hasEnded = new Date(currentListing.endsAt) < new Date();
+
+  if (!hasEnded) {
+    bidWrap.addEventListener('submit', async (event) => {
+      handleBid(event, listingID, bidsContainer, highestBid.amount);
+      setTimeout(getProfile, 500);
+      setTimeout(async () => {
+        const navElement = document.querySelector('nav');
+        navElement.innerHTML = '';
+        navElement.append(loggedInButton());
+        const links = navLinks();
+        navElement.append(links);
+
+        await listingService.fetchListings();
+        const newListings = await initializeListings();
+        console.log('NEW:', newListings);
+        renderListings(newListings);
+      }, 1000);
+    });
+  }
 
   const bidContainer = createInput('number ', '0 cr.', 'bid', 'bg-white', 'capitalize', 'w-1/2', 'xsm:px-4', 'xsm:py-2', 'xsm:rounded-t-xl', 'xsm:w-full', 'text-center', 'sm:rounded-s-xl', 'sm:shadow-customShadow');
-
   const submitBtn = createBtn(
     'place bid',
     'uppercase',
@@ -113,7 +136,7 @@ export function listingModal(listings) {
     'shadow-customShadow',
   );
 
-  const bidsContainer = createDiv('mt-20', 'flex', 'flex-col', 'pb-10');
+  const bidsContainer = createDiv('mt-8', 'flex', 'flex-col', 'pb-10');
 
   if (currentListing.bids) {
     const reversedBids = [...currentListing.bids].reverse();
@@ -135,16 +158,33 @@ export function listingModal(listings) {
     });
   }
 
-  bidWrap.append(bidContainer, submitBtn);
+  if (hasEnded) {
+    auctionEndingWrap.classList.add('text-error');
+    auctionEndingWrap.textContent = 'Auction has ended!';
+  } else {
+    bidWrap.append(bidContainer, submitBtn);
+  }
 
   interactionWrap.append(auctionEndingWrap);
+
   if (!isActive) {
     interactionWrap.append(callToAction);
   }
 
   if (isActive) {
-    interactionWrap.append(bidWrap, bidsContainer);
+    if (!hasEnded) {
+      interactionWrap.append(bidWrap);
+    }
+    interactionWrap.append(bidsContainer);
   }
+
+  const closeBtn = createBtn('', 'absolute', 'top-2.5', 'right-2.5', 'backdrop-invert', 'rounded-full', 'shadow-customShadow', 'hover:animate-pulse');
+  const closeImg = createImg('/src/images/close.svg', 'close', 'size-5');
+  closeBtn.addEventListener('click', () => {
+    closeModal(modal);
+  });
+
+  closeBtn.append(closeImg);
 
   auctionEndingWrap.append(auctionEndingTime);
 
@@ -155,7 +195,7 @@ export function listingModal(listings) {
   imageWrap.append(image);
   subTopContainer.append(timeWrap, bidInfo);
   titleTop.append(headingTop);
-  element.append(titleTop, subTopContainer, imageWrap, InfoWrap, auctionDetailsWrap, interactionWrap);
+  element.append(titleTop, subTopContainer, imageWrap, InfoWrap, auctionDetailsWrap, interactionWrap, closeBtn);
 
   return element;
 }
