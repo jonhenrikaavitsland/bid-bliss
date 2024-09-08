@@ -20,7 +20,6 @@ export function search() {
 
       if (!query) {
         newListings = await initializeListings();
-
         if (!newListings.data) {
           newListings = { data: newListings };
         }
