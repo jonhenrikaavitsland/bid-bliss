@@ -1,27 +1,26 @@
 import { alertUser } from '../errorHandling/alertUser';
 
-/**
- * Fetches data from a given URL using the provided options.
- *
- * This asynchronous function sends a fetch request to the specified URL
- * with the given options. It parses the JSON response and checks for any
- * HTTP errors, throwing an error if the response is not OK.
- *
- * @param {string} url - The URL to fetch data from.
- * @param {Object} object - The options to pass to the fetch request, including method, headers, and body.
- * @returns {Promise<Object>} A promise that resolves to the JSON-parsed response data.
- * @throws {Error} If the HTTP response is not OK, an error with the response status is thrown.
- */
-export async function fetchData(url, object, alertType) {
-  const response = await fetch(url, object);
-  const result = await response.json();
-
-  alertUser(alertType, response.status);
-
-  if (!response.ok) {
-    console.error(response.status);
-    throw new Error(response.status);
+export async function fetchData(url, object = {}, alertType) {
+  if (typeof url !== 'string' || !url.trim()) {
+    console.error('Invalid URL provided');
+    throw new Error('Invalid URL');
   }
 
-  return result;
+  try {
+    const response = await fetch(url, object);
+
+    const result = await response.json();
+
+    alertUser(alertType, response.status);
+
+    if (!response.ok) {
+      console.error('Error:', response.status, response.statusText);
+      throw new Error(`Error: ${response.status} - ${response.statusText}`);
+    }
+
+    return result;
+  } catch (error) {
+    console.error('Fetch error:', error.message);
+    throw error;
+  }
 }
