@@ -18,8 +18,8 @@ export async function handleBid(event, rawListingID, bidsContainer, currentHigh)
   if (!bid.classList.contains('border-correct')) return;
 
   const listingID = cleanListingID(rawListingID);
-
   const uuidPattern = /^[0-9a-f]{8}-[0-9a-f]{4}-[1-5][0-9a-f]{3}-[89ab][0-9a-f]{3}-[0-9a-f]{12}$/i;
+
   if (!uuidPattern.test(listingID)) {
     console.error('Invalid listing ID:', listingID);
     const errorMessage = createDiv('text-error', 'text-center');
