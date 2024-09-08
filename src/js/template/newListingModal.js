@@ -21,7 +21,7 @@ import { setError } from '../validate/setError';
 export function newListingModal() {
   const element = createDiv('relative', 'rounded-xl', 'shadow-customShadow', 'flex', 'flex-col', 'grow', 'overflow-y-auto', 'max-h-[90%]', 'max-w-lg', 'md:max-w-2xl');
 
-  const headingTopWrap = createSection('bg-secondary', 'text-white', 'uppercase', 'font-serif', 'font-medium', 'px-2.5', 'py-2', 'md:px-5', 'md:py-4');
+  const headingTopWrap = createSection('bg-secondary', 'text-white', 'uppercase', 'font-serif', 'text-lg', 'font-medium', 'px-2.5', 'py-2.5', 'md:px-5', 'md:py-4');
   const headingTop = createHeading(2, 'create auction');
 
   const listingContents = createForm('new-listing', 'create', 'flex', 'flex-col', 'gap-5', 'pt-5', 'px-2.5', 'pb-8', 'bg-neutralBg');
