@@ -1,5 +1,6 @@
 import { fetchData } from '../../API/fetchData';
 import { API_Base, API_Listings } from '../../data/constants';
+import { initializeListings } from '../../data/initializeListings';
 import { renderListings } from '../../render/renderListings';
 import { sanitizeInput } from '../../validate/sanitize/sanitizeInput';
 
@@ -13,12 +14,19 @@ export function search() {
     const rawQuery = input.value.trim();
     const query = sanitizeInput(rawQuery);
 
-    if (!query) {
-      return;
-    }
-
     try {
-      const newListings = await fetchData(`${API_Base}${API_Listings}/search?q=${encodeURIComponent(query)}`);
+      let newListings;
+
+      if (!query) {
+        newListings = await initializeListings();
+
+        if (!newListings.data) {
+          newListings = { data: newListings };
+        }
+      } else {
+        newListings = await fetchData(`${API_Base}${API_Listings}/search?q=${encodeURIComponent(query)}`);
+      }
+
       console.log(newListings);
 
       renderListings(newListings.data);
