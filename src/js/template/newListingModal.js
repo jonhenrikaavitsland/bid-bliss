@@ -143,13 +143,13 @@ export function newListingModal() {
   const imageLabel = createLabel('newListingImages', 'images:', 'capitalize');
   const imgWrap = createDiv('flex', 'xsm:flex-col');
   const imageInput = createInput('text', 'https://www.img.com/image.jpg', 'newListingImages', 'grow', 'xsm:rounded-t-xl', 'xsm:py-2.5', 'xsm:px-2', 'sm:rounded-s-xl', 'sm:ps-2', 'sm:shadow-customShadow');
-  const imageBtn = createBtn('save', 'uppercase', 'font-serif', 'font-semibold', 'bg-secondary', 'hover:bg-hoverSecondary', 'py-2', 'px-4', 'text-white', 'shadow-customShadow', 'xsm:rounded-b-xl', 'sm:rounded-e-xl');
+  const imageBtn = createBtn('save', 'uppercase', 'font-serif', 'font-semibold', 'bg-secondary', 'hover:bg-hoverSecondary', 'py-3', 'px-4', 'md:px-6', 'md:text-lg', 'text-white', 'shadow-customShadow', 'xsm:rounded-b-xl', 'sm:rounded-e-xl');
   imageBtn.setAttribute('type', 'button');
   const images = createDiv('mt-2');
   images.setAttribute('id', 'imagePreviewContainer');
   const imageValidate = createDiv('relative');
 
-  const cta = createBtn('create listing', 'uppercase', 'bg-secondary', 'hover:bg-hoverSecondary', 'py-2', 'px-4', 'rounded-xl', 'text-white', 'shadow-customShadow', 'mx-auto', 'font-serif', 'font-medium', 'mt-5');
+  const cta = createBtn('create listing', 'uppercase', 'bg-secondary', 'hover:bg-hoverSecondary', 'py-3', 'px-4', 'md:px-6', 'md:text-lg', 'rounded-xl', 'text-white', 'shadow-customShadow', 'mx-auto', 'font-serif', 'font-medium', 'mt-5');
 
   const closeBtn = createBtn('', 'absolute', 'top-2.5', 'right-2.5', 'backdrop-invert', 'rounded-full', 'shadow-customShadow', 'hover:animate-pulse');
   const closeImg = createImg('/src/images/close.svg', 'close', 'size-5');
