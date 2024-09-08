@@ -1,7 +1,15 @@
-export function createLabel(forAttribute, textContent, ...classes) {
+export function createLabel(forAttribute = '', textContent = '', ...classes) {
   const label = document.createElement('label');
-  label.setAttribute('for', forAttribute);
-  label.textContent = textContent;
-  label.classList.add(...classes);
+
+  label.setAttribute('for', typeof forAttribute === 'string' ? forAttribute : '');
+
+  label.textContent = typeof textContent === 'string' ? textContent : '';
+
+  const validClasses = classes.filter((cls) => typeof cls === 'string' && cls.trim() !== '');
+
+  if (validClasses.length > 0) {
+    label.classList.add(...validClasses);
+  }
+
   return label;
 }
