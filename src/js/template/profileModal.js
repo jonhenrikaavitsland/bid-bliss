@@ -42,6 +42,7 @@ export function profileModal() {
   const countWrap = createDiv('flex', 'flex-col', 'gap-1', 'capitalize', 'text-sm');
   const activeListings = createSpan(`active listings: ${listings}`);
   const winnings = createSpan(`listings won: ${wins}`);
+  countWrap.append(activeListings, winnings);
 
   const uploadForm = createForm('upload', 'avatar', 'flex', 'flex-col', 'gap-1.5');
   const uploadInfo = createLabel('uploadAvatar', 'Change avatar:', 'text-sm', 'md:text-base');
@@ -50,23 +51,22 @@ export function profileModal() {
   uploadInput.setAttribute('data-upload', 'input');
   const uploadBtn = createBtn('upload', 'uppercase', 'xsm:rounded-b-xl', 'sm:rounded-e-xl', 'bg-primary', 'py-3', 'px-4', 'md:px-6', 'font-serif', 'md:text-lg', 'hover:bg-hoverPrimary', 'text-white', 'shadow-customShadow');
   uploadBtn.setAttribute('data-upload', 'btn');
+  uploadWrap.append(uploadInput, uploadBtn);
+  uploadForm.append(uploadInfo, uploadWrap);
 
   const logOutBtn = createBtn('log out', 'bg-primary', 'hover:bg-hoverPrimary', 'font-serif', 'rounded-xl', 'py-3', 'px-4', 'md:px-6', 'md:text-lg', 'uppercase', 'text-white', 'mx-auto', 'mt-4', 'shadow-customShadow', 'lg:hidden');
   logOutBtn.addEventListener('click', () => logout());
 
   const closeBtn = createBtn('', 'absolute', 'top-2.5', 'right-2.5', 'backdrop-invert', 'rounded-full', 'shadow-customShadow', 'hover:animate-pulse');
   const closeImg = createImg('/src/images/close.svg', 'close', 'size-5');
+  closeBtn.append(closeImg);
   closeBtn.addEventListener('click', () => {
     closeModal(modal);
   });
 
-  closeBtn.append(closeImg);
-
-  uploadWrap.append(uploadInput, uploadBtn);
-  uploadForm.append(uploadInfo, uploadWrap);
-  countWrap.append(activeListings, winnings);
   nameWrap.append(title, bioInfo);
   infoWrap.append(nameWrap, creditCount, countWrap);
   element.append(image, infoWrap, uploadForm, logOutBtn, closeBtn);
+
   return element;
 }

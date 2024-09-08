@@ -1,10 +1,15 @@
-export function createForm(dataAttributeName = '', dataAttributeValue, ...classes) {
+export function createForm(dataAttributeName = '', dataAttributeValue = '', ...classes) {
   const form = document.createElement('form');
 
-  if (dataAttributeName && dataAttributeValue) {
+  if (typeof dataAttributeName === 'string' && dataAttributeName.trim() && typeof dataAttributeValue === 'string' && dataAttributeValue.trim()) {
     form.setAttribute(`data-${dataAttributeName}`, dataAttributeValue);
   }
 
-  form.classList.add(...classes);
+  const validClasses = classes.filter((cls) => typeof cls === 'string' && cls.trim() !== '');
+
+  if (validClasses.length > 0) {
+    form.classList.add(...validClasses);
+  }
+
   return form;
 }

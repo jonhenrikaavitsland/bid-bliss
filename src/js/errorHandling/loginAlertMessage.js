@@ -3,6 +3,7 @@ export function loginAlertMessage(alertStatus) {
 
   switch (alertStatus) {
     case 200:
+      message = null;
       break;
     case 401: // Unauthorized
       message = 'Incorrect email or password. Please try again.';

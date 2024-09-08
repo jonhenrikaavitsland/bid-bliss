@@ -10,18 +10,25 @@ export function navLinks() {
   const links = ['new auction', 'profile', 'logout'];
 
   links.forEach((btn, index) => {
-    const ButtonWrap = createLi();
+    const buttonWrap = createLi();
     const button = createBtn(btn, 'uppercase', 'py-3', 'px-6', 'hover:bg-hoverPrimary', 'rounded-xl');
+
     button.setAttribute('data-nav', index);
-    if (btn === 'profile') {
-      button.addEventListener('click', () => runModal(true, 'profile'));
-    } else if (btn === 'new auction') {
-      button.addEventListener('click', () => runModal(true, 'newListing'));
-    } else if (btn === 'logout') {
-      button.addEventListener('click', () => logout());
+
+    switch (btn) {
+      case 'profile':
+        button.addEventListener('click', () => runModal(true, 'profile'));
+        break;
+      case 'new auction':
+        button.addEventListener('click', () => runModal(true, 'newListing'));
+        break;
+      case 'logout':
+        button.addEventListener('click', logout);
+        break;
     }
-    ButtonWrap.append(button);
-    element.append(ButtonWrap);
+
+    buttonWrap.append(button);
+    element.append(buttonWrap);
   });
 
   return element;

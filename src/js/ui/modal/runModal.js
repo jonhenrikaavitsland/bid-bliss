@@ -10,12 +10,15 @@ export function runModal(state = 'false', modalValue) {
 
   if (state === true && modalValue === 'gallery') {
     openGallery(currentModal);
-  } else if (state === true) {
+    return;
+  }
+
+  if (state === true) {
     openModal(currentModal);
+
     if (modalValue === 'register' || modalValue === 'login') {
       linkListener(modalValue);
-      console.log('Test-1');
-      console.log(document.querySelector('#email'));
+
       gatherUserData();
     }
     if (modalValue === 'profile') {

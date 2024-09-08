@@ -6,13 +6,23 @@ export function linkListener(target) {
 
   if (!currentModalLink) return;
 
-  currentModalLink.addEventListener('click', () => {
+  const handleClick = () => {
+    currentModalLink.classList.add('pointer-events-none');
+
+    modal.innerHTML = '';
+
     if (target === 'login') {
-      modal.innerHTML = '';
       runModal(true, 'register');
     } else if (target === 'register') {
-      modal.innerHTML = '';
       runModal(true, 'login');
     }
-  });
+
+    currentModalLink.removeEventListener('click', handleClick);
+
+    setTimeout(() => {
+      currentModalLink.classList.remove('pointer-events-none');
+    }, 1000);
+  };
+
+  currentModalLink.addEventListener('click', handleClick);
 }

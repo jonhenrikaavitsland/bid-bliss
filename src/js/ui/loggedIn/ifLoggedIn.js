@@ -8,12 +8,19 @@ import { addBtn } from './addBtn';
 const nav = document.querySelector('nav');
 
 export async function ifLoggedIn() {
-  if (load('token') && load('profile')) {
+  const token = load('token');
+  const profile = load('profile');
+
+  if (token && profile) {
     await getProfile();
+
     addBtn();
+
     nav.innerHTML = '';
+
     document.body.append(loggedInButton2());
     nav.append(loggedInButton());
+
     const links = navLinks();
     nav.append(links);
   }

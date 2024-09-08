@@ -31,12 +31,14 @@ const DEFAULT_IMAGE_ALT = 'listing item';
 const DEFAULT_TITLE = 'Unknown item';
 
 export function listingModal(listings) {
-  console.log('listingModal:', listings);
-
   const isActive = load('profile');
   const currentListingID = load('listingID');
   const currentListing = listings.find((listing) => listing.id === currentListingID);
-  console.log('Current:', currentListing);
+
+  if (!currentListing) {
+    console.error('Current listing not found');
+    return createDiv('Error: Listing not found');
+  }
 
   save('media', currentListing.media);
 
@@ -109,7 +111,6 @@ export function listingModal(listings) {
 
         await listingService.fetchListings();
         const newListings = await initializeListings();
-        console.log('NEW:', newListings);
         renderListings(newListings);
       }, 1000);
     });
