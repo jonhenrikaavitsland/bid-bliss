@@ -5,13 +5,25 @@ import { updateAvatar } from './updateAvatar';
 
 export async function handleUploadClick(event) {
   event.preventDefault();
-  const uploadInput = document.querySelector('[data-upload="input"]');
-  const url = uploadInput.value.trim();
 
-  if (!isValidUrl(url) || !(await isImageAccessible(url))) {
-    handleInvalidUrl();
+  const uploadInput = document.querySelector('[data-upload="input"]');
+
+  if (!uploadInput) {
+    console.error('Upload input element not found');
     return;
   }
 
-  await updateAvatar(url);
+  const url = uploadInput.value.trim();
+
+  try {
+    if (!isValidUrl(url) || !(await isImageAccessible(url))) {
+      handleInvalidUrl();
+      return;
+    }
+
+    await updateAvatar(url);
+  } catch (error) {
+    console.error('Error handling upload click:', error);
+    handleInvalidUrl();
+  }
 }
