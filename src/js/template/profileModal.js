@@ -54,7 +54,7 @@ export function profileModal() {
   const logOutBtn = createBtn('log out', 'bg-primary', 'hover:bg-hoverPrimary', 'rounded-xl', 'py-2', 'px-3', 'md:py-4', 'md:px-6', 'uppercase', 'text-white', 'mx-auto', 'mt-4', 'shadow-customShadow', 'lg:hidden');
   logOutBtn.addEventListener('click', () => logout());
 
-  const closeBtn = createBtn('', 'absolute', 'top-2.5', 'right-2.5', 'backdrop-invert', 'rounded-full');
+  const closeBtn = createBtn('', 'absolute', 'top-2.5', 'right-2.5', 'backdrop-invert', 'rounded-full', 'shadow-customShadow', 'hover:animate-pulse');
   const closeImg = createImg('/src/images/close.svg', 'close', 'size-5');
   closeBtn.addEventListener('click', () => {
     closeModal(modal);

@@ -43,7 +43,7 @@ export function loginModal() {
   const regText3 = createTextNode(' now!');
   const regCta = createAnchor('#', '', '', 'text-center', 'py-2');
 
-  const closeBtn = createBtn('', 'absolute', 'top-2.5', 'right-2.5', 'backdrop-invert', 'rounded-full');
+  const closeBtn = createBtn('', 'absolute', 'top-2.5', 'right-2.5', 'backdrop-invert', 'rounded-full', 'shadow-customShadow', 'hover:animate-pulse');
   const closeImg = createImg('/src/images/close.svg', 'close', 'size-5');
   closeBtn.addEventListener('click', () => {
     closeModal(modal);

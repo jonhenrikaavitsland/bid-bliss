@@ -178,7 +178,7 @@ export function listingModal(listings) {
     interactionWrap.append(bidsContainer);
   }
 
-  const closeBtn = createBtn('', 'absolute', 'top-2.5', 'right-2.5', 'backdrop-invert', 'rounded-full');
+  const closeBtn = createBtn('', 'absolute', 'top-2.5', 'right-2.5', 'backdrop-invert', 'rounded-full', 'shadow-customShadow', 'hover:animate-pulse');
   const closeImg = createImg('/src/images/close.svg', 'close', 'size-5');
   closeBtn.addEventListener('click', () => {
     closeModal(modal);
