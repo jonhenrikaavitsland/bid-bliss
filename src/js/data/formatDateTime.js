@@ -1,7 +1,10 @@
-export function formatDateTime(datetimeString) {
+export function formatDateTime(datetimeString, timeZone = 'Europe/Oslo') {
   const date = new Date(datetimeString);
 
-  if (isNaN(date)) return 'invalid date';
+  if (Number.isNaN(date.getTime())) {
+    console.error(`Invalid date string provided: ${datetimeString}`);
+    return 'Invalid date';
+  }
 
   const options = {
     year: 'numeric',
@@ -9,7 +12,7 @@ export function formatDateTime(datetimeString) {
     day: 'numeric',
     hour: 'numeric',
     minute: 'numeric',
-    timeZone: 'Europe/Oslo',
+    timeZone,
   };
 
   return date.toLocaleString('en-GB', options);
