@@ -136,7 +136,7 @@ export function listingModal(listings) {
     'shadow-customShadow',
   );
 
-  const bidsContainer = createDiv('mt-20', 'flex', 'flex-col', 'pb-10');
+  const bidsContainer = createDiv('mt-8', 'flex', 'flex-col', 'pb-10');
 
   if (currentListing.bids) {
     const reversedBids = [...currentListing.bids].reverse();
