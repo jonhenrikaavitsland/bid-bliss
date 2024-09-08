@@ -22,6 +22,8 @@ import { navLinks } from './navLinks';
 import { renderListings } from '../render/renderListings';
 import { listingService } from '../data/listingService';
 import { initializeListings } from '../data/initializeListings';
+import { closeModal } from '../ui/modal/closeModal';
+import { modal } from '../data/constants';
 
 export const DEFAULT_TIME_FORMAT = 'invalid date';
 const DEFAULT_IMAGE_URL = '/src/images/placeholderItem.png';
@@ -38,7 +40,7 @@ export function listingModal(listings) {
 
   save('media', currentListing.media);
 
-  const element = createArticle('rounded-xl', 'grow', 'overflow-y-auto', 'max-h-[90%]', 'max-w-lg', 'md:max-w-2xl');
+  const element = createArticle('relative', 'rounded-xl', 'grow', 'overflow-y-auto', 'max-h-[90%]', 'max-w-lg', 'md:max-w-2xl');
 
   const titleTop = createSection('bg-secondary', 'rounded-t-xl', 'px-2.5', 'py-2', 'md:px-5', 'md:py-4');
   const headingTop = createHeading(2, currentListing.title, 'font-serif', 'font-semibold', 'capitalize', 'md:text-lg', 'text-neutralBg');
@@ -176,6 +178,14 @@ export function listingModal(listings) {
     interactionWrap.append(bidsContainer);
   }
 
+  const closeBtn = createBtn('', 'absolute', 'top-2.5', 'right-2.5', 'backdrop-invert', 'rounded-full');
+  const closeImg = createImg('/src/images/close.svg', 'close', 'size-5');
+  closeBtn.addEventListener('click', () => {
+    closeModal(modal);
+  });
+
+  closeBtn.append(closeImg);
+
   auctionEndingWrap.append(auctionEndingTime);
 
   auctionDetailsWrap.append(auctionTitle, auctionDescription);
@@ -185,7 +195,7 @@ export function listingModal(listings) {
   imageWrap.append(image);
   subTopContainer.append(timeWrap, bidInfo);
   titleTop.append(headingTop);
-  element.append(titleTop, subTopContainer, imageWrap, InfoWrap, auctionDetailsWrap, interactionWrap);
+  element.append(titleTop, subTopContainer, imageWrap, InfoWrap, auctionDetailsWrap, interactionWrap, closeBtn);
 
   return element;
 }

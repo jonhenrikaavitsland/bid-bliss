@@ -1,4 +1,6 @@
+import { modal } from '../data/constants.js';
 import { createAnchor } from '../elements/createAnchor.js';
+import { createBtn } from '../elements/createBtn.js';
 import { createDiv } from '../elements/createDiv.js';
 import { createForm } from '../elements/createForm.js';
 import { createHeading } from '../elements/createHeading.js';
@@ -8,11 +10,12 @@ import { createLabel } from '../elements/createLabel.js';
 import { createSection } from '../elements/createSection.js';
 import { createSpan } from '../elements/createSpan.js';
 import { createTextNode } from '../elements/createTextNode.js';
+import { closeModal } from '../ui/modal/closeModal.js';
 
 export function registerModal() {
-  const element = createSection('flex', 'flex-col', 'bg-neutralBg', 'p-8', 'rounded-xl', 'lg:pt-10', 'lg:px-10', 'pb-16', 'shadow-customShadow', 'overflow-y-auto', 'max-h-[90%]', 'max-h-screen');
+  const element = createSection('relative', 'flex', 'flex-col', 'bg-neutralBg', 'p-8', 'rounded-xl', 'lg:pt-10', 'lg:px-10', 'pb-16', 'shadow-customShadow', 'overflow-y-auto', 'max-h-[90%]', 'max-h-screen');
 
-  const imageWrap = createDiv('max-w-48', 'md:max-w-72', 'mx-auto');
+  const imageWrap = createDiv('max-w-96', 'mx-auto');
   const image = createImg('/src/images/auctioneer-signup.png', 'auctioneer presenting a signup form');
 
   const heading = createHeading(2, `"1000 credits signup bonus!"`, 'font-serif', 'text-primary', 'text-center', 'mt-0.5', 'lg:mt-1', 'text-primary', 'font-semibold', 'uppercase', 'md:text-xxl');
@@ -40,6 +43,13 @@ export function registerModal() {
   const regText3 = createTextNode(' here!');
   const regCta = createAnchor('#', '', '', 'text-center', 'py-2');
 
+  const closeBtn = createBtn('', 'absolute', 'top-2.5', 'right-2.5', 'backdrop-invert', 'rounded-full');
+  const closeImg = createImg('/src/images/close.svg', 'close', 'size-5');
+  closeBtn.addEventListener('click', () => {
+    closeModal(modal);
+  });
+
+  closeBtn.append(closeImg);
   regCta.append(regText1, regText2, regText3);
   wrap.append(cta);
   ctaGroup.append(regCta);
@@ -47,7 +57,7 @@ export function registerModal() {
   emailGroup.append(labelEmail, emailInput, emailValidate);
   formElement.append(emailGroup, passwordGroup, wrap);
   imageWrap.append(image);
-  element.append(imageWrap, heading, formElement, ctaGroup);
+  element.append(imageWrap, heading, formElement, ctaGroup, closeBtn);
 
   return element;
 }

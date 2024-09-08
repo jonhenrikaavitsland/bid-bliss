@@ -1,12 +1,8 @@
 import { fetchData } from '../API/fetchData';
 import { isImageAccessible } from '../API/isImageAccessible';
-import { API_Base, API_Key, API_Listings } from '../data/constants';
+import { API_Base, API_Key, API_Listings, modal } from '../data/constants';
 import { getTimeAhead } from '../data/getTimeAhead';
-import { initializeListings } from '../data/initializeListings';
-
 import { isValidUrl } from '../data/isValidUrl';
-import { listings } from '../data/listings';
-import { listingService } from '../data/listingService';
 import { createBtn } from '../elements/createBtn';
 import { createDiv } from '../elements/createDiv';
 import { createForm } from '../elements/createForm';
@@ -17,14 +13,13 @@ import { createLabel } from '../elements/createLabel';
 import { createSection } from '../elements/createSection';
 import { createTextarea } from '../elements/createTextarea';
 import { load } from '../localStorage/load';
-import { save } from '../localStorage/save';
-import { renderListings } from '../render/renderListings';
+import { closeModal } from '../ui/modal/closeModal';
 import { clearError } from '../validate/clearError';
 import { sanitizeInput } from '../validate/sanitize/sanitizeInput';
 import { setError } from '../validate/setError';
 
 export function newListingModal() {
-  const element = createDiv('rounded-xl', 'shadow-customShadow', 'flex', 'flex-col', 'grow', 'overflow-y-auto', 'max-h-[90%]', 'max-w-lg', 'md:max-w-2xl');
+  const element = createDiv('relative', 'rounded-xl', 'shadow-customShadow', 'flex', 'flex-col', 'grow', 'overflow-y-auto', 'max-h-[90%]', 'max-w-lg', 'md:max-w-2xl');
 
   const headingTopWrap = createSection('bg-secondary', 'text-white', 'uppercase', 'font-serif', 'font-medium', 'px-2.5', 'py-2', 'md:px-5', 'md:py-4');
   const headingTop = createHeading(2, 'create auction');
@@ -156,6 +151,14 @@ export function newListingModal() {
 
   const cta = createBtn('create listing', 'uppercase', 'bg-secondary', 'hover:bg-hoverSecondary', 'py-2', 'px-4', 'rounded-xl', 'text-white', 'shadow-customShadow', 'mx-auto', 'font-serif', 'font-medium', 'mt-5');
 
+  const closeBtn = createBtn('', 'absolute', 'top-2.5', 'right-2.5', 'backdrop-invert', 'rounded-full');
+  const closeImg = createImg('/src/images/close.svg', 'close', 'size-5');
+  closeBtn.addEventListener('click', () => {
+    closeModal(modal);
+  });
+
+  closeBtn.append(closeImg);
+
   imageBtn.addEventListener('click', async () => {
     try {
       const imageUrl = sanitizeInput(imageInput.value.trim());
@@ -212,6 +215,6 @@ export function newListingModal() {
   titleWrap.append(titleLabel, titleInput, titleValidate);
   listingContents.append(titleWrap, descriptionWrap, tagsWrap, timeWrap, imageWrap, cta);
   headingTopWrap.append(headingTop);
-  element.append(headingTopWrap, listingContents);
+  element.append(headingTopWrap, listingContents, closeBtn);
   return element;
 }
