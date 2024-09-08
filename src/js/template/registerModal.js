@@ -17,6 +17,7 @@ export function registerModal() {
 
   const imageWrap = createDiv('max-w-96', 'mx-auto');
   const image = createImg('/src/images/auctioneer-signup.png', 'auctioneer presenting a signup form');
+  imageWrap.append(image);
 
   const heading = createHeading(2, `"1000 credits signup bonus!"`, 'font-serif', 'text-primary', 'text-center', 'mt-0.5', 'lg:mt-1', 'text-primary', 'font-semibold', 'uppercase', 'md:text-xxl');
 
@@ -27,36 +28,36 @@ export function registerModal() {
   const emailInput = createInput('text', 'your-email@stud.noroff.no', 'email', 'h-8', 'md:h-10', 'pl-2', 'rounded-xl', 'shadow-customShadow');
   const emailValidate = createDiv('text-sm', 'min-h-3.5', 'text-error');
   emailValidate.setAttribute('data-validate', 'email');
+  emailGroup.append(labelEmail, emailInput, emailValidate);
 
   const passwordGroup = createDiv('flex', 'flex-col', 'gap-1.5');
   const labelPassword = createLabel('password', 'Password:', 'md:text-xl');
   const passwordInput = createInput('password', '*****', 'password', 'h-8', 'md:h-10', 'pl-2', 'rounded-xl', 'shadow-customShadow');
   const passwordValidate = createDiv('text-sm', 'min-h-3.5', 'text-error');
   passwordValidate.setAttribute('data-validate', 'password');
+  passwordGroup.append(labelPassword, passwordInput, passwordValidate);
 
   const ctaGroup = createDiv('flex', 'flex-col', 'mx-auto', 'gap-5');
   const wrap = createDiv('mx-auto');
   const cta = createInput('submit', '', '', 'uppercase', 'cursor-pointer', 'bg-primary', 'hover:bg-hoverPrimary', 'rounded-xl', 'py-3', 'px-4', 'md:px-6', 'font-serif', 'text-neutralBg', 'shadow-customShadow', 'font-medium', 'md:text-lg');
   cta.value = 'register';
+  wrap.append(cta);
+
+  const regCta = createAnchor('#', '', '', 'text-center', 'py-2');
   const regText1 = createTextNode('Already a member? ');
   const regText2 = createSpan('Login', 'text-secondary', 'hover:text-hoverSecondary');
   const regText3 = createTextNode(' here!');
-  const regCta = createAnchor('#', '', '', 'text-center', 'py-2');
+  regCta.append(regText1, regText2, regText3);
 
   const closeBtn = createBtn('', 'absolute', 'top-2.5', 'right-2.5', 'backdrop-invert', 'rounded-full', 'shadow-customShadow', 'hover:animate-pulse');
   const closeImg = createImg('/src/images/close.svg', 'close', 'size-5');
+  closeBtn.append(closeImg);
   closeBtn.addEventListener('click', () => {
     closeModal(modal);
   });
 
-  closeBtn.append(closeImg);
-  regCta.append(regText1, regText2, regText3);
-  wrap.append(cta);
-  ctaGroup.append(regCta);
-  passwordGroup.append(labelPassword, passwordInput, passwordValidate);
-  emailGroup.append(labelEmail, emailInput, emailValidate);
+  ctaGroup.append(wrap, regCta);
   formElement.append(emailGroup, passwordGroup, wrap);
-  imageWrap.append(image);
   element.append(imageWrap, heading, formElement, ctaGroup, closeBtn);
 
   return element;
