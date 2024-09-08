@@ -19,7 +19,13 @@ export function alertUser(alertType, alertStatus) {
       break;
     case 'newListing':
       message = newListingAlertMessage(alertStatus);
+      break;
+    default:
+      console.warn(`Unsupported alert type: ${alertType}`);
+      return;
   }
 
-  if (message) showAlert(message);
+  if (message) {
+    showAlert(message);
+  }
 }
