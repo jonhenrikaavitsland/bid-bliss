@@ -17,6 +17,7 @@ export async function gatherUserData() {
 
   if (registerForm) {
     addLiveValidation(registerForm);
+
     registerForm.addEventListener('submit', async (event) => {
       event.preventDefault();
 
@@ -28,20 +29,19 @@ export async function gatherUserData() {
       isPasswordValid = validatePassword(password);
 
       updateValidation(event.target.email, isEmailValid, emailMessage, MSG_Email);
-
       updateValidation(event.target.password, isPasswordValid, passwordMessage, MSG_Password);
 
-      if (!isEmailValid || !isPasswordValid) {
-        return;
-      }
+      if (!isEmailValid || !isPasswordValid) return;
 
       await registerUser(name, email, password);
       modal.innerHTML = '';
       runModal(true, 'login');
     });
   }
+
   if (loginForm) {
     addLiveValidation(loginForm);
+
     loginForm.addEventListener('submit', async (event) => {
       event.preventDefault();
 
@@ -52,15 +52,11 @@ export async function gatherUserData() {
       isPasswordValid = validatePassword(password);
 
       updateValidation(event.target.email, isEmailValid, emailMessage, MSG_Email);
-
       updateValidation(event.target.password, isPasswordValid, passwordMessage, MSG_Password);
 
-      if (!isEmailValid || !isPasswordValid) {
-        return;
-      }
+      if (!isEmailValid || !isPasswordValid) return;
 
       await loginUser(email, password);
-
       window.location.href = '/';
     });
   }
