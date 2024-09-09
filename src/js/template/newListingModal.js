@@ -2,6 +2,7 @@ import { fetchData } from '../API/fetchData';
 import { isImageAccessible } from '../API/isImageAccessible';
 import { API_Base, API_Key, API_Listings, modal } from '../data/constants';
 import { getTimeAhead } from '../data/getTimeAhead';
+import { initializeListings } from '../data/initializeListings';
 import { isValidUrl } from '../data/isValidUrl';
 import { createBtn } from '../elements/createBtn';
 import { createDiv } from '../elements/createDiv';
@@ -13,6 +14,7 @@ import { createLabel } from '../elements/createLabel';
 import { createSection } from '../elements/createSection';
 import { createTextarea } from '../elements/createTextarea';
 import { load } from '../localStorage/load';
+import { renderListings } from '../render/renderListings';
 import { closeModal } from '../ui/modal/closeModal';
 import { clearError } from '../validate/clearError';
 import { sanitizeInput } from '../validate/sanitize/sanitizeInput';
@@ -91,9 +93,8 @@ export function newListingModal() {
       const images = document.getElementById('imagePreviewContainer');
       if (images) images.innerHTML = '';
 
-      setTimeout(() => {
-        window.location.href = '/';
-      }, 500);
+      const newListings = await initializeListings();
+      renderListings(newListings);
     } catch (error) {
       console.error('Error during form submission:', error);
       generalFeedback.innerText = 'An error occurred during submission. Please try again.';
