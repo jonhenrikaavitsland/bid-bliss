@@ -159,10 +159,10 @@ export function newListingModal() {
 
       clearError(imageValidate);
 
-      const imageElement = createDiv('flex', 'gap-2', 'items-center', 'mb-2');
+      const imageElement = createDiv('flex', 'flex-wrap', 'gap-4', 'items-center', 'mb-2');
       const imgPreview = createImg(imageUrl, 'image preview', 'w-20', 'h-20', 'object-cover', 'rounded-xl');
-      const altInput = createInput('text', 'Alt text', '', 'bg-white', 'rounded-xl', 'shadow-customShadow', 'py-2', 'px-4');
-      const removeBtn = createBtn('Remove', 'uppercase', 'font-serif', 'font-semibold', 'bg-error', 'hover:bg-opacity-90', 'py-2', 'px-4', 'text-white', 'rounded-xl');
+      const altInput = createInput('text', 'Alt text', '', 'bg-white', 'rounded-xl', 'shadow-customShadow', 'py-3', 'px-4');
+      const removeBtn = createBtn('Remove', 'uppercase', 'font-serif', 'font-semibold', 'bg-error', 'hover:bg-opacity-90', 'py-3', 'px-4', 'text-white', 'rounded-xl');
 
       imageElement.appendChild(imgPreview);
       imageElement.appendChild(altInput);
