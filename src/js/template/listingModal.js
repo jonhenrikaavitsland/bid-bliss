@@ -19,9 +19,6 @@ import { getHighestBid } from '../ui/bid/getHighestBid';
 import { getProfile } from '../API/getProfile';
 import { loggedInButton } from './loggedInButton';
 import { navLinks } from './navLinks';
-import { renderListings } from '../render/renderListings';
-import { listingService } from '../data/listingService';
-import { initializeListings } from '../data/initializeListings';
 import { closeModal } from '../ui/modal/closeModal';
 import { modal } from '../data/constants';
 
@@ -108,10 +105,6 @@ export function listingModal(listings) {
         navElement.append(loggedInButton());
         const links = navLinks();
         navElement.append(links);
-
-        await listingService.fetchListings();
-        const newListings = await initializeListings();
-        renderListings(newListings);
       }, 1000);
     });
   }
