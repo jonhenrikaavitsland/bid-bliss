@@ -6,6 +6,8 @@ import { fetchData } from '../../API/fetchData';
 import { createDiv } from '../../elements/createDiv';
 import { createNewBid } from './createNewBid';
 import { cleanListingID } from '../../data/cleanListingID';
+import { renderListings } from '../../render/renderListings';
+import { initializeListings } from '../../data/initializeListings';
 
 export async function handleBid(event, rawListingID, bidsContainer, currentHigh) {
   event.preventDefault();
@@ -46,6 +48,9 @@ export async function handleBid(event, rawListingID, bidsContainer, currentHigh)
 
     const newBid = createNewBid(response.data, sanitizedBidAmount);
     bidsContainer.prepend(newBid);
+
+    const newListings = await initializeListings();
+    renderListings(newListings);
 
     bid.value = '';
     bid.classList.remove('border-correct');
