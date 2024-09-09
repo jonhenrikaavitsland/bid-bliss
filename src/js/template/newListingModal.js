@@ -75,8 +75,6 @@ export function newListingModal() {
     const token = load('token');
     const payload = { title, description: description || '', tags, media: imageContainer, endsAt };
 
-    console.log('Payload to be sent:', payload);
-
     try {
       const response = await fetchData(`${API_Base}${API_Listings}`, {
         method: 'POST',
