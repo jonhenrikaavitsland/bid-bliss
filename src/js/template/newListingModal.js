@@ -2,6 +2,7 @@ import { fetchData } from '../API/fetchData';
 import { isImageAccessible } from '../API/isImageAccessible';
 import { API_Base, API_Key, API_Listings, modal } from '../data/constants';
 import { getTimeAhead } from '../data/getTimeAhead';
+import { initializeListings } from '../data/initializeListings';
 import { isValidUrl } from '../data/isValidUrl';
 import { createBtn } from '../elements/createBtn';
 import { createDiv } from '../elements/createDiv';
@@ -13,6 +14,7 @@ import { createLabel } from '../elements/createLabel';
 import { createSection } from '../elements/createSection';
 import { createTextarea } from '../elements/createTextarea';
 import { load } from '../localStorage/load';
+import { renderListings } from '../render/renderListings';
 import { closeModal } from '../ui/modal/closeModal';
 import { clearError } from '../validate/clearError';
 import { sanitizeInput } from '../validate/sanitize/sanitizeInput';
@@ -73,8 +75,6 @@ export function newListingModal() {
     const token = load('token');
     const payload = { title, description: description || '', tags, media: imageContainer, endsAt };
 
-    console.log('Payload to be sent:', payload);
-
     try {
       const response = await fetchData(`${API_Base}${API_Listings}`, {
         method: 'POST',
@@ -91,9 +91,8 @@ export function newListingModal() {
       const images = document.getElementById('imagePreviewContainer');
       if (images) images.innerHTML = '';
 
-      setTimeout(() => {
-        window.location.href = '/';
-      }, 500);
+      const newListings = await initializeListings();
+      renderListings(newListings);
     } catch (error) {
       console.error('Error during form submission:', error);
       generalFeedback.innerText = 'An error occurred during submission. Please try again.';
@@ -160,10 +159,10 @@ export function newListingModal() {
 
       clearError(imageValidate);
 
-      const imageElement = createDiv('flex', 'gap-2', 'items-center', 'mb-2');
+      const imageElement = createDiv('flex', 'flex-wrap', 'gap-4', 'items-center', 'mb-2');
       const imgPreview = createImg(imageUrl, 'image preview', 'w-20', 'h-20', 'object-cover', 'rounded-xl');
-      const altInput = createInput('text', 'Alt text', '', 'bg-white', 'rounded-xl', 'shadow-customShadow', 'py-2', 'px-4');
-      const removeBtn = createBtn('Remove', 'uppercase', 'font-serif', 'font-semibold', 'bg-error', 'hover:bg-opacity-90', 'py-2', 'px-4', 'text-white', 'rounded-xl');
+      const altInput = createInput('text', 'Alt text', '', 'bg-white', 'rounded-xl', 'shadow-customShadow', 'py-3', 'px-4');
+      const removeBtn = createBtn('Remove', 'uppercase', 'font-serif', 'font-semibold', 'bg-error', 'hover:bg-opacity-90', 'py-3', 'px-4', 'text-white', 'rounded-xl');
 
       imageElement.appendChild(imgPreview);
       imageElement.appendChild(altInput);
