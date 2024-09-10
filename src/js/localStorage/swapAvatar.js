@@ -1,3 +1,4 @@
+import { placeholderImg } from '../data/images';
 import { load } from './load';
 import { save } from './save';
 
@@ -24,7 +25,7 @@ export function swapAvatar() {
       name,
       email,
       bio,
-      avatar: { url: '/src/images/placeholder.jpg', alt: name },
+      avatar: { url: placeholderImg, alt: name },
       credits,
       _count: { listings, wins },
     };
