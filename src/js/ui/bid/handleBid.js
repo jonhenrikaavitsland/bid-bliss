@@ -33,7 +33,7 @@ export async function handleBid(event, rawListingID, bidsContainer, currentHigh)
   const sanitizedBidAmount = sanitizeInput(bid.value);
 
   try {
-    const url = `${API_Base}${API_Listings}/${listingID}/bids`;
+    const url = `${API_Base}${API_Listings}/${listingID}/bids?_bids=true`;
     const options = {
       method: 'POST',
       headers: {
@@ -45,9 +45,11 @@ export async function handleBid(event, rawListingID, bidsContainer, currentHigh)
     };
 
     const response = await fetchData(url, options, 'bid');
+    console.log('response:', response);
 
     const newBid = createNewBid(response.data, sanitizedBidAmount);
     bidsContainer.prepend(newBid);
+    console.log('newbid:', newBid);
 
     const newListings = await initializeListings();
     renderListings(newListings);
