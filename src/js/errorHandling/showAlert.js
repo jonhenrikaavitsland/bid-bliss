@@ -10,12 +10,18 @@ export function showAlert(message) {
 
   alertMessage.textContent = message;
 
+  if (message === 'Registration successful! Your profile has been created.') {
+    alertContainer.classList.add('border-correct');
+  } else {
+    alertContainer.classList.add('border-error');
+  }
+
   alertContainer.classList.remove('hidden');
   alertContainer.classList.add('flex');
   document.body.classList.add('overflow-hidden');
 
   const hideAlert = () => {
-    alertContainer.classList.remove('flex');
+    alertContainer.classList.remove('flex', 'border-error', 'border-correct');
     alertContainer.classList.add('hidden');
     console.clear();
     alertButton.removeEventListener('click', hideAlert);
