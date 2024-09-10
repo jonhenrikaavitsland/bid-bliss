@@ -47,7 +47,11 @@ export async function handleBid(event, rawListingID, bidsContainer, currentHigh)
     const response = await fetchData(url, options, 'bid');
     console.log('response:', response);
 
-    const newBid = createNewBid(response.data, sanitizedBidAmount);
+    if (response && response.data && Array.isArray(response.data.bids)) {
+      response.data.bids.reverse();
+    }
+
+    const newBid = createNewBid(response.data.bids[0], sanitizedBidAmount);
     bidsContainer.prepend(newBid);
     console.log('newbid:', newBid);
 
