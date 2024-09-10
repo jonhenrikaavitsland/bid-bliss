@@ -21,9 +21,9 @@ export async function gatherUserData() {
     registerForm.addEventListener('submit', async (event) => {
       event.preventDefault();
 
-      const name = event.target.email.value.replace(/@.*$/, '');
-      const email = event.target.email.value;
-      const password = event.target.password.value;
+      const email = event.target.email.value.toLowerCase().trim();
+      const name = event.target.email.value.replace(/@.*$/, '').trim();
+      const password = event.target.password.value.trim();
 
       isEmailValid = validateEmail(email);
       isPasswordValid = validatePassword(password);
@@ -45,8 +45,8 @@ export async function gatherUserData() {
     loginForm.addEventListener('submit', async (event) => {
       event.preventDefault();
 
-      const email = event.target.email.value;
-      const password = event.target.password.value;
+      const email = event.target.email.value.toLowerCase().trim();
+      const password = event.target.password.value.trim();
 
       isEmailValid = validateEmail(email);
       isPasswordValid = validatePassword(password);
@@ -57,7 +57,6 @@ export async function gatherUserData() {
       if (!isEmailValid || !isPasswordValid) return;
 
       await loginUser(email, password);
-      window.location.href = '/';
     });
   }
 }
