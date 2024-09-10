@@ -57,7 +57,6 @@ export async function gatherUserData() {
       if (!isEmailValid || !isPasswordValid) return;
 
       await loginUser(email, password);
-      window.location.href = '/';
     });
   }
 }
