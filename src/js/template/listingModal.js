@@ -21,9 +21,10 @@ import { loggedInButton } from './loggedInButton';
 import { navLinks } from './navLinks';
 import { closeModal } from '../ui/modal/closeModal';
 import { modal } from '../data/constants';
+import { closeSvg, placeholderItemImg } from '../data/images';
 
 export const DEFAULT_TIME_FORMAT = 'invalid date';
-const DEFAULT_IMAGE_URL = '/src/images/placeholderItem.png';
+const DEFAULT_IMAGE_URL = placeholderItemImg;
 const DEFAULT_IMAGE_ALT = 'listing item';
 const DEFAULT_TITLE = 'Unknown item';
 
@@ -173,7 +174,7 @@ export function listingModal(listings) {
   }
 
   const closeBtn = createBtn('', 'absolute', 'top-2.5', 'right-2.5', 'backdrop-invert', 'rounded-full', 'shadow-customShadow', 'hover:animate-pulse');
-  const closeImg = createImg('/src/images/close.svg', 'close', 'size-5');
+  const closeImg = createImg(closeSvg, 'close', 'size-5');
   closeBtn.addEventListener('click', () => {
     closeModal(modal);
   });

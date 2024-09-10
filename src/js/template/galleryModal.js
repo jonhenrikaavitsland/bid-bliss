@@ -1,8 +1,9 @@
+import { placeholderItemImg } from '../data/images';
 import { createDiv } from '../elements/createDiv';
 import { createImg } from '../elements/createImg';
 import { load } from '../localStorage/load';
 
-const DEFAULT_IMAGE_URL = '/src/images/placeholderItem.png';
+const DEFAULT_IMAGE_URL = placeholderItemImg;
 const DEFAULT_IMAGE_ALT = 'listing item';
 
 export function galleryModal() {

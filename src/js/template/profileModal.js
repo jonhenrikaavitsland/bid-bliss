@@ -1,4 +1,5 @@
 import { modal } from '../data/constants';
+import { closeSvg, placeholderImg } from '../data/images';
 import { createBtn } from '../elements/createBtn';
 import { createDiv } from '../elements/createDiv';
 import { createForm } from '../elements/createForm';
@@ -13,7 +14,7 @@ import { load } from '../localStorage/load';
 import { logout } from '../ui/logoutBtn/logout';
 import { closeModal } from '../ui/modal/closeModal';
 
-const DEFAULT_IMAGE_URL = '/src/images/placeholder.jpg';
+const DEFAULT_IMAGE_URL = placeholderImg;
 const DEFAULT_IMAGE_ALT = 'my avatar';
 const DEFAULT_BIO = 'Aspiring auctioneer';
 
@@ -58,7 +59,7 @@ export function profileModal() {
   logOutBtn.addEventListener('click', () => logout());
 
   const closeBtn = createBtn('', 'absolute', 'top-2.5', 'right-2.5', 'backdrop-invert', 'rounded-full', 'shadow-customShadow', 'hover:animate-pulse');
-  const closeImg = createImg('/src/images/close.svg', 'close', 'size-5');
+  const closeImg = createImg(closeSvg, 'close', 'size-5');
   closeBtn.append(closeImg);
   closeBtn.addEventListener('click', () => {
     closeModal(modal);

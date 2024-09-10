@@ -2,6 +2,7 @@ import { fetchData } from '../API/fetchData';
 import { isImageAccessible } from '../API/isImageAccessible';
 import { API_Base, API_Key, API_Listings, modal } from '../data/constants';
 import { getTimeAhead } from '../data/getTimeAhead';
+import { closeSvg } from '../data/images';
 import { initializeListings } from '../data/initializeListings';
 import { isValidUrl } from '../data/isValidUrl';
 import { createBtn } from '../elements/createBtn';
@@ -194,7 +195,7 @@ export function newListingModal() {
   const cta = createBtn('create listing', 'uppercase', 'bg-secondary', 'hover:bg-hoverSecondary', 'py-3', 'px-4', 'md:px-6', 'md:text-lg', 'rounded-xl', 'text-white', 'shadow-customShadow', 'mx-auto', 'font-serif', 'font-medium', 'mt-5');
 
   const closeBtn = createBtn('', 'absolute', 'top-2.5', 'right-2.5', 'backdrop-invert', 'rounded-full', 'shadow-customShadow', 'hover:animate-pulse');
-  const closeImg = createImg('/src/images/close.svg', 'close', 'size-5');
+  const closeImg = createImg(closeSvg, 'close', 'size-5');
   closeBtn.append(closeImg);
   closeBtn.addEventListener('click', () => {
     closeModal(modal);
