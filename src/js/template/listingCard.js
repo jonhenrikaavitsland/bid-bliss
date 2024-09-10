@@ -8,9 +8,10 @@ import { createTime } from '../elements/createTime';
 import { save } from '../localStorage/save';
 import { runModal } from '../ui/modal/runModal';
 import { createArticle } from '../elements/createArticle';
+import { placeholderItemImg } from '../data/images';
 
 const DEFAULT_TITLE = 'Unknown item';
-const DEFAULT_IMAGE_URL = '/src/images/placeholderItem.png';
+const DEFAULT_IMAGE_URL = placeholderItemImg;
 const DEFAULT_IMAGE_ALT = 'listing item';
 const DEFAULT_TIME_FORMAT = 'invalid date';
 

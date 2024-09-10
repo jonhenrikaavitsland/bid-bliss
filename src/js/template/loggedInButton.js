@@ -1,3 +1,4 @@
+import { placeholderImg } from '../data/images';
 import { createDiv } from '../elements/createDiv';
 import { createHeading } from '../elements/createHeading';
 import { createImg } from '../elements/createImg';
@@ -14,7 +15,7 @@ export function loggedInButton() {
     return createDiv('Profile not found');
   }
 
-  const { name = 'Unknown User', avatar: { url: avatarUrl = '/src/images/placeholder.jpg', alt: avatarAlt = name } = {}, credits = 0, bio = 'No biography available.' } = profile;
+  const { name = 'Unknown User', avatar: { url: avatarUrl = placeholderImg, alt: avatarAlt = name } = {}, credits = 0, bio = 'No biography available.' } = profile;
 
   const element = createDiv('hidden', 'rounded-full', 'border-2', 'border-neutralBg', 'lg:flex', 'h-10', 'lg:h-20', 'w-36', 'lg:w-72', 'justify-between', 'cursor-pointer', 'hover:bg-hoverPrimary');
 

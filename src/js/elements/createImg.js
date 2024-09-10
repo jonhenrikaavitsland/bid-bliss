@@ -1,4 +1,4 @@
-import { placeholderItem } from '../data/constants';
+import { placeholderItemImg } from '../data/images';
 import { isValidUrl } from '../data/isValidUrl';
 
 export function createImg(src = '', alt = '', ...classes) {
@@ -8,7 +8,7 @@ export function createImg(src = '', alt = '', ...classes) {
     image.src = src;
   } else {
     console.error(`Invalid image source URL: ${src}`);
-    image.src = placeholderItem;
+    image.src = placeholderItemImg;
   }
 
   image.alt = typeof alt === 'string' ? alt : 'Image description unavailable';

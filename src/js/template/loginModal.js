@@ -1,4 +1,5 @@
 import { modal } from '../data/constants.js';
+import { auctioneerWelcomeImg, closeSvg } from '../data/images.js';
 import { createAnchor } from '../elements/createAnchor.js';
 import { createBtn } from '../elements/createBtn.js';
 import { createDiv } from '../elements/createDiv.js';
@@ -16,7 +17,7 @@ export function loginModal() {
   const element = createSection('relative', 'flex', 'flex-col', 'bg-neutralBg', 'p-8', 'rounded-xl', 'lg:pt-10', 'lg:px-10', 'pb-16', 'shadow-customShadow', 'overflow-y-auto', 'max-h-[90%]', 'max-h-screen');
 
   const imageWrap = createDiv('max-w-96', 'mx-auto');
-  const image = createImg('/src/images/auctioneer-welcome.png', 'auctioneer greeting');
+  const image = createImg(auctioneerWelcomeImg, 'auctioneer greeting');
   imageWrap.append(image);
 
   const heading = createHeading(2, `"Your Next Great Deal Awaits!"`, 'font-serif', 'text-primary', 'text-center', 'mt-0.5', 'lg:mt-1', 'font-semibold', 'uppercase', 'md:text-xxl');
@@ -52,7 +53,7 @@ export function loginModal() {
   ctaGroup.append(regCta);
 
   const closeBtn = createBtn('', 'absolute', 'top-2.5', 'right-2.5', 'backdrop-invert', 'rounded-full', 'shadow-customShadow', 'hover:animate-pulse');
-  const closeImg = createImg('/src/images/close.svg', 'close', 'size-5');
+  const closeImg = createImg(closeSvg, 'close', 'size-5');
   closeBtn.append(closeImg);
   closeBtn.addEventListener('click', () => {
     closeModal(modal);

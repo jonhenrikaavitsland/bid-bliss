@@ -1,4 +1,5 @@
 import { modal } from '../data/constants.js';
+import { auctioneerSignupImg, closeSvg } from '../data/images.js';
 import { createAnchor } from '../elements/createAnchor.js';
 import { createBtn } from '../elements/createBtn.js';
 import { createDiv } from '../elements/createDiv.js';
@@ -16,7 +17,7 @@ export function registerModal() {
   const element = createSection('relative', 'flex', 'flex-col', 'bg-neutralBg', 'p-8', 'rounded-xl', 'lg:pt-10', 'lg:px-10', 'pb-16', 'shadow-customShadow', 'overflow-y-auto', 'max-h-[90%]', 'max-h-screen');
 
   const imageWrap = createDiv('max-w-96', 'mx-auto');
-  const image = createImg('/src/images/auctioneer-signup.png', 'auctioneer presenting a signup form');
+  const image = createImg(auctioneerSignupImg, 'auctioneer presenting a signup form');
   imageWrap.append(image);
 
   const heading = createHeading(2, `"1000 credits signup bonus!"`, 'font-serif', 'text-primary', 'text-center', 'mt-0.5', 'lg:mt-1', 'text-primary', 'font-semibold', 'uppercase', 'md:text-xxl');
@@ -50,7 +51,7 @@ export function registerModal() {
   regCta.append(regText1, regText2, regText3);
 
   const closeBtn = createBtn('', 'absolute', 'top-2.5', 'right-2.5', 'backdrop-invert', 'rounded-full', 'shadow-customShadow', 'hover:animate-pulse');
-  const closeImg = createImg('/src/images/close.svg', 'close', 'size-5');
+  const closeImg = createImg(closeSvg, 'close', 'size-5');
   closeBtn.append(closeImg);
   closeBtn.addEventListener('click', () => {
     closeModal(modal);

@@ -1,3 +1,4 @@
+import { placeholderImg } from '../data/images';
 import { createBtn } from '../elements/createBtn';
 import { createImg } from '../elements/createImg';
 import { load } from '../localStorage/load';
@@ -12,7 +13,7 @@ export function loggedInButton2() {
     return createBtn('Profile Error', 'fixed', 'z-10', 'bottom-5', 'right-5', 'w-20', 'lg:hidden', 'border-2', 'border-white', 'rounded-full', 'md:bottom-8', 'md:right-8');
   }
 
-  const { url: avatarUrl = '/src/images/placeholder.jpg', alt: avatarAlt = 'User avatar' } = profile.avatar;
+  const { url: avatarUrl = placeholderImg, alt: avatarAlt = 'User avatar' } = profile.avatar;
 
   const element = createBtn('', 'fixed', 'z-10', 'bottom-5', 'right-5', 'w-20', 'lg:hidden', 'border-2', 'border-white', 'rounded-full', 'md:bottom-8', 'md:right-8');
 

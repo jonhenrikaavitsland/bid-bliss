@@ -4,7 +4,7 @@ export function isValidUrl(url) {
     return false;
   }
 
-  const specificPathPattern = /^\/src\/images\/[\w\-./]*$/;
+  const specificPathPattern = /^\/(src\/images|assets)\/[\w\-./]*$/;
   if (specificPathPattern.test(url)) {
     return true;
   }
