@@ -1,3 +1,5 @@
+import { runModal } from '../ui/modal/runModal';
+
 /**
  * Handles the click event for the login button by displaying the login modal.
  *
@@ -12,8 +14,6 @@
  * loginButton.addEventListener('click', handleLoginBtnClick);
  * ```
  */
-import { runModal } from '../ui/modal/runModal';
-
 export function handleLoginBtnClick() {
   try {
     runModal(true, 'login');
