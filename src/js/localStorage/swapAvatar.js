@@ -2,6 +2,20 @@ import { placeholderImg } from '../data/images';
 import { load } from './load';
 import { save } from './save';
 
+/**
+ * Swaps the user's avatar URL in the profile if it matches a specific default image URL.
+ *
+ * This function checks the current profile data loaded from localStorage and replaces the avatar URL
+ * with a placeholder image if it matches the specified default URL. If the profile data is missing
+ * or does not have the required structure, it logs an error.
+ *
+ * @returns {void} No return value; updates the profile in localStorage if the conditions are met.
+ * @example
+ * ```js
+ * // Swap avatar URL if it matches the default image
+ * swapAvatar();
+ * ```
+ */
 export function swapAvatar() {
   const profile = load('profile');
 
