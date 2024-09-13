@@ -32,9 +32,18 @@ export function listingCard(data) {
     element.classList.add('grayscale');
   }
 
+  let isProcessing = false;
+
   element.addEventListener('click', () => {
+    if (isProcessing) return;
+    isProcessing = true;
+
     save('listingID', id);
     runModal(true, 'listing');
+
+    setTimeout(() => {
+      isProcessing = false;
+    }, 1000);
   });
 
   const image = createImg(media?.[0]?.url || DEFAULT_IMAGE_URL, media?.[0]?.alt || DEFAULT_IMAGE_ALT, 'rounded-xl', 'aspect-square', 'object-cover');
