@@ -13,6 +13,7 @@ export function initializeSwipeEvents(element, media, activeIndex, onSwipe) {
 
   element.addEventListener('touchstart', (event) => {
     startX = event.touches[0].clientX;
+    endX = startX; // should now avoid undefined value!
   });
 
   element.addEventListener('touchmove', (event) => {
