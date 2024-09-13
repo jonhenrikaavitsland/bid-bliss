@@ -13,6 +13,21 @@ import { createSpan } from '../elements/createSpan.js';
 import { createTextNode } from '../elements/createTextNode.js';
 import { closeModal } from '../ui/modal/closeModal.js';
 
+/**
+ * Creates and returns a login modal element for user authentication.
+ *
+ * This function constructs a login modal with an image, heading, form fields for email and password,
+ * and a call-to-action button for logging in. It includes validation messages and a link for users to register if they don't have an account.
+ * The modal can be closed by clicking the close button.
+ *
+ * @returns {HTMLElement} The constructed login modal element.
+ * @example
+ * ```js
+ * // Create a login modal and append it to the document body
+ * const modal = loginModal();
+ * document.body.append(modal);
+ * ```
+ */
 export function loginModal() {
   const element = createSection('relative', 'flex', 'flex-col', 'bg-neutralBg', 'p-8', 'rounded-xl', 'lg:pt-10', 'lg:px-10', 'pb-16', 'shadow-customShadow', 'overflow-y-auto', 'max-h-[90%]', 'max-h-screen');
 

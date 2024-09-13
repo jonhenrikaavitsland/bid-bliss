@@ -15,7 +15,6 @@ import { createDiv } from '../elements/createDiv';
  * document.querySelector('nav').append(loginButton);
  * ```
  */
-
 export function loginLink() {
   const element = createDiv('flex', 'flex-col', 'lg:justify-center');
 
