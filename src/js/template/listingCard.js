@@ -15,6 +15,36 @@ const DEFAULT_IMAGE_URL = placeholderItemImg;
 const DEFAULT_IMAGE_ALT = 'listing item';
 const DEFAULT_TIME_FORMAT = 'invalid date';
 
+/**
+ * Creates a listing card element based on the provided listing data.
+ *
+ * This function generates an article element representing a listing, including its title, image, end time, and bid count.
+ * It applies special styles if the listing has ended and sets up click event handling to save the listing ID and trigger the listing modal.
+ * If invalid data is provided, it returns a div with an error message.
+ *
+ * @param {Object} data The listing data object containing information such as title, end time, media, and bid count.
+ * @param {string} [data.id=''] The unique identifier of the listing.
+ * @param {string} [data.endsAt=''] The end date and time of the listing.
+ * @param {string} [data.title='Unknown item'] The title of the listing.
+ * @param {Array} [data.media=[]] An array of media objects for the listing.
+ * @param {Object} [data._count={}] An object containing count information, including bid count.
+ * @param {number} [data._count.bids=0] The number of bids on the listing.
+ * @returns {HTMLElement} The constructed listing card element.
+ * @example
+ * ```js
+ * // Create a listing card with sample data
+ * const sampleData = {
+ *   id: '123',
+ *   endsAt: '2023-09-13T15:30:00Z',
+ *   title: 'Sample Item',
+ *   media: [{ url: 'https://example.com/image.jpg', alt: 'Sample image' }],
+ *   _count: { bids: 5 },
+ * };
+ * const card = listingCard(sampleData);
+ * document.body.append(card);
+ * ```
+ */
+
 export function listingCard(data) {
   if (!data || typeof data !== 'object') {
     console.error('Invalid data provided for listing card');
