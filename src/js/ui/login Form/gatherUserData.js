@@ -7,6 +7,21 @@ import { validateEmail } from '../../validate/validateEmail';
 import { validatePassword } from '../../validate/validatePassword';
 import { runModal } from '../modal/runModal';
 
+/**
+ * Gathers user data from login and registration forms, validates inputs, and handles form submission.
+ *
+ * This function attaches live validation and submit event listeners to login and registration forms. It validates
+ * email and password inputs, updates validation messages, and attempts to register or log in the user based on form submissions.
+ * If registration is successful, it switches to the login modal.
+ *
+ * @async
+ * @returns {Promise<void>} No return value; handles form submissions and updates the DOM accordingly.
+ * @example
+ * ```js
+ * // Initialize event listeners and handle user data gathering from login and registration forms
+ * gatherUserData();
+ * ```
+ */
 export async function gatherUserData() {
   const loginForm = document.querySelector(`[data-api="login"]`);
   const registerForm = document.querySelector(`[data-api="register"]`);
