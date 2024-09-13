@@ -2,6 +2,31 @@ import { fetchData } from './fetchData';
 import { API_Base, API_Key, API_Profiles } from '../data/constants';
 import { load } from '../localStorage/load';
 
+/**
+ * Updates the user's profile with a new avatar URL.
+ *
+ * Sends a PUT request to update the user's profile with the provided avatar URL.
+ * The function checks for necessary profile and authorization data before making the request.
+ *
+ * @async
+ * @param {string} url The URL of the new avatar image.
+ * @returns {Promise<boolean>} Returns `true` if the profile update is successful, otherwise `false`.
+ * @throws {Error} Logs errors if required data is missing or if the update request fails.
+ * @example
+ * ```js
+ * // Update profile with a new avatar URL
+ * const avatarUrl = 'https://example.com/new-avatar.jpg';
+ * updateProfile(avatarUrl)
+ *   .then(success => {
+ *     if (success) {
+ *       console.log('Profile updated successfully');
+ *     } else {
+ *       console.log('Failed to update profile');
+ *     }
+ *   })
+ *   .catch(error => console.error('Profile update error:', error));
+ * ```
+ */
 export async function updateProfile(url) {
   if (!url || typeof url !== 'string') {
     console.error('Invalid URL provided for profile update.');
