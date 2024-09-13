@@ -13,7 +13,7 @@ export function galleryModal() {
     console.warn('No media available, using default image.');
   }
 
-  const galleryContainer = createDiv('flex', 'flex-col', 'gap-10', 'max-w-screen', 'overflow-y-auto', 'max-h-[90vh]', 'md:max-w-[500px]', 'lg:max-w-[700px]');
+  const galleryContainer = createDiv('flex', 'flex-col', 'gap-10', 'max-w-screen', 'overflow-y-auto', 'max-h-full', 'md:max-w-[500px]', 'lg:max-w-[700px]', 'bg-neutralTxt', 'py-5');
 
   const activeImage = createImg(media?.[0]?.url || DEFAULT_IMAGE_URL, media?.[0]?.alt || DEFAULT_IMAGE_ALT, 'aspect-square', 'object-contain', 'object-bottom', 'max-w-full', 'max-h-[60vh]');
 

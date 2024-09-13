@@ -11,7 +11,7 @@ export function openGallery(target) {
   const scrollPosition = window.scrollY || document.documentElement.scrollTop;
 
   gallery.classList.remove('hidden');
-  gallery.classList.add('flex', 'items-center', 'justify-center', 'px-5');
+  gallery.classList.add('flex', 'items-center', 'justify-center', 'py-5');
 
   gallery.style.top = `${scrollPosition}px`;
 
