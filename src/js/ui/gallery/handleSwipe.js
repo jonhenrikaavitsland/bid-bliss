@@ -8,11 +8,12 @@
  */
 export function handleSwipe(startX, endX, media, activeIndex, onSwipe) {
   const swipeThreshold = 50;
+  const swipeDistance = startX - endX;
 
-  if (startX - endX > swipeThreshold && activeIndex < media.length - 1) {
+  if (swipeDistance > swipeThreshold && activeIndex < media.length - 1) {
     // Swiped left
     onSwipe(activeIndex + 1);
-  } else if (endX - startX > swipeThreshold && activeIndex > 0) {
+  } else if (swipeDistance < -swipeThreshold && activeIndex > 0) {
     // Swiped right
     onSwipe(activeIndex - 1);
   }
