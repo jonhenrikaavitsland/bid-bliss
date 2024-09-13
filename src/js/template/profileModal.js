@@ -18,6 +18,21 @@ const DEFAULT_IMAGE_URL = placeholderImg;
 const DEFAULT_IMAGE_ALT = 'my avatar';
 const DEFAULT_BIO = 'Aspiring auctioneer';
 
+/**
+ * Creates and returns a modal element displaying the user's profile information.
+ *
+ * This function constructs a profile modal that includes the user's avatar, name, bio, credits, and counts of active listings and wins.
+ * It also provides a form to upload a new avatar image and a button to log out. The modal can be closed using the close button.
+ * Default values are used for missing avatar data and bio information.
+ *
+ * @returns {HTMLElement} The constructed profile modal element.
+ * @example
+ * ```js
+ * // Create a profile modal and append it to the document body
+ * const modal = profileModal();
+ * document.body.append(modal);
+ * ```
+ */
 export function profileModal() {
   const {
     name,

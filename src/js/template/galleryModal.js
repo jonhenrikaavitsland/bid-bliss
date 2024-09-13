@@ -11,6 +11,21 @@ import { closeGallery } from '../ui/modal/closeGallery';
 export const DEFAULT_IMAGE_URL = placeholderItemImg;
 export const DEFAULT_IMAGE_ALT = 'listing item';
 
+/**
+ * Creates and returns a gallery modal element for displaying images.
+ *
+ * The gallery modal displays a set of images loaded from localStorage, with the ability to switch between images
+ * by clicking on thumbnails or swiping. A close button allows the user to exit the gallery.
+ * If no images are available, a default placeholder image is used.
+ *
+ * @returns {HTMLElement} The constructed gallery modal element.
+ * @example
+ * ```js
+ * // Append the gallery modal to the document body
+ * const gallery = galleryModal();
+ * document.body.append(gallery);
+ * ```
+ */
 export function galleryModal() {
   const media = load('media');
 

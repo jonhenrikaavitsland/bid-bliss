@@ -1,6 +1,19 @@
 import { createBtn } from '../../elements/createBtn';
 import { runModal } from '../modal/runModal';
 
+/**
+ * Adds a "New Auction" button to the specified parent element and sets up an event listener to open the new listing modal.
+ *
+ * This function creates a button for starting a new auction, appends it to the designated parent element,
+ * and adds styling classes to the parent element to adjust its layout.
+ *
+ * @returns {void} No return value; modifies the DOM by adding the button and updating the parent element's classes.
+ * @example
+ * ```js
+ * // Add a "New Auction" button to the page
+ * addBtn();
+ * ```
+ */
 export function addBtn() {
   const btnParent = document.querySelector(`[data-buttons="newAuction"]`);
 

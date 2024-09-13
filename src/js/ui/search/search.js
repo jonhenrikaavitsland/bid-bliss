@@ -4,6 +4,20 @@ import { renderListings } from '../../render/renderListings';
 import { sanitizeInput } from '../../validate/sanitize/sanitizeInput';
 import { initializeListings } from '../../data/initializeListings';
 
+/**
+ * Handles the search functionality by fetching and rendering listings based on user input.
+ *
+ * This function sets up an event listener on a search form, sanitizes the user input, and fetches listings based on the search query.
+ * If no query is entered or no results are found, it initializes the default listings. The function also manages input styling and messages
+ * when no results are found.
+ *
+ * @returns {void} No return value; sets up event listeners and updates the DOM with search results or default listings.
+ * @example
+ * ```js
+ * // Initialize the search functionality on the page
+ * search();
+ * ```
+ */
 export function search() {
   const form = document.querySelector(`[data-form="search"]`);
   const input = document.querySelector('#searchField');

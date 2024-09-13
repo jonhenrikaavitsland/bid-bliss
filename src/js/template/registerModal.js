@@ -13,6 +13,22 @@ import { createSpan } from '../elements/createSpan.js';
 import { createTextNode } from '../elements/createTextNode.js';
 import { closeModal } from '../ui/modal/closeModal.js';
 
+/**
+ * Creates and returns a registration modal element for new user signups.
+ *
+ * This function constructs a registration modal with an image, heading, and form fields for email and password.
+ * It also includes validation message areas and a call-to-action button for registering.
+ * A link is provided for users to navigate to the login modal if they already have an account.
+ * The modal can be closed using the close button.
+ *
+ * @returns {HTMLElement} The constructed registration modal element.
+ * @example
+ * ```js
+ * // Create a registration modal and append it to the document body
+ * const modal = registerModal();
+ * document.body.append(modal);
+ * ```
+ */
 export function registerModal() {
   const element = createSection('relative', 'flex', 'flex-col', 'bg-neutralBg', 'p-8', 'rounded-xl', 'lg:pt-10', 'lg:px-10', 'pb-16', 'shadow-customShadow', 'overflow-y-auto', 'max-h-[90%]', 'max-h-screen');
 

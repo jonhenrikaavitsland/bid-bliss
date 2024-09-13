@@ -5,6 +5,6 @@
     "source.fixAll.eslint": "always"
   },
   "eslint.validate": ["javascript"],
-  "cSpell.words": ["Aavitsland", "apng", "bidbliss", "datetime", "mochawesome", "noopener", "noreferrer", "Noroff", "Roboto", "tailwindcss"],
+  "cSpell.words": ["Aavitsland", "apng", "bidbliss", "datetime", "DDTHH", "mochawesome", "noopener", "noreferrer", "Noroff", "Roboto", "signups", "tailwindcss"],
   "editor.tabSize": 2
 }

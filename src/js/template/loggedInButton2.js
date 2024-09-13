@@ -5,6 +5,21 @@ import { load } from '../localStorage/load';
 import { save } from '../localStorage/save';
 import { runModal } from '../ui/modal/runModal';
 
+/**
+ * Creates and returns a button element for mobile view displaying the logged-in user's avatar.
+ *
+ * This function constructs a fixed button with the user's avatar image, which triggers the profile modal when clicked.
+ * If the profile data is invalid or missing, it returns a button indicating an error. The button has an initial pulse animation
+ * that stops once clicked, indicating user interaction.
+ *
+ * @returns {HTMLElement} The constructed button element displaying the user's avatar or an error button if the profile data is invalid.
+ * @example
+ * ```js
+ * // Create a logged-in button for mobile and append it to the document
+ * const button = loggedInButton2();
+ * document.body.append(button);
+ * ```
+ */
 export function loggedInButton2() {
   const profile = load('profile');
 
