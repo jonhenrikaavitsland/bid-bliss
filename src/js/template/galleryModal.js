@@ -4,10 +4,12 @@ import { createBtn } from '../elements/createBtn';
 import { createDiv } from '../elements/createDiv';
 import { createImg } from '../elements/createImg';
 import { load } from '../localStorage/load';
+import { initializeSwipeEvents } from '../ui/gallery/initializeSwipeEvents';
+import { updateActiveImage } from '../ui/gallery/updateActiveImage';
 import { closeGallery } from '../ui/modal/closeGallery';
 
-const DEFAULT_IMAGE_URL = placeholderItemImg;
-const DEFAULT_IMAGE_ALT = 'listing item';
+export const DEFAULT_IMAGE_URL = placeholderItemImg;
+export const DEFAULT_IMAGE_ALT = 'listing item';
 
 export function galleryModal() {
   const media = load('media');
@@ -23,6 +25,7 @@ export function galleryModal() {
   const allImages = createDiv('flex', 'justify-center', 'flex-wrap', 'gap-8', 'md:gap-10', 'lg:gap-12', 'p-2');
 
   const fragment = document.createDocumentFragment();
+  let activeIndex = 0; //Tracking the active index for swiping
 
   (media || []).forEach((image, index) => {
     const isActive = index === 0;
@@ -33,11 +36,8 @@ export function galleryModal() {
     }
 
     imageObject.addEventListener('click', () => {
-      activeImage.src = image.url || DEFAULT_IMAGE_URL;
-      activeImage.alt = image.alt || DEFAULT_IMAGE_ALT;
-
-      allImages.childNodes.forEach((img) => img.classList.add('blur-sm'));
-      imageObject.classList.remove('blur-sm');
+      updateActiveImage(activeImage, allImages, media, index);
+      activeIndex = index;
     });
 
     fragment.append(imageObject);
@@ -53,6 +53,11 @@ export function galleryModal() {
   closeBtn.append(closeImg);
   allImages.appendChild(fragment);
   galleryContainer.append(activeImage, allImages, closeBtn);
+
+  initializeSwipeEvents(activeImage, media, activeIndex, (newIndex) => {
+    updateActiveImage(activeImage, allImages, media, newIndex);
+    activeIndex = newIndex;
+  });
 
   return galleryContainer;
 }
