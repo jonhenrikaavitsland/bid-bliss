@@ -21,6 +21,21 @@ import { clearError } from '../validate/clearError';
 import { sanitizeInput } from '../validate/sanitize/sanitizeInput';
 import { setError } from '../validate/setError';
 
+/**
+ * Creates and returns a modal element for creating a new auction listing.
+ *
+ * This function constructs a modal that allows users to create a new listing with fields for title, description, tags, end time, and images.
+ * It handles form validation, sanitization of inputs, and image URL validation. On form submission, it attempts to create the listing
+ * and refreshes the displayed listings. If any errors occur during submission or image handling, appropriate error messages are displayed.
+ *
+ * @returns {HTMLElement} The constructed modal element for creating a new listing.
+ * @example
+ * ```js
+ * // Create a new listing modal and append it to the document body
+ * const modal = newListingModal();
+ * document.body.append(modal);
+ * ```
+ */
 export function newListingModal() {
   const element = createDiv('relative', 'rounded-xl', 'shadow-customShadow', 'flex', 'flex-col', 'grow', 'overflow-y-auto', 'max-h-[90%]', 'max-w-lg', 'md:max-w-2xl');
 
