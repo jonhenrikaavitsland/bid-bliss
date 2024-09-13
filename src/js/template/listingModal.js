@@ -28,6 +28,26 @@ const DEFAULT_IMAGE_URL = placeholderItemImg;
 const DEFAULT_IMAGE_ALT = 'listing item';
 const DEFAULT_TITLE = 'Unknown item';
 
+/**
+ * Creates and returns a modal element for displaying detailed information about a specific listing.
+ *
+ * This function constructs a detailed modal for a listing, including its title, description, images, bid information,
+ * and interaction options such as bidding if the auction is still active. If the listing data is not found,
+ * it returns an error message element.
+ *
+ * @param {Array} listings An array of listing objects to search for the current listing by ID.
+ * @returns {HTMLElement} The constructed modal element displaying the listing details.
+ * @example
+ * ```js
+ * // Create a listing modal with sample listings
+ * const sampleListings = [
+ *   { id: '123', title: 'Sample Item', endsAt: '2023-09-13T15:30:00Z', media: [{ url: 'https://example.com/image.jpg', alt: 'Sample image' }], _count: { bids: 5 } }
+ * ];
+ * const modal = listingModal(sampleListings);
+ * document.body.append(modal);
+ * ```
+ */
+
 export function listingModal(listings) {
   const isActive = load('profile');
   const currentListingID = load('listingID');
