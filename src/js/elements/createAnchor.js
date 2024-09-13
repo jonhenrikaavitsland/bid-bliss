@@ -1,9 +1,9 @@
 import { isValidUrl } from '../data/isValidUrl';
 
-export function createAnchor(href, textContent, target = '_self', ...classes) {
+export function createAnchor(href, textContent = '', target = '_self', ...classes) {
   const anchor = document.createElement('a');
   anchor.href = isValidUrl(href) ? href : '#';
-  anchor.textContent = textContent || 'link';
+  anchor.textContent = textContent;
   anchor.target = target;
 
   if (target === '_blank') {
