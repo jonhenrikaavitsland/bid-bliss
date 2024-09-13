@@ -7,6 +7,20 @@ import { createSpan } from '../elements/createSpan';
 import { load } from '../localStorage/load';
 import { runModal } from '../ui/modal/runModal';
 
+/**
+ * Creates and returns a button element for logged-in users, displaying their profile information.
+ *
+ * This function constructs a button-like element that shows the user's profile picture, username, bio, and credits.
+ * When clicked, it triggers the profile modal. If the profile data is not found or invalid, it returns an error message element.
+ *
+ * @returns {HTMLElement} The constructed button element displaying the user's profile information.
+ * @example
+ * ```js
+ * // Create a logged-in button element and append it to the document
+ * const button = loggedInButton();
+ * document.body.append(button);
+ * ```
+ */
 export function loggedInButton() {
   const profile = load('profile');
 
