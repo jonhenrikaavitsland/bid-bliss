@@ -22,4 +22,9 @@ export function openModal(target) {
       closeModal(modal);
     }
   });
+  modal.addEventListener('touchstart', (event) => {
+    if (event.target === modal) {
+      closeModal(modal);
+    }
+  });
 }

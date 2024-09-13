@@ -22,4 +22,9 @@ export function openGallery(target) {
       closeGallery(gallery);
     }
   });
+  gallery.addEventListener('touchstart', (event) => {
+    if (event.target === gallery || event.target === modal) {
+      closeGallery(gallery);
+    }
+  });
 }
