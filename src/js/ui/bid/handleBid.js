@@ -9,6 +9,26 @@ import { cleanListingID } from '../../data/cleanListingID';
 import { renderListings } from '../../render/renderListings';
 import { initializeListings } from '../../data/initializeListings';
 
+/**
+ * Handles the bidding process by validating and submitting a bid for a specified listing.
+ *
+ * This function validates the bid amount, cleans the listing ID, and submits the bid to the server.
+ * If the listing ID is invalid or the bid fails validation, it displays an error message. Upon successful bid submission,
+ * the function updates the bid list and re-renders the updated listings.
+ *
+ * @async
+ * @param {Event} event The event object from the bid form submission.
+ * @param {string} rawListingID The raw listing ID which may need cleaning and validation.
+ * @param {HTMLElement} bidsContainer The container element where the new bid will be displayed.
+ * @param {Object} currentHigh The current highest bid object containing the amount.
+ * @returns {Promise<void>} No return value; handles bid placement and updates the DOM.
+ * @example
+ * ```js
+ * // Handle bid placement when the user submits a bid
+ * const formElement = document.querySelector('#bidForm');
+ * formElement.addEventListener('submit', (event) => handleBid(event, 'listing-id-123', bidsContainer, { amount: 100 }));
+ * ```
+ */
 export async function handleBid(event, rawListingID, bidsContainer, currentHigh) {
   event.preventDefault();
 
