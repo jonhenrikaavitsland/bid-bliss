@@ -7,13 +7,13 @@ import { handleSwipe } from './handleSwipe';
  * @param {number} activeIndex - The current index of the active image.
  * @param {Function} onSwipe - Callback function to handle swipe updates.
  */
-export function initializeSwipeEvents(element, media, activeIndex, onSwipe) {
+export function initializeSwipeEvents(element, media, getActiveIndex, setActiveIndex) {
   let startX = 0;
   let endX = 0;
 
   element.addEventListener('touchstart', (event) => {
     startX = event.touches[0].clientX;
-    endX = startX; // should now avoid undefined value!
+    endX = startX;
   });
 
   element.addEventListener('touchmove', (event) => {
@@ -21,6 +21,10 @@ export function initializeSwipeEvents(element, media, activeIndex, onSwipe) {
   });
 
   element.addEventListener('touchend', () => {
-    handleSwipe(startX, endX, media, activeIndex, onSwipe);
+    const activeIndex = getActiveIndex();
+
+    handleSwipe(startX, endX, media, activeIndex, (newIndex) => {
+      setActiveIndex(newIndex);
+    });
   });
 }

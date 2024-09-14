@@ -40,7 +40,13 @@ export function galleryModal() {
   const allImages = createDiv('flex', 'justify-center', 'flex-wrap', 'gap-8', 'md:gap-10', 'lg:gap-12', 'p-2');
 
   const fragment = document.createDocumentFragment();
-  let activeIndex = 0; //Tracking the active index for swiping
+
+  let activeIndex = 0; //Tracking the active index for swiping11
+  const getActiveIndex = () => activeIndex;
+  const setActiveIndex = (newIndex) => {
+    activeIndex = newIndex;
+    updateActiveImage(activeImage, allImages, media, newIndex);
+  };
 
   (media || []).forEach((image, index) => {
     const isActive = index === 0;
@@ -51,8 +57,7 @@ export function galleryModal() {
     }
 
     imageObject.addEventListener('click', () => {
-      updateActiveImage(activeImage, allImages, media, index);
-      activeIndex = index;
+      setActiveIndex(index); // Update activeIndex via the setter
     });
 
     fragment.append(imageObject);
@@ -69,10 +74,7 @@ export function galleryModal() {
   allImages.appendChild(fragment);
   galleryContainer.append(activeImage, allImages, closeBtn);
 
-  initializeSwipeEvents(activeImage, media, activeIndex, (newIndex) => {
-    updateActiveImage(activeImage, allImages, media, newIndex);
-    activeIndex = newIndex;
-  });
+  initializeSwipeEvents(activeImage, media, getActiveIndex, setActiveIndex);
 
   return galleryContainer;
 }
