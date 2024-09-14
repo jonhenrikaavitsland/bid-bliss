@@ -22,14 +22,14 @@
  * ```
  */
 export function sortListings(listings) {
-  if (!listings || !Array.isArray(listings.data)) {
+  if (!listings || !Array.isArray(listings)) {
     console.error('Invalid listings data provided.');
     return [];
   }
 
   const now = new Date();
 
-  return listings.data.sort((a, b) => {
+  return listings.sort((a, b) => {
     const dateA = new Date(a.endsAt);
     const dateB = new Date(b.endsAt);
 
