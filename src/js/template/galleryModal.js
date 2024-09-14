@@ -12,18 +12,18 @@ export const DEFAULT_IMAGE_URL = placeholderItemImg;
 export const DEFAULT_IMAGE_ALT = 'listing item';
 
 /**
- * Creates and returns a gallery modal element for displaying images.
+ * Creates and returns a modal element for displaying a gallery of images.
  *
- * The gallery modal displays a set of images loaded from localStorage, with the ability to switch between images
- * by clicking on thumbnails or swiping. A close button allows the user to exit the gallery.
- * If no images are available, a default placeholder image is used.
+ * This function constructs a gallery modal that displays media items, allowing users to swipe through images.
+ * It initializes swipe events for navigation and includes a close button to exit the gallery. If no media is available,
+ * it defaults to a placeholder image.
  *
  * @returns {HTMLElement} The constructed gallery modal element.
  * @example
  * ```js
- * // Append the gallery modal to the document body
- * const gallery = galleryModal();
- * document.body.append(gallery);
+ * // Create a gallery modal and append it to the document body
+ * const modal = galleryModal();
+ * document.body.append(modal);
  * ```
  */
 export function galleryModal() {
