@@ -1,22 +1,14 @@
 /**
- * Sorts a list of listings based on their end dates, prioritizing active listings over ended ones.
+ * Sorts an array of listings based on their end date, prioritizing active listings over ended ones.
  *
- * The function sorts listings that are still active (not ended) by their end date in ascending order (earliest first),
- * and places listings that have ended in descending order of their end dates (most recent ended first).
+ * This function sorts listings by their `endsAt` date. Active listings are sorted in ascending order by end date,
+ * while ended listings are sorted in descending order, appearing after active listings.
  *
- * @param {Object} listings The listings object containing the data to be sorted.
- * @param {Array} listings.data The array of listings to sort, each containing an `endsAt` date property.
- * @returns {Array} The sorted array of listings. Returns an empty array if the input is invalid.
+ * @param {Array} listings An array of listing objects to be sorted.
+ * @returns {Array} The sorted array of listings.
  * @example
  * ```js
- * // Sort an array of listings by end date
- * const listings = {
- *   data: [
- *     { endsAt: '2023-09-20T10:00:00Z' },
- *     { endsAt: '2023-09-10T12:00:00Z' },
- *     { endsAt: '2023-09-15T08:00:00Z' }
- *   ]
- * };
+ * // Sort a list of auction listings
  * const sortedListings = sortListings(listings);
  * console.log(sortedListings);
  * ```
