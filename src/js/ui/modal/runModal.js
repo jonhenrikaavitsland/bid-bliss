@@ -23,7 +23,6 @@ import { openModal } from './openModal.js';
  */
 export async function runModal(state = 'false', modalValue) {
   const currentModal = await modalRouter(modalValue);
-  console.log(currentModal);
 
   if (state === true && modalValue === 'gallery') {
     openGallery(currentModal);

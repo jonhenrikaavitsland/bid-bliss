@@ -1,42 +1,39 @@
-import { fetchData } from '../API/fetchData';
-import { API_Base, API_Listings } from './constants';
+import { fetchAllListings } from '../API/fetchAllListings';
 
 /**
- * A service class for managing listings, including fetching, retrieving, and updating listings data.
+ * A service class for managing and fetching auction listings.
+ *
+ * This class handles fetching listings from an API and provides methods to access the fetched listings.
+ * It manages the internal state of listings and ensures that errors during fetching are handled gracefully
+ * by logging the error and setting the listings to an empty array.
  */
 class ListingService {
-  /**
-   * Creates an instance of ListingService.
-   */
   constructor() {
     /**
      * @private
-     * @type {Array|null} listings - Holds the listings data fetched from the API.
+     * @type {Array|null} listings - Stores the fetched listings or null if not fetched yet.
      */
     this.listings = null;
   }
 
   /**
-   * Fetches listings from the API, including seller and bids information.
+   * Fetches listings from the API and updates the internal state.
    *
-   * Makes a request to the listings API endpoint to retrieve the listings data
-   * and stores the response. If an error occurs during the fetch, an empty array is set as listings.
+   * This method attempts to fetch all listings using an API call. If the fetch is successful,
+   * it updates the `listings` property with the fetched data. If an error occurs during fetching,
+   * it logs the error and sets `listings` to an empty array.
    *
    * @async
-   * @returns {Promise<void>} Resolves when listings are fetched and stored.
-   * @throws {Error} Logs an error if the fetch operation fails.
+   * @returns {Promise<void>} No return value; updates the internal state of the listings.
    * @example
    * ```js
-   * // Fetch listings using the service
-   * listingService.fetchListings()
-   *   .then(() => console.log('Listings fetched successfully'))
-   *   .catch(error => console.error('Failed to fetch listings:', error));
+   * // Fetch listings from the API
+   * await listingService.fetchListings();
    * ```
    */
   async fetchListings() {
     try {
-      const response = await fetchData(`${API_Base}${API_Listings}?_seller=true&_bids=true`);
-      this.listings = response || [];
+      this.listings = (await fetchAllListings()) || [];
     } catch (error) {
       console.error('Error fetching listings:', error);
       this.listings = [];
@@ -44,40 +41,20 @@ class ListingService {
   }
 
   /**
-   * Retrieves the current listings data.
+   * Retrieves the current listings stored in the service.
    *
-   * @returns {Array} An array of listings; returns an empty array if listings have not been fetched.
+   * This method returns the listings that have been fetched or an empty array if no listings have been fetched yet.
+   *
+   * @returns {Array} The list of fetched listings or an empty array if no listings are available.
    * @example
    * ```js
-   * // Get current listings
+   * // Get the current listings
    * const listings = listingService.getListings();
    * console.log(listings);
    * ```
    */
   getListings() {
     return this.listings || [];
-  }
-
-  /**
-   * Updates the listings with new data.
-   *
-   * Replaces the current listings data with the provided array. Logs an error if the provided data is not an array.
-   *
-   * @param {Array} newData The new listings data to update.
-   * @returns {void}
-   * @example
-   * ```js
-   * // Update listings with new data
-   * const newListings = [{ id: 1, name: 'New Listing' }];
-   * listingService.updateListings(newListings);
-   * ```
-   */
-  updateListings(newData) {
-    if (!Array.isArray(newData)) {
-      console.error('Invalid data format. Listings should be an array.');
-      return;
-    }
-    this.listings = newData;
   }
 }
 

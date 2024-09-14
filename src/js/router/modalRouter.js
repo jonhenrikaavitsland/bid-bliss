@@ -31,7 +31,6 @@ import { updateListingsIf } from './updateListingsIf';
 export async function modalRouter(modalValue) {
   try {
     const listings = await updateListingsIf(modalValue);
-    console.log('Listings in router:', listings);
 
     switch (modalValue) {
       case 'login':
