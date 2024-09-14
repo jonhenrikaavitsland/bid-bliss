@@ -20,5 +20,5 @@ export function closeGallery(gallery) {
   document.body.classList.add('pointer-events-none');
   setTimeout(() => {
     document.body.classList.remove('pointer-events-none');
-  }, 1000);
+  }, 500);
 }

@@ -21,5 +21,5 @@ export function closeModal(modal) {
   document.body.classList.remove('overflow-hidden');
   setTimeout(() => {
     document.body.classList.remove('pointer-events-none');
-  }, 1000);
+  }, 500);
 }
