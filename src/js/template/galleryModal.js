@@ -12,18 +12,18 @@ export const DEFAULT_IMAGE_URL = placeholderItemImg;
 export const DEFAULT_IMAGE_ALT = 'listing item';
 
 /**
- * Creates and returns a gallery modal element for displaying images.
+ * Creates and returns a modal element for displaying a gallery of images.
  *
- * The gallery modal displays a set of images loaded from localStorage, with the ability to switch between images
- * by clicking on thumbnails or swiping. A close button allows the user to exit the gallery.
- * If no images are available, a default placeholder image is used.
+ * This function constructs a gallery modal that displays media items, allowing users to swipe through images.
+ * It initializes swipe events for navigation and includes a close button to exit the gallery. If no media is available,
+ * it defaults to a placeholder image.
  *
  * @returns {HTMLElement} The constructed gallery modal element.
  * @example
  * ```js
- * // Append the gallery modal to the document body
- * const gallery = galleryModal();
- * document.body.append(gallery);
+ * // Create a gallery modal and append it to the document body
+ * const modal = galleryModal();
+ * document.body.append(modal);
  * ```
  */
 export function galleryModal() {
@@ -40,7 +40,13 @@ export function galleryModal() {
   const allImages = createDiv('flex', 'justify-center', 'flex-wrap', 'gap-8', 'md:gap-10', 'lg:gap-12', 'p-2');
 
   const fragment = document.createDocumentFragment();
-  let activeIndex = 0; //Tracking the active index for swiping
+
+  let activeIndex = 0; //Tracking the active index for swiping11
+  const getActiveIndex = () => activeIndex;
+  const setActiveIndex = (newIndex) => {
+    activeIndex = newIndex;
+    updateActiveImage(activeImage, allImages, media, newIndex);
+  };
 
   (media || []).forEach((image, index) => {
     const isActive = index === 0;
@@ -51,8 +57,7 @@ export function galleryModal() {
     }
 
     imageObject.addEventListener('click', () => {
-      updateActiveImage(activeImage, allImages, media, index);
-      activeIndex = index;
+      setActiveIndex(index); // Update activeIndex via the setter
     });
 
     fragment.append(imageObject);
@@ -69,10 +74,7 @@ export function galleryModal() {
   allImages.appendChild(fragment);
   galleryContainer.append(activeImage, allImages, closeBtn);
 
-  initializeSwipeEvents(activeImage, media, activeIndex, (newIndex) => {
-    updateActiveImage(activeImage, allImages, media, newIndex);
-    activeIndex = newIndex;
-  });
+  initializeSwipeEvents(activeImage, media, getActiveIndex, setActiveIndex);
 
   return galleryContainer;
 }
