@@ -22,6 +22,9 @@ export default {
       animation: {
         loaderAnimation: 'loaderAnimation 1.2s linear infinite',
       },
+      spacing: {
+        5.5: '22px',
+      },
     },
     fontSize: {
       sm: ['0.875rem', '0.875rem'],
