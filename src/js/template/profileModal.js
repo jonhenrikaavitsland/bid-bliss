@@ -1,4 +1,3 @@
-import { adjustBottomMargin } from '../data/adjustBottomMargin';
 import { modal } from '../data/constants';
 import { closeSvg, placeholderImg } from '../data/images';
 import { createBtn } from '../elements/createBtn';
@@ -55,9 +54,9 @@ export function profileModal() {
     'shadow-customShadow',
     'min-w-40',
     'max-w-96',
+    'my-auto',
     'flex-grow',
     'flex-shrink',
-    'mt-auto',
     'xmd:landscape:max-w-[804px]',
     'md:landscape:max-w-[1112px]',
     'md:max-w-[672px]',
