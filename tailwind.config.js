@@ -35,6 +35,7 @@ export default {
       lg: '1440px',
       xsm: { max: '450px' },
       sm: { min: '451px' },
+      xmd: { max: '834px' },
     },
     colors: {
       transparent: 'transparent',
