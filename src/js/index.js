@@ -1,3 +1,4 @@
+import { adjustBottomMargin } from './data/adjustBottomMargin';
 import { initializeListings } from './data/initializeListings';
 import { loginBtnListener } from './listeners/loginBtnListener';
 import { renderListings } from './render/renderListings';
@@ -15,6 +16,8 @@ async function runApp() {
   renderLoginBtn();
   loginBtnListener();
   ifLoggedIn();
+  window.addEventListener('load', () => adjustBottomMargin('#profileModal'));
+  window.addEventListener('resize', () => adjustBottomMargin('#profileModal'));
 
   console.log('Listings:', newListings);
 }

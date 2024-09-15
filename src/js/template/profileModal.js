@@ -1,3 +1,4 @@
+import { adjustBottomMargin } from '../data/adjustBottomMargin';
 import { modal } from '../data/constants';
 import { closeSvg, placeholderImg } from '../data/images';
 import { createBtn } from '../elements/createBtn';
@@ -56,11 +57,12 @@ export function profileModal() {
     'max-w-96',
     'flex-grow',
     'flex-shrink',
-    'my-auto',
+    'mt-auto',
     'xmd:landscape:max-w-[804px]',
     'md:landscape:max-w-[1112px]',
     'md:max-w-[672px]',
   );
+  element.setAttribute('id', 'profileModal');
 
   const closeBtn = createBtn('', 'backdrop-invert', 'rounded-full', 'shadow-customShadow', 'hover:animate-pulse');
   const closeImg = createImg(closeSvg, 'close', 'size-5');
