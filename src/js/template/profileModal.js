@@ -57,6 +57,8 @@ export function profileModal() {
     'flex-grow',
     'flex-shrink',
     'my-auto',
+    'md:mt-auto',
+    'md:mb-5',
     'xmd:landscape:max-w-[804px]',
     'md:landscape:max-w-[1112px]',
     'md:max-w-[672px]',
