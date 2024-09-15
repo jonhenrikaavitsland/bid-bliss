@@ -2,7 +2,6 @@ import { initializeListings } from './data/initializeListings';
 import { loginBtnListener } from './listeners/loginBtnListener';
 import { renderListings } from './render/renderListings';
 import { renderLoginBtn } from './render/renderLoginBtn';
-import { newProfileModal } from './template/newProfileModal';
 import { ifLoggedIn } from './ui/loggedIn/ifLoggedIn';
 import { openModal } from './ui/modal/openModal';
 import { search } from './ui/search/search';
