@@ -14,7 +14,7 @@
  * ```
  */
 export function closeModal(modal) {
-  modal.classList.remove('flex', 'items-center', 'justify-center', 'px-5');
+  modal.classList.remove('flex');
   modal.classList.add('hidden');
   modal.innerHTML = '';
   document.body.classList.add('pointer-events-none');

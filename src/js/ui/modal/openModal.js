@@ -26,7 +26,7 @@ export function openModal(target) {
   const scrollPosition = window.scrollY || document.documentElement.scrollTop;
 
   modal.classList.remove('hidden');
-  modal.classList.add('flex', 'items-center', 'justify-center', 'p-5', 'md:px-10');
+  modal.classList.add('flex');
 
   modal.style.top = `${scrollPosition}px`;
   document.body.classList.add('overflow-hidden');
