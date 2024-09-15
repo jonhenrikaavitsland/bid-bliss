@@ -1,5 +1,5 @@
 import { modal } from '../data/constants';
-import { auctioneerWelcomeImg, closeSvg } from '../data/images';
+import { auctioneerSignupImg, closeSvg } from '../data/images';
 import { createAnchor } from '../elements/createAnchor';
 import { createBtn } from '../elements/createBtn';
 import { createDiv } from '../elements/createDiv';
@@ -49,16 +49,16 @@ export function testModal() {
   const topContainer = createDiv('flex', 'flex-col', 'landscape:w-1/2', 'px-5.5', 'landscape:ps-2.5', 'landscape:pe-5', 'landscape:my-auto');
 
   const imageWrap = createDiv('max-w-full', 'mx-auto');
-  const image = createImg(auctioneerWelcomeImg, 'auctioneer greeting');
+  const image = createImg(auctioneerSignupImg, 'auctioneer presenting a signup form');
   imageWrap.append(image);
 
-  const heading = createHeading(2, `"Your Next Great Deal Awaits!"`, 'font-serif', 'text-center', 'mt-0.5', 'md:mt-1', 'font-semibold', 'uppercase', 'md:text-xl');
+  const heading = createHeading(2, `"1000 credits signup bonus!"`, 'font-serif', 'text-center', 'mt-0.5', 'md:mt-1', 'font-semibold', 'uppercase', 'md:text-xl');
 
   topContainer.append(imageWrap, heading);
 
   const bottomContainer = createDiv('flex', 'flex-col', 'landscape:w-1/2', 'landscape:justify-center', 'px-5.5', 'landscape:pe-2.5', 'landscape:ps-5');
 
-  const formElement = createForm('api', 'login', 'flex', 'flex-col', 'gap-5', 'mt-9', 'mb-16', 'md:gap-7');
+  const formElement = createForm('api', 'register', 'flex', 'flex-col', 'gap-5', 'mt-9', 'mb-16', 'md:gap-7');
 
   const emailGroup = createDiv('flex', 'flex-col', 'gap-1.5');
   const labelEmail = createLabel('email', 'Email:', 'md:text-xl');
@@ -81,9 +81,9 @@ export function testModal() {
   wrap.append(cta);
 
   const regCta = createAnchor('#', '', '', 'text-center', 'py-2');
-  const regText1 = createTextNode('Not yet a member? ');
-  const regText2 = createSpan('Register', 'text-secondary', 'hover:text-hoverSecondary');
-  const regText3 = createTextNode(' now!');
+  const regText1 = createTextNode('Already a member? ');
+  const regText2 = createSpan('Login', 'text-secondary', 'hover:text-hoverSecondary');
+  const regText3 = createTextNode(' here!');
   regCta.append(regText1, regText2, regText3);
 
   ctaGroup.append(regCta);
