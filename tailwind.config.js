@@ -22,9 +22,6 @@ export default {
       animation: {
         loaderAnimation: 'loaderAnimation 1.2s linear infinite',
       },
-      height: {
-        'max-100vh-full': 'max(100vh, 100%)', // Custom height utility
-      },
     },
     fontSize: {
       sm: ['0.875rem', '0.875rem'],
