@@ -77,6 +77,7 @@ export function listingCard(data) {
   });
 
   const image = createImg(media?.[0]?.url || DEFAULT_IMAGE_URL, media?.[0]?.alt || DEFAULT_IMAGE_ALT, 'rounded-xl', 'aspect-square', 'object-cover');
+  image.setAttribute('loading', 'lazy');
 
   const section = createSection('flex', 'flex-col', 'gap-1');
 
