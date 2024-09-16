@@ -55,13 +55,6 @@ export function listingCard(data) {
 
   const element = createArticle('flex', 'flex-col', 'gap-2.5', 'shadow-customShadow', 'p-5', 'bg-white', 'cursor-pointer', 'max-w-[367px]');
 
-  const currentTime = new Date();
-  const endTime = new Date(endsAt);
-
-  if (endTime < currentTime) {
-    element.classList.add('grayscale');
-  }
-
   let isProcessing = false;
 
   element.addEventListener('click', () => {
@@ -89,6 +82,15 @@ export function listingCard(data) {
   timeSpan.textContent = 'Ends: ';
   const timeFormatted = formatDateTime(endsAt) || DEFAULT_TIME_FORMAT;
   const listEnding = createTime(endsAt || '0000-00-00T00:00:00Z', timeFormatted);
+
+  const currentTime = new Date();
+  const endTime = new Date(endsAt);
+
+  if (endTime < currentTime) {
+    image.classList.add('grayscale');
+    listEnding.classList.add('text-error');
+    timeSpan.textContent = 'Ended at: ';
+  }
 
   const bidInfo = createSpan(`Bids: ${bids}`);
 
