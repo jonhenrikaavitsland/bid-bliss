@@ -23,8 +23,6 @@ export function openModal(target) {
     return;
   }
 
-  if (modal.classList.contains('flex')) return;
-
   const scrollPosition = window.scrollY || document.documentElement.scrollTop;
 
   modal.classList.remove('hidden');
