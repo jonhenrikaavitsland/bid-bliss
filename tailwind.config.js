@@ -12,6 +12,7 @@ export default {
       },
       boxShadow: {
         customShadow: '0px 4px 4px 0px rgba(0, 0, 0, 0.25)',
+        scrollIndicator: 'inset 0 -20px 20px -10px rgba(0, 0, 0, 0.2)',
       },
       keyframes: {
         loaderAnimation: {
@@ -24,6 +25,7 @@ export default {
       },
       spacing: {
         5.5: '22px',
+        13: '52px',
       },
     },
     fontSize: {
