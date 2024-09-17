@@ -32,7 +32,6 @@ export function createImg(src = '', alt = '', ...classes) {
   if (isValidUrl(src)) {
     image.src = src;
   } else {
-    console.error(`Invalid image source URL: ${src}`);
     image.src = placeholderItemImg;
   }
 
