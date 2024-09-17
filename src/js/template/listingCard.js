@@ -58,7 +58,7 @@ export function listingCard(data) {
     isProcessing = true;
 
     // save('listingID', id);
-    runModal(true, 'listingID', element.dataset.id);
+    runModal(true, 'listing', element.dataset.id);
 
     setTimeout(() => {
       isProcessing = false;
