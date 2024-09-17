@@ -50,7 +50,7 @@ export default {
       primary: '#2C3E50',
       secondary: '#3498DB',
       neutralTxt: '#151717',
-      error: '#E74C3C',
+      error: '#C0392B',
       correct: '#2ECC71',
       hoverPrimary: '#3C4F64',
       hoverSecondary: '#2A86C1',
