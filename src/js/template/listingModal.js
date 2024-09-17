@@ -130,7 +130,7 @@ export async function listingModal(id) {
 
   const callToAction = createHeading(3, 'Login to interact with this auction!', 'font-semibold', 'text-lg', 'mt-9', 'pb-10', 'text-center');
 
-  const bidWrap = createForm('bid', 'place-bid', 'w-1/2', 'landscape:w-2/3', 'flex', 'mx-auto', 'mt-4', 'xsm:flex-col', 'xsm:items-center', 'md:landscape:px-5', 'xsm:w-2/3');
+  const bidWrap = createForm('bid', 'place-bid', 'w-1/2', 'landscape:w-3/4', 'flex', 'mx-auto', 'mt-4', 'flex-col', 'md:flex-row', 'xsm:items-center', 'md:landscape:px-5', 'xsm:w-2/3');
   const highestBid = getHighestBid(currentListing.data) || { amount: 0 };
 
   const hasEnded = new Date(endsAt) < new Date();
@@ -150,7 +150,7 @@ export async function listingModal(id) {
   }
 
   const bidLabel = createLabel('bid', 'place bid', 'sr-only');
-  const bidContainer = createInput('number ', '0 cr.', 'bid', 'bg-white', 'capitalize', 'w-1/2', 'xsm:px-4', 'xsm:py-2', 'xsm:rounded-t-xl', 'xsm:w-full', 'text-center', 'sm:rounded-s-xl', 'sm:shadow-customShadow');
+  const bidContainer = createInput('number ', '0 cr.', 'bid', 'bg-white', 'capitalize', 'w-1/2', 'xmd:px-4', 'xmd:py-2', 'xmd:rounded-t-xl', 'xmd:w-full', 'text-center', 'md:rounded-s-xl', 'sm:shadow-customShadow');
   const submitBtn = createBtn(
     'place bid',
     'uppercase',
@@ -165,9 +165,9 @@ export async function listingModal(id) {
     'md:px-6',
     'md:text-xl',
     'w-1/2',
-    'xsm:rounded-b-xl',
-    'xsm:w-full',
-    'sm:rounded-e-xl',
+    'xmd:rounded-b-xl',
+    'xmd:w-full',
+    'md:rounded-e-xl',
     'shadow-customShadow',
   );
 
