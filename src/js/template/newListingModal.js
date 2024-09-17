@@ -217,14 +217,14 @@ export function newListingModal() {
           imageContainer.splice(index, 1);
           images.removeChild(imageElement);
         }
-        applyScrollShadow(images);
+        applyScrollShadow(images, 264);
       });
     } catch (error) {
       console.error('Error while adding image:', error);
       setError(imageValidate, 'Error while adding image');
     }
 
-    applyScrollShadow(images);
+    applyScrollShadow(images, 264);
   });
 
   const container = createDiv('flex', 'flex-col', 'landscape:flex-row', 'h-full');
