@@ -1,5 +1,6 @@
 import { fetchData } from '../API/fetchData';
 import { isImageAccessible } from '../API/isImageAccessible';
+import { applyScrollShadow } from '../data/applyScrollShadow';
 import { API_Base, API_Key, API_Listings, modal } from '../data/constants';
 import { getTimeAhead } from '../data/getTimeAhead';
 import { closeSvg } from '../data/images';
@@ -12,7 +13,6 @@ import { createHeading } from '../elements/createHeading';
 import { createImg } from '../elements/createImg';
 import { createInput } from '../elements/createInput';
 import { createLabel } from '../elements/createLabel';
-import { createSection } from '../elements/createSection';
 import { createTextarea } from '../elements/createTextarea';
 import { load } from '../localStorage/load';
 import { renderListings } from '../render/renderListings';
@@ -22,13 +22,13 @@ import { sanitizeInput } from '../validate/sanitize/sanitizeInput';
 import { setError } from '../validate/setError';
 
 /**
- * Creates and returns a modal element for creating a new auction listing.
+ * Creates and returns a modal for creating a new auction listing.
  *
- * This function constructs a modal that allows users to create a new listing with fields for title, description, tags, end time, and images.
- * It handles form validation, sanitization of inputs, and image URL validation. On form submission, it attempts to create the listing
- * and refreshes the displayed listings. If any errors occur during submission or image handling, appropriate error messages are displayed.
+ * This function constructs a new listing modal that includes form fields for the auction title, description, tags, and end time.
+ * It allows users to add images with validation and preview functionality. The form submission handles input sanitization,
+ * error messages, and dynamic updates to the displayed listings upon successful creation of the new auction.
  *
- * @returns {HTMLElement} The constructed modal element for creating a new listing.
+ * @returns {HTMLElement} The constructed new listing modal element.
  * @example
  * ```js
  * // Create a new listing modal and append it to the document body
@@ -37,15 +37,25 @@ import { setError } from '../validate/setError';
  * ```
  */
 export function newListingModal() {
-  const element = createDiv('relative', 'rounded-xl', 'shadow-customShadow', 'flex', 'flex-col', 'grow', 'overflow-y-auto', 'max-h-[90%]', 'max-w-lg', 'md:max-w-2xl');
+  const element = createDiv('flex', 'flex-col', 'rounded-xl', 'shadow-customShadow', 'min-w-40', 'max-w-96', 'my-auto', 'flex-grow', 'flex-shrink', 'xmd:landscape:max-w-[804px]', 'md:landscape:max-w-[1112px]', 'md:max-w-[672px]');
+  element.setAttribute('id', 'profileModal');
 
-  const headingTopWrap = createSection('bg-secondary', 'text-white', 'uppercase', 'font-serif', 'text-lg', 'font-medium', 'px-2.5', 'py-2.5', 'md:px-5', 'md:py-4');
-  const headingTop = createHeading(2, 'create auction');
-  headingTopWrap.append(headingTop);
+  const closeBtn = createBtn('', 'backdrop-invert', 'rounded-full', 'shadow-customShadow', 'hover:animate-pulse');
+  const closeImg = createImg(closeSvg, 'close', 'size-5');
+  closeBtn.append(closeImg);
+  const btnWrap = createDiv('size-9', 'flex', 'justify-center', 'items-center', 'cursor-pointer');
+  btnWrap.addEventListener('click', () => {
+    closeModal(modal);
+  });
+  btnWrap.append(closeBtn);
+  const btnContainer = createDiv('flex', 'justify-between', 'items-center', 'py-0.5', 'pe-0.5', 'ps-2.5', 'rounded-t-xl', 'bg-secondary', 'text-white', 'font-serif', 'text-lg', 'font-medium', 'md:ps-5', 'md:py-1', 'md:pe-3');
 
-  const listingContents = createForm('new-listing', 'create', 'flex', 'flex-col', 'gap-5', 'pt-5', 'px-2.5', 'pb-8', 'bg-neutralBg');
+  const heading = createHeading(2, 'Create auction', 'uppercase');
+  btnContainer.append(heading, btnWrap);
 
   let imageContainer = [];
+
+  const listingContents = createForm('flex', 'flex-col', 'new-listing', 'create', 'bg-neutralBg', 'rounded-b-xl');
 
   listingContents.addEventListener('submit', async (event) => {
     event.preventDefault();
@@ -116,6 +126,8 @@ export function newListingModal() {
     }
   });
 
+  const topContainer = createDiv('flex', 'flex-col', 'landscape:w-1/2', 'pt-5', 'px-2.5', 'gap-5', 'md:px-5', 'landscape:pb-13', 'landscape:max-h-100%', 'landscape:overflow-hidden', 'landscape:flex-1', 'landscape:h-min');
+
   const titleWrap = createDiv('flex', 'flex-col', 'gap-1');
   const titleLabel = createLabel('newListingTitle', 'title: *', 'capitalize');
   const titleInput = createInput('text', '', 'newListingTitle', 'bg-white', 'rounded-xl', 'shadow-customShadow', 'py-2.5', 'px-2');
@@ -149,14 +161,19 @@ export function newListingModal() {
   });
   timeWrap.append(timeLabel, timeInput);
 
+  topContainer.append(titleWrap, descriptionWrap, tagsWrap, timeWrap);
+
+  const bottomContainer = createDiv('flex', 'flex-col', 'landscape:w-1/2', 'px-2.5', 'pt-5', 'gap-11', 'rounded-b-xl', 'md:px-5', 'landscape:overflow-hidden', 'landscape:flex-1', 'landscape:max-h-[425px]');
+
   const imageWrap = createDiv('flex', 'flex-col', 'gap-1');
   const imageLabel = createLabel('newListingImages', 'images:', 'capitalize');
   const imgWrap = createDiv('flex', 'xsm:flex-col');
   const imageInput = createInput('text', 'https://www.img.com/image.jpg', 'newListingImages', 'grow', 'xsm:rounded-t-xl', 'xsm:py-2.5', 'xsm:px-2', 'sm:rounded-s-xl', 'sm:ps-2', 'sm:shadow-customShadow');
   const imageBtn = createBtn('save', 'uppercase', 'font-serif', 'font-semibold', 'bg-secondary', 'hover:bg-hoverSecondary', 'py-3', 'px-4', 'md:px-6', 'md:text-lg', 'text-white', 'shadow-customShadow', 'xsm:rounded-b-xl', 'sm:rounded-e-xl');
   imageBtn.setAttribute('type', 'button');
-  const images = createDiv('mt-2');
+  const images = createDiv('mt-2', 'overflow-y-scroll', 'flex-grow', 'landscape:max-h-[264px]');
   images.setAttribute('id', 'imagePreviewContainer');
+
   const imageValidate = createDiv('relative');
   imgWrap.append(imageInput, imageBtn);
   imageWrap.append(imageLabel, imgWrap, images, imageValidate);
@@ -200,23 +217,28 @@ export function newListingModal() {
           imageContainer.splice(index, 1);
           images.removeChild(imageElement);
         }
+        applyScrollShadow(images, 264);
       });
     } catch (error) {
       console.error('Error while adding image:', error);
       setError(imageValidate, 'Error while adding image');
     }
+
+    applyScrollShadow(images, 264);
   });
 
-  const cta = createBtn('create listing', 'uppercase', 'bg-secondary', 'hover:bg-hoverSecondary', 'py-3', 'px-4', 'md:px-6', 'md:text-lg', 'rounded-xl', 'text-white', 'shadow-customShadow', 'mx-auto', 'font-serif', 'font-medium', 'mt-5');
+  const container = createDiv('flex', 'flex-col', 'landscape:flex-row', 'h-full');
 
-  const closeBtn = createBtn('', 'absolute', 'top-2.5', 'right-2.5', 'backdrop-invert', 'rounded-full', 'shadow-customShadow', 'hover:animate-pulse');
-  const closeImg = createImg(closeSvg, 'close', 'size-5');
-  closeBtn.append(closeImg);
-  closeBtn.addEventListener('click', () => {
-    closeModal(modal);
-  });
+  const cta = createBtn('create listing', 'uppercase', 'bg-secondary', 'hover:bg-hoverSecondary', 'py-3', 'px-4', 'md:px-6', 'md:text-lg', 'rounded-xl', 'text-white', 'shadow-customShadow', 'mx-auto', 'font-serif', 'font-medium');
 
-  listingContents.append(titleWrap, descriptionWrap, tagsWrap, timeWrap, imageWrap, cta);
-  element.append(headingTopWrap, listingContents, closeBtn);
+  const ctaWrap = createDiv('flex', 'pt-13', 'pb-8');
+  ctaWrap.append(cta);
+
+  bottomContainer.append(imageWrap);
+
+  container.append(topContainer, bottomContainer);
+
+  listingContents.append(container, ctaWrap);
+  element.append(btnContainer, listingContents);
   return element;
 }

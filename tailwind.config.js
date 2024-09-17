@@ -12,6 +12,7 @@ export default {
       },
       boxShadow: {
         customShadow: '0px 4px 4px 0px rgba(0, 0, 0, 0.25)',
+        scrollIndicator: 'inset 0 -20px 20px -10px rgba(0, 0, 0, 0.2)',
       },
       keyframes: {
         loaderAnimation: {
@@ -21,6 +22,10 @@ export default {
       },
       animation: {
         loaderAnimation: 'loaderAnimation 1.2s linear infinite',
+      },
+      spacing: {
+        5.5: '22px',
+        13: '52px',
       },
     },
     fontSize: {
@@ -35,6 +40,7 @@ export default {
       lg: '1440px',
       xsm: { max: '450px' },
       sm: { min: '451px' },
+      xmd: { max: '834px' },
     },
     colors: {
       transparent: 'transparent',
@@ -42,12 +48,12 @@ export default {
       white: '#FFF',
       neutralBg: '#ECF0F1',
       primary: '#2C3E50',
-      secondary: '#3498DB',
+      secondary: '#2575B7',
       neutralTxt: '#151717',
-      error: '#E74C3C',
+      error: '#C0392B',
       correct: '#2ECC71',
       hoverPrimary: '#3C4F64',
-      hoverSecondary: '#2A86C1',
+      hoverSecondary: '#2E8ECC',
     },
   },
   plugins: [

@@ -2,7 +2,7 @@ import { formatDateTime } from '../../data/formatDateTime';
 import { createDiv } from '../../elements/createDiv';
 import { createSpan } from '../../elements/createSpan';
 import { createTime } from '../../elements/createTime';
-import { DEFAULT_TIME_FORMAT } from '../../template/listingModal';
+import { DEFAULT_TIME_FORMAT } from '../../data/constants';
 
 /**
  * Creates and returns a new bid element to display bid information.

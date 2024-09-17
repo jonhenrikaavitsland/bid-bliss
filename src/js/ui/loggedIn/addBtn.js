@@ -17,7 +17,7 @@ import { runModal } from '../modal/runModal';
 export function addBtn() {
   const btnParent = document.querySelector(`[data-buttons="newAuction"]`);
 
-  const btn = createBtn('new auction', 'py-3', 'px-4', 'md:py-3', 'md:px-6', 'md:text-lg', 'text-white', 'bg-primary', 'hover:bg-hoverPrimary', 'rounded-xl', 'uppercase', 'font-serif', 'font-medium', 'lg:hidden');
+  const btn = createBtn('new auction', 'py-3', 'px-4', 'md:py-3', 'md:px-6', 'md:text-lg', 'text-white', 'bg-primary', 'hover:bg-hoverPrimary', 'rounded-xl', 'uppercase', 'font-serif', 'font-medium', 'lg:hidden', 'shadow-customShadow');
   btn.addEventListener('click', () => {
     runModal(true, 'newListing');
   });

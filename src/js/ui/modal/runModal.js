@@ -6,23 +6,32 @@ import { openGallery } from './openGallery.js';
 import { openModal } from './openModal.js';
 
 /**
- * Runs the modal functionality based on the provided state and modal type, routing to the appropriate content.
+ * Displays a specified modal based on the given state and modal type.
  *
- * This function determines which modal to display based on the `modalValue` parameter, opening either a gallery or a standard modal.
- * It sets up specific listeners and actions based on the modal type, such as link listeners for login/register or upload listeners for profile.
+ * This function handles the display of various modals based on the provided `modalValue`. Depending on the `state`,
+ * it either opens the modal using `openModal` or `openGallery` for gallery-type modals. It also sets up event listeners
+ * and data gathering for specific modals, such as login, register, and profile modals.
  *
  * @async
- * @param {boolean} [state=false] The state indicating whether the modal should be opened (`true`) or not.
- * @param {string} modalValue The type of modal to be displayed (e.g., 'gallery', 'register', 'login', 'profile').
- * @returns {Promise<void>} No return value; modifies the DOM to display the appropriate modal and sets up event listeners.
+ * @param {boolean} state - Determines whether to open the modal (`true`) or not (`false`).
+ * @param {string} modalValue - The type of modal to display (e.g., 'login', 'register', 'listing', 'gallery', 'profile', 'newListing').
+ * @param {string} [listingId] - Optional listing ID used when fetching specific listing details for the listing modal.
+ * @param {Object} [media={}] - Optional media object, used for the gallery modal to display images.
+ *
  * @example
- * ```js
- * // Run the modal with the login form
- * runModal(true, 'login');
- * ```
+ * // Open the gallery modal with media
+ * await runModal(true, 'gallery', null, { images: [...] });
+ *
+ * @example
+ * // Open the listing modal with a specific listing ID
+ * await runModal(true, 'listing', '12345-listing-id');
+ *
+ * @example
+ * // Open the login modal
+ * await runModal(true, 'login');
  */
-export async function runModal(state = 'false', modalValue) {
-  const currentModal = await modalRouter(modalValue);
+export async function runModal(state = 'false', modalValue, listingId, media = {}) {
+  const currentModal = await modalRouter(modalValue, listingId, media);
 
   if (state === true && modalValue === 'gallery') {
     openGallery(currentModal);

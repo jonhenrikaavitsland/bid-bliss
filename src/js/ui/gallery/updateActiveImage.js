@@ -1,4 +1,4 @@
-import { DEFAULT_IMAGE_ALT, DEFAULT_IMAGE_URL } from '../../template/galleryModal';
+import { DEFAULT_IMAGE_ALT, DEFAULT_IMAGE_URL } from '../../data/constants';
 
 /**
  * Updates the active image and UI based on the selected index.

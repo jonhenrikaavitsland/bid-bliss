@@ -1,3 +1,5 @@
+import { placeholderItemImg } from './images';
+
 export const modal = document.querySelector(`[data-modal="modalObject"]`);
 export const gallery = document.querySelector(`[data-modal="galleryObject"]`);
 
@@ -13,3 +15,8 @@ export const REG_Email = /^[a-zA-Z0-9._%+-]+@stud\.noroff\.no$/;
 export const REG_Password = /^[a-zA-Z0-9!@#$%^&*()_+={}:;'",.<>?[\]-]+$/;
 export const MSG_Email = 'Invalid email. Please use a @stud.noroff.no email and avoid illegal characters';
 export const MSG_Password = 'Invalid password. Must be at least 8 characters long and contain no illegal characters.';
+
+export const DEFAULT_TIME_FORMAT = 'invalid date';
+export const DEFAULT_IMAGE_ALT = 'listing item';
+export const DEFAULT_TITLE = 'Unknown item';
+export const DEFAULT_IMAGE_URL = placeholderItemImg;

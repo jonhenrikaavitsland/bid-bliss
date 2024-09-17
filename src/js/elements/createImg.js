@@ -1,26 +1,30 @@
+import { handleImageError } from '../data/handleImageError';
 import { placeholderItemImg } from '../data/images';
 import { isValidUrl } from '../data/isValidUrl';
 
 /**
- * Creates an `<img>` element with a specified source, alt text, and CSS classes.
+ * Creates an `<img>` element with specified attributes, classes, and error handling.
  *
- * Validates the provided image source URL; if invalid, sets a placeholder image.
- * Adds optional alt text and CSS classes to the image element.
+ * This function generates an image element with the provided source URL and alternative text.
+ * It validates the URL and applies a placeholder image if the URL is invalid.
+ * The image will load lazily, and additional classes can be applied to the element.
+ * If the image is not an SVG, it will check the dimensions upon loading, replacing the image with
+ * a placeholder if it is too small. Error handling is also included to manage failed image loads.
  *
- * @param {string} [src=''] The source URL of the image. If invalid, a placeholder image is used.
- * @param {string} [alt=''] The alt text for the image. Defaults to 'Image description unavailable' if not a string.
- * @param {...string} classes Optional CSS classes to add to the image element.
- * @returns {HTMLImageElement} The created image element with the specified source, alt text, and classes.
+ * @param {string} [src=''] - The source URL of the image. If the URL is invalid, a placeholder image is used.
+ * @param {string} [alt=''] - The alternative text for the image. Defaults to 'Image description unavailable' if not provided.
+ * @param {...string} classes - Additional CSS classes to apply to the image element.
+ * @returns {HTMLImageElement} The created image element with lazy loading and error handling.
+ *
  * @example
- * ```js
- * // Create an image with a valid source, alt text, and classes
- * const image = createImg('https://example.com/image.jpg', 'Example Image', 'responsive', 'thumbnail');
- * document.body.appendChild(image);
+ * // Create an image element with a valid source
+ * const img = createImg('https://example.com/image.jpg', 'Example Image', 'class1', 'class2');
+ * document.body.appendChild(img);
  *
- * // Create an image with an invalid source, triggering a placeholder image
- * const placeholderImage = createImg('invalid-url', 'Broken Image');
- * document.body.appendChild(placeholderImage);
- * ```
+ * @example
+ * // Create an image element with an invalid source, resulting in a placeholder
+ * const img = createImg('invalid-url', 'Invalid Image');
+ * document.body.appendChild(img); // Displays a placeholder instead of the invalid URL
  */
 export function createImg(src = '', alt = '', ...classes) {
   const image = document.createElement('img');
@@ -28,7 +32,6 @@ export function createImg(src = '', alt = '', ...classes) {
   if (isValidUrl(src)) {
     image.src = src;
   } else {
-    console.error(`Invalid image source URL: ${src}`);
     image.src = placeholderItemImg;
   }
 
@@ -38,6 +41,19 @@ export function createImg(src = '', alt = '', ...classes) {
 
   if (validClasses.length > 0) {
     image.classList.add(...validClasses);
+  }
+
+  image.onerror = () => handleImageError(image);
+  image.loading = 'lazy';
+
+  if (!src.endsWith('.svg')) {
+    image.onload = () => {
+      if (image.naturalWidth < 327 || image.naturalHeight < 327) {
+        image.src = placeholderItemImg;
+
+        image.onerror = null;
+      }
+    };
   }
 
   return image;

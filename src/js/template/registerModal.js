@@ -1,25 +1,23 @@
-import { modal } from '../data/constants.js';
-import { auctioneerSignupImg, closeSvg } from '../data/images.js';
-import { createAnchor } from '../elements/createAnchor.js';
-import { createBtn } from '../elements/createBtn.js';
-import { createDiv } from '../elements/createDiv.js';
-import { createForm } from '../elements/createForm.js';
-import { createHeading } from '../elements/createHeading.js';
-import { createImg } from '../elements/createImg.js';
-import { createInput } from '../elements/createInput.js';
-import { createLabel } from '../elements/createLabel.js';
-import { createSection } from '../elements/createSection.js';
-import { createSpan } from '../elements/createSpan.js';
-import { createTextNode } from '../elements/createTextNode.js';
-import { closeModal } from '../ui/modal/closeModal.js';
+import { modal } from '../data/constants';
+import { auctioneerSignupImg, closeSvg } from '../data/images';
+import { createAnchor } from '../elements/createAnchor';
+import { createBtn } from '../elements/createBtn';
+import { createDiv } from '../elements/createDiv';
+import { createForm } from '../elements/createForm';
+import { createHeading } from '../elements/createHeading';
+import { createImg } from '../elements/createImg';
+import { createInput } from '../elements/createInput';
+import { createLabel } from '../elements/createLabel';
+import { createSpan } from '../elements/createSpan';
+import { createTextNode } from '../elements/createTextNode';
+import { closeModal } from '../ui/modal/closeModal';
 
 /**
- * Creates and returns a registration modal element for new user signups.
+ * Creates and returns a registration modal element with form fields for user sign-up, including email and password inputs.
  *
- * This function constructs a registration modal with an image, heading, and form fields for email and password.
- * It also includes validation message areas and a call-to-action button for registering.
- * A link is provided for users to navigate to the login modal if they already have an account.
- * The modal can be closed using the close button.
+ * This function constructs a registration modal that provides a signup form with fields for email and password, validation messages,
+ * and a call-to-action button. It also includes a link for existing users to navigate to the login page. The modal highlights
+ * a signup bonus message for new users.
  *
  * @returns {HTMLElement} The constructed registration modal element.
  * @example
@@ -30,15 +28,52 @@ import { closeModal } from '../ui/modal/closeModal.js';
  * ```
  */
 export function registerModal() {
-  const element = createSection('relative', 'flex', 'flex-col', 'bg-neutralBg', 'p-8', 'rounded-xl', 'lg:pt-10', 'lg:px-10', 'pb-16', 'shadow-customShadow', 'overflow-y-auto', 'max-h-[90%]', 'max-h-screen');
+  const element = createDiv(
+    'flex',
+    'flex-col',
+    'px-2.5',
+    'md:px-3',
+    'pt-2.5',
+    'pb-9',
+    'md:pb-6',
+    'bg-neutralBg',
+    'rounded-xl',
+    'shadow-customShadow',
+    'min-w-40',
+    'max-w-96',
+    'my-auto',
+    'flex-grow',
+    'flex-shrink',
+    'xmd:landscape:max-w-[804px]',
+    'md:landscape:max-w-[1112px]',
+    'md:max-w-[672px]',
+  );
+  element.setAttribute('id', 'profileModal');
 
-  const imageWrap = createDiv('max-w-96', 'mx-auto');
+  const closeBtn = createBtn('', 'backdrop-invert', 'rounded-full', 'shadow-customShadow', 'hover:animate-pulse');
+  const closeImg = createImg(closeSvg, 'close', 'size-5');
+  closeBtn.append(closeImg);
+  const btnWrap = createDiv('size-9', 'flex', 'justify-center', 'items-center', 'cursor-pointer');
+  btnWrap.addEventListener('click', () => {
+    closeModal(modal);
+  });
+  btnWrap.append(closeBtn);
+  const btnContainer = createDiv('flex', 'justify-end');
+  btnContainer.append(btnWrap);
+
+  const topContainer = createDiv('flex', 'flex-col', 'landscape:w-1/2', 'px-5.5', 'landscape:ps-2.5', 'landscape:pe-5', 'landscape:my-auto');
+
+  const imageWrap = createDiv('max-w-full', 'mx-auto');
   const image = createImg(auctioneerSignupImg, 'auctioneer presenting a signup form');
   imageWrap.append(image);
 
-  const heading = createHeading(2, `"1000 credits signup bonus!"`, 'font-serif', 'text-primary', 'text-center', 'mt-0.5', 'lg:mt-1', 'text-primary', 'font-semibold', 'uppercase', 'md:text-xxl');
+  const heading = createHeading(2, `"1000 credits signup bonus!"`, 'font-serif', 'text-center', 'mt-0.5', 'md:mt-1', 'font-semibold', 'uppercase', 'md:text-xl');
 
-  const formElement = createForm('api', 'register', 'flex', 'flex-col', 'gap-5', 'mt-9', 'mb-16', 'text-primary', 'md:gap-7');
+  topContainer.append(imageWrap, heading);
+
+  const bottomContainer = createDiv('flex', 'flex-col', 'landscape:w-1/2', 'landscape:justify-center', 'px-5.5', 'landscape:pe-2.5', 'landscape:ps-5');
+
+  const formElement = createForm('api', 'register', 'flex', 'flex-col', 'gap-5', 'mt-9', 'mb-16', 'md:gap-7');
 
   const emailGroup = createDiv('flex', 'flex-col', 'gap-1.5');
   const labelEmail = createLabel('email', 'Email:', 'md:text-xl');
@@ -57,7 +92,7 @@ export function registerModal() {
   const ctaGroup = createDiv('flex', 'flex-col', 'mx-auto', 'gap-5');
   const wrap = createDiv('mx-auto');
   const cta = createInput('submit', '', '', 'uppercase', 'cursor-pointer', 'bg-primary', 'hover:bg-hoverPrimary', 'rounded-xl', 'py-3', 'px-4', 'md:px-6', 'font-serif', 'text-neutralBg', 'shadow-customShadow', 'font-medium', 'md:text-lg');
-  cta.value = 'register';
+  cta.value = 'login';
   wrap.append(cta);
 
   const regCta = createAnchor('#', '', '', 'text-center', 'py-2');
@@ -66,16 +101,14 @@ export function registerModal() {
   const regText3 = createTextNode(' here!');
   regCta.append(regText1, regText2, regText3);
 
-  const closeBtn = createBtn('', 'absolute', 'top-2.5', 'right-2.5', 'backdrop-invert', 'rounded-full', 'shadow-customShadow', 'hover:animate-pulse');
-  const closeImg = createImg(closeSvg, 'close', 'size-5');
-  closeBtn.append(closeImg);
-  closeBtn.addEventListener('click', () => {
-    closeModal(modal);
-  });
+  ctaGroup.append(regCta);
 
-  ctaGroup.append(wrap, regCta);
   formElement.append(emailGroup, passwordGroup, wrap);
-  element.append(imageWrap, heading, formElement, ctaGroup, closeBtn);
+  bottomContainer.append(formElement, ctaGroup);
 
+  const containers = createDiv('flex', 'flex-col', 'landscape:flex-row');
+  containers.append(topContainer, bottomContainer);
+
+  element.append(btnContainer, containers);
   return element;
 }

@@ -26,19 +26,32 @@ export function openModal(target) {
   const scrollPosition = window.scrollY || document.documentElement.scrollTop;
 
   modal.classList.remove('hidden');
-  modal.classList.add('flex', 'items-center', 'justify-center', 'p-5', 'md:px-10');
+  modal.classList.add('flex');
 
   modal.style.top = `${scrollPosition}px`;
   document.body.classList.add('overflow-hidden');
 
   modal.append(target);
 
-  modal.addEventListener('click', (event) => {
-    if (event.target === modal) {
+  let touchStartY = 0;
+
+  modal.addEventListener('touchstart', (event) => {
+    touchStartY = event.touches[0].clientY;
+  });
+
+  modal.addEventListener('touchend', (event) => {
+    const touchEndY = event.changedTouches[0].clientY;
+
+    // Determine if the touch was a scroll gesture on the Y-axis
+    const deltaY = Math.abs(touchEndY - touchStartY);
+
+    // Only close if the touch was not a vertical scroll gesture (minimal vertical movement)
+    if (deltaY < 10 && event.target === modal) {
       closeModal(modal);
     }
   });
-  modal.addEventListener('touchstart', (event) => {
+
+  modal.addEventListener('click', (event) => {
     if (event.target === modal) {
       closeModal(modal);
     }

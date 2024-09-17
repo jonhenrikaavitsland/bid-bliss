@@ -4,43 +4,43 @@ import { listingModal } from '../template/listingModal';
 import { galleryModal } from '../template/galleryModal';
 import { profileModal } from '../template/profileModal';
 import { newListingModal } from '../template/newListingModal';
-import { updateListingsIf } from './updateListingsIf';
 
 /**
  * Routes to the appropriate modal based on the provided modal value.
  *
- * This function determines which modal to render based on the `modalValue` parameter.
- * It may fetch listings if required and logs errors if the provided modal value does not match any known modals.
+ * This function determines which modal component to render based on the `modalValue` provided. It handles different
+ * modal types such as login, register, listing, gallery, profile, and new listing. For the listing modal, it also
+ * accepts a `listingId` to fetch specific listing details, and for the gallery modal, it accepts `media` data to display.
  *
  * @async
- * @param {string} modalValue The type of modal to render ('login', 'register', 'listing', 'gallery', 'profile', 'newListing').
- * @returns {Promise<HTMLElement|null>} A promise that resolves to the corresponding modal element or `null` if an error occurs.
- * @example
- * ```js
- * // Route to the login modal
- * modalRouter('login').then(modal => {
- *   if (modal) document.body.append(modal);
- * });
+ * @param {string} modalValue - The type of modal to display (e.g., 'login', 'register', 'listing', 'gallery', 'profile', 'newListing').
+ * @param {string} [listingId] - Optional listing ID, used when fetching specific listing details for the listing modal.
+ * @param {Object} [media={}] - Optional media object, used for the gallery modal to display images.
+ * @returns {Promise<HTMLElement|null>} The modal element to be displayed, or `null` if an error occurs.
  *
- * // Route to the listing modal
- * modalRouter('listing').then(modal => {
- *   if (modal) document.body.append(modal);
- * });
- * ```
+ * @example
+ * // Fetch and display the login modal
+ * const loginElement = await modalRouter('login');
+ *
+ * @example
+ * // Fetch and display a specific listing modal
+ * const listingElement = await modalRouter('listing', '12345-listing-id');
+ *
+ * @example
+ * // Fetch and display a gallery modal with media
+ * const galleryElement = await modalRouter('gallery', null, { images: [...] });
  */
-export async function modalRouter(modalValue) {
+export async function modalRouter(modalValue, listingId, media = {}) {
   try {
-    const listings = await updateListingsIf(modalValue);
-
     switch (modalValue) {
       case 'login':
         return loginModal();
       case 'register':
         return registerModal();
       case 'listing':
-        return listingModal(listings);
+        return listingModal(listingId);
       case 'gallery':
-        return galleryModal();
+        return galleryModal(media);
       case 'profile':
         return profileModal();
       case 'newListing':
