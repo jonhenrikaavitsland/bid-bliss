@@ -1,20 +1,17 @@
 /**
- * Checks if an element's content is overflowing its visible area, specifically in landscape orientation.
+ * Checks if the content within an element is overflowing beyond a specified pixel height in landscape orientation.
  *
- * This function determines whether the content within a given element is overflowing beyond the specified height (264 pixels),
- * and checks if the device is currently in landscape orientation. This can be useful for adjusting scroll behaviors or UI elements
- * dynamically based on the content size and screen orientation.
+ * This function determines whether the content of the specified element exceeds a given pixel height threshold
+ * and checks if the screen orientation is landscape. The function returns true if both conditions are met,
+ * indicating that the element's content is overflowing in landscape orientation.
  *
- * @param {HTMLElement} element - The DOM element to check for content overflow.
- * @returns {boolean} - Returns `true` if the content is overflowing and the orientation is landscape; otherwise, `false`.
+ * @param {HTMLElement} element - The element to check for content overflow.
+ * @param {number} px - The pixel threshold to determine if the content is overflowing.
+ * @returns {boolean} - Returns `true` if the content is overflowing beyond the specified height in landscape orientation; otherwise, returns `false`.
  * @example
- * ```js
- * // Check if an element's content is overflowing in landscape mode
- * const contentOverflowing = isOVerflowing(document.querySelector('.content'));
- * if (contentOverflowing) {
- *   console.log('Content is overflowing in landscape orientation.');
- * }
- * ```
+ * // Checks if the content overflows 300px in landscape mode
+ * const isOverflow = isOVerflowing(document.getElementById('contentBox'), 300);
+ * console.log(isOverflow); // Output: true or false
  */
 export function isOVerflowing(element, px) {
   const isContentOverflowing = element.scrollHeight > +px;

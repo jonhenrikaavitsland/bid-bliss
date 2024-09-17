@@ -26,6 +26,22 @@ import { navLinks } from './navLinks';
 const DEFAULT_IMAGE_ALT = 'listing item';
 const DEFAULT_TITLE = 'Unknown item';
 
+/**
+ * Creates a detailed modal for displaying information about a specific listing.
+ *
+ * This function constructs and returns a modal element containing detailed information about the specified listing,
+ * including its title, description, images, bids, and interaction options. If the auction is still active, users can
+ * place bids. The modal also includes navigation and close options. If the listing is not found, it displays an error message.
+ *
+ * @async
+ * @function listingModal
+ * @param {string} id - The unique identifier of the listing to display.
+ * @returns {HTMLElement} - The constructed modal element displaying the listing details.
+ * @example
+ * // Display a modal for a listing with a specific ID
+ * const modal = await listingModal('1234-5678-9101');
+ * document.body.append(modal);
+ */
 export async function listingModal(id) {
   const isActive = load('profile');
 
