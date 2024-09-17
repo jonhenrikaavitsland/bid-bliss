@@ -1,6 +1,6 @@
 import { fetchData } from '../API/fetchData';
 import { getProfile } from '../API/getProfile';
-import { API_Base, API_Listings, DEFAULT_TIME_FORMAT, modal } from '../data/constants';
+import { API_Base, API_Listings, DEFAULT_IMAGE_ALT, DEFAULT_TIME_FORMAT, DEFAULT_TITLE, modal } from '../data/constants';
 import { formatDateTime } from '../data/formatDateTime';
 import { formatDate } from '../data/formateDate';
 import { closeSvg } from '../data/images';
@@ -22,9 +22,6 @@ import { closeModal } from '../ui/modal/closeModal';
 import { runModal } from '../ui/modal/runModal';
 import { loggedInButton } from './loggedInButton';
 import { navLinks } from './navLinks';
-
-const DEFAULT_IMAGE_ALT = 'listing item';
-const DEFAULT_TITLE = 'Unknown item';
 
 /**
  * Creates a detailed modal for displaying information about a specific listing.

@@ -15,3 +15,5 @@ export const MSG_Email = 'Invalid email. Please use a @stud.noroff.no email and 
 export const MSG_Password = 'Invalid password. Must be at least 8 characters long and contain no illegal characters.';
 
 export const DEFAULT_TIME_FORMAT = 'invalid date';
+export const DEFAULT_IMAGE_ALT = 'listing item';
+export const DEFAULT_TITLE = 'Unknown item';
