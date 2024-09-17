@@ -1,229 +1,216 @@
-import { fetchData } from '../API/fetchData';
-import { isImageAccessible } from '../API/isImageAccessible';
-import { applyScrollShadow } from '../data/applyScrollShadow';
-import { API_Base, API_Key, API_Listings, modal } from '../data/constants';
-import { getTimeAhead } from '../data/getTimeAhead';
-import { closeSvg } from '../data/images';
-import { initializeListings } from '../data/initializeListings';
-import { isValidUrl } from '../data/isValidUrl';
-import { createBtn } from '../elements/createBtn';
-import { createDiv } from '../elements/createDiv';
-import { createForm } from '../elements/createForm';
-import { createHeading } from '../elements/createHeading';
-import { createImg } from '../elements/createImg';
-import { createInput } from '../elements/createInput';
-import { createLabel } from '../elements/createLabel';
-import { createTextarea } from '../elements/createTextarea';
-import { load } from '../localStorage/load';
-import { renderListings } from '../render/renderListings';
-import { closeModal } from '../ui/modal/closeModal';
-import { clearError } from '../validate/clearError';
-import { sanitizeInput } from '../validate/sanitize/sanitizeInput';
-import { setError } from '../validate/setError';
+// import { fetchData } from '../API/fetchData';
+// import { getProfile } from '../API/getProfile';
+// import { API_Base, API_Listings, modal } from '../data/constants';
+// import { formatDateTime } from '../data/formatDateTime';
+// import { formatDate } from '../data/formateDate';
+// import { closeSvg } from '../data/images';
+// import { createBtn } from '../elements/createBtn';
+// import { createDiv } from '../elements/createDiv';
+// import { createForm } from '../elements/createForm';
+// import { createHeading } from '../elements/createHeading';
+// import { createImg } from '../elements/createImg';
+// import { createInput } from '../elements/createInput';
+// import { createLabel } from '../elements/createLabel';
+// import { createParagraph } from '../elements/createParagraph';
+// import { createSection } from '../elements/createSection';
+// import { createSpan } from '../elements/createSpan';
+// import { createTime } from '../elements/createTime';
+// import { load } from '../localStorage/load';
+// import { getHighestBid } from '../ui/bid/getHighestBid';
+// import { handleBid } from '../ui/bid/handleBid';
+// import { closeModal } from '../ui/modal/closeModal';
+// import { runModal } from '../ui/modal/runModal';
+// import { DEFAULT_TIME_FORMAT } from './listingModal';
+// import { loggedInButton } from './loggedInButton';
+// import { navLinks } from './navLinks';
 
-export function testModal() {
-  const element = createDiv('flex', 'flex-col', 'rounded-xl', 'shadow-customShadow', 'min-w-40', 'max-w-96', 'my-auto', 'flex-grow', 'flex-shrink', 'xmd:landscape:max-w-[804px]', 'md:landscape:max-w-[1112px]', 'md:max-w-[672px]');
-  element.setAttribute('id', 'profileModal');
+// const DEFAULT_IMAGE_ALT = 'listing item';
+// const DEFAULT_TITLE = 'Unknown item';
 
-  const closeBtn = createBtn('', 'backdrop-invert', 'rounded-full', 'shadow-customShadow', 'hover:animate-pulse');
-  const closeImg = createImg(closeSvg, 'close', 'size-5');
-  closeBtn.append(closeImg);
-  const btnWrap = createDiv('size-9', 'flex', 'justify-center', 'items-center', 'cursor-pointer');
-  btnWrap.addEventListener('click', () => {
-    closeModal(modal);
-  });
-  btnWrap.append(closeBtn);
-  const btnContainer = createDiv('flex', 'justify-between', 'items-center', 'py-0.5', 'pe-0.5', 'ps-2.5', 'rounded-t-xl', 'bg-secondary', 'text-white', 'font-serif', 'text-lg', 'font-medium', 'md:ps-5', 'md:py-1', 'md:pe-3');
+// export async function listingModal(id) {
+//   const isActive = load('profile');
 
-  const heading = createHeading(2, 'Create auction', 'uppercase');
-  btnContainer.append(heading, btnWrap);
+//   const currentListing = await fetchData(`${API_Base}${API_Listings}/${id}?_seller=true&_bids=true`);
 
-  let imageContainer = [];
+//   if (!currentListing) {
+//     console.error('Current listing not found');
+//     return createDiv('Error: Listing not found');
+//   }
 
-  const listingContents = createForm('flex', 'flex-col', 'new-listing', 'create', 'bg-neutralBg', 'rounded-b-xl');
+//   const { created, description, endsAt, media, title, updated, _count, bids, seller } = currentListing.data;
 
-  listingContents.addEventListener('submit', async (event) => {
-    event.preventDefault();
+//   const element = createDiv('flex', 'flex-col', 'rounded-xl', 'shadow-customShadow', 'min-w-40', 'max-w-96', 'my-auto', 'flex-grow', 'flex-shrink', 'xmd:landscape:max-w-[804px]', 'md:landscape:max-w-[1112px]', 'md:max-w-[672px]');
+//   element.setAttribute('id', 'profileModal');
 
-    const title = sanitizeInput(document.getElementById('newListingTitle')?.value.trim());
-    const description = sanitizeInput(document.getElementById('newListingDescription')?.value.trim());
-    const tagsInputValue = sanitizeInput(document.getElementById('newListingTags')?.value.trim());
-    const tags = tagsInputValue ? tagsInputValue.split(/,|\s+/).filter((tag) => tag) : [];
-    const endsAt = document.getElementById('newListingTime')?.value;
+//   const closeBtn = createBtn('', 'backdrop-invert', 'rounded-full', 'shadow-customShadow', 'hover:animate-pulse');
+//   const closeImg = createImg(closeSvg, 'close', 'size-5');
+//   closeBtn.append(closeImg);
+//   const btnWrap = createDiv('size-9', 'flex', 'justify-center', 'items-center', 'cursor-pointer');
+//   btnWrap.addEventListener('click', () => {
+//     closeModal(modal);
+//   });
+//   btnWrap.append(closeBtn);
+//   const btnContainer = createDiv('flex', 'justify-between', 'items-center', 'bg-secondary', 'text-white', 'text-lg', 'rounded-t-xl', 'font-semibold', 'ps-2.5', 'md:ps-5', 'pe-0.5', 'md:pe-3', 'py-0.5', 'md:py-2', 'font-serif', 'capitalize');
+//   const heading = createHeading(2, title);
+//   btnContainer.append(heading, btnWrap);
 
-    const titleValidate = document.getElementById('titleValidate');
-    const descriptionValidate = document.getElementById('descriptionValidate');
-    const tagsValidate = document.getElementById('tagsValidate');
-    const timeValidate = document.getElementById('timeValidate');
+//   const subContainer = createDiv('flex', 'justify-between', 'bg-primary', 'text-neutralBg', 'px-2.5', 'py-3', 'md:p-5');
 
-    if (titleValidate) clearError(titleValidate);
-    if (descriptionValidate) clearError(descriptionValidate);
-    if (tagsValidate) clearError(tagsValidate);
-    if (timeValidate) clearError(timeValidate);
+//   const timeWrap = createSpan();
+//   timeWrap.textContent = 'Ends: ';
 
-    let generalFeedback = document.getElementById('generalFeedback');
-    if (!generalFeedback) {
-      generalFeedback = createDiv('text-error', 'mt-2');
-      generalFeedback.setAttribute('id', 'generalFeedback');
-    }
-    generalFeedback.innerText = '';
+//   const timeFormatted = formatDate(endsAt);
+//   const listEnding = createTime(endsAt || '0000-00-00T00:00:00Z', timeFormatted || DEFAULT_TIME_FORMAT);
+//   timeWrap.append(listEnding);
 
-    let formIsValid = true;
-    if (!title) {
-      setError(titleValidate, 'Title is required');
-      formIsValid = false;
-    }
-    if (!endsAt) {
-      setError(timeValidate, 'Auction end date is required.');
-      formIsValid = false;
-    }
-    if (!formIsValid) {
-      generalFeedback.innerText = '* Please fill out all required fields to submit the auction.';
-      listingContents.appendChild(generalFeedback);
-      return;
-    }
+//   const bidInfo = createSpan(`Bids: ${_count.bids || 0}`);
 
-    const token = load('token');
-    const payload = { title, description: description || '', tags, media: imageContainer, endsAt };
+//   subContainer.append(timeWrap, bidInfo);
 
-    try {
-      const response = await fetchData(`${API_Base}${API_Listings}`, {
-        method: 'POST',
-        headers: {
-          Authorization: `Bearer ${token}`,
-          'X-Noroff-API-Key': API_Key,
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify(payload),
-      });
+//   const topWrap = createDiv('flex', 'flex-col');
 
-      listingContents.reset();
-      imageContainer = [];
-      const images = document.getElementById('imagePreviewContainer');
-      if (images) images.innerHTML = '';
+//   const topContainer = createDiv('flex', 'flex-col', 'landscape:w-1/2', 'flex-1');
 
-      const newListings = await initializeListings();
-      renderListings(newListings);
-    } catch (error) {
-      console.error('Error during form submission:', error);
-      generalFeedback.innerText = 'An error occurred during submission. Please try again.';
-      listingContents.appendChild(generalFeedback);
-    }
-  });
+//   const imageWrap = createDiv('w-full', 'aspect-square', 'overflow-hidden', 'flex', 'items-center', 'justify-center', 'h-full');
+//   imageWrap.addEventListener('click', () => {
+//     runModal(true, 'gallery', '', media);
+//   });
 
-  const topContainer = createDiv('flex', 'flex-col', 'landscape:w-1/2', 'pt-5', 'px-2.5', 'gap-5', 'md:px-5', 'landscape:pb-13', 'landscape:max-h-100%', 'landscape:overflow-hidden', 'landscape:flex-1', 'landscape:h-min');
+//   const image = createImg(media[0]?.url, media[0]?.alt || DEFAULT_IMAGE_ALT, 'cursor-pointer', 'object-cover', 'w-full', 'h-full', 'landscape:rounded-bl-xl');
+//   imageWrap.append(image);
+//   topContainer.append(imageWrap);
 
-  const titleWrap = createDiv('flex', 'flex-col', 'gap-1');
-  const titleLabel = createLabel('newListingTitle', 'title: *', 'capitalize');
-  const titleInput = createInput('text', '', 'newListingTitle', 'bg-white', 'rounded-xl', 'shadow-customShadow', 'py-2.5', 'px-2');
-  const titleValidate = createDiv('relative');
-  titleValidate.setAttribute('id', 'titleValidate');
-  titleWrap.append(titleLabel, titleInput, titleValidate);
+//   const bottomContainer = createDiv('flex', 'flex-col', 'landscape:w-1/2', 'bg-neutralBg', 'rounded-b-xl', 'landscape:rounded-s-none', 'flex-1');
 
-  const descriptionWrap = createDiv('flex', 'flex-col', 'gap-1');
-  const descriptionLabel = createLabel('newListingDescription', 'description:', 'capitalize');
-  const descriptionInput = createTextarea('newListingDescription', 'Describe your item...', 4, 'bg-white', 'rounded-xl', 'shadow-customShadow', 'py-2.5', 'px-2');
-  const descriptionValidate = createDiv('relative');
-  descriptionValidate.setAttribute('id', 'descriptionValidate');
-  descriptionWrap.append(descriptionLabel, descriptionInput, descriptionValidate);
+//   const InfoWrap = createSection('p-2.5', 'md:p-5', 'flex', 'flex-col', 'md:landscape:flex-row', 'md:landscape:justify-between', 'md:landscape:items-center', 'md:landscape:gap-x-10', 'md:landscape:flex-wrap');
 
-  const tagsWrap = createDiv('flex', 'flex-col', 'gap-1');
-  const tagsLabel = createLabel('newListingTags', 'tags:', 'capitalize');
-  const tagsInput = createInput('text', '', 'newListingTags', 'bg-white', 'rounded-xl', 'shadow-customShadow', 'py-2.5', 'px-2');
-  const tagsValidate = createDiv('relative');
-  tagsValidate.setAttribute('id', 'tagsValidate');
-  tagsWrap.append(tagsLabel, tagsInput, tagsValidate);
+//   const headingMiddle = createHeading(3, `Auction# ${id.slice(0, 8)}`, 'font-serif');
 
-  const timeWrap = createDiv('flex', 'flex-col', 'gap-1');
-  const timeLabel = createLabel('newListingTime', 'Auction ends: *');
-  const timeInput = createInput('datetime-local', '', 'newListingTime', 'bg-white', 'rounded-xl', 'shadow-customShadow', 'py-2.5', 'px-2', 'cursor-pointer');
-  timeInput.value = getTimeAhead(60);
-  timeInput.min = getTimeAhead(60);
-  timeInput.max = getTimeAhead(364);
-  timeInput.addEventListener('click', (event) => {
-    event.preventDefault();
-    timeInput.showPicker();
-  });
-  timeWrap.append(timeLabel, timeInput);
+//   const timeWrap2 = createSpan();
+//   let timeFormattedCreatedOrUpdated;
 
-  topContainer.append(titleWrap, descriptionWrap, tagsWrap, timeWrap);
+//   if (updated === created) {
+//     timeWrap2.textContent = 'Created: ';
+//     timeFormattedCreatedOrUpdated = formatDate(created);
+//   } else {
+//     timeWrap2.textContent = 'Updated: ';
+//     timeFormattedCreatedOrUpdated = formatDate(updated);
+//   }
 
-  const bottomContainer = createDiv('flex', 'flex-col', 'landscape:w-1/2', 'px-2.5', 'pt-5', 'gap-11', 'rounded-b-xl', 'md:px-5', 'landscape:overflow-hidden', 'landscape:flex-1', 'landscape:max-h-[425px]');
+//   const timeCreatedOrUpdated = createTime(endsAt || '0000-00-00T00:00:00Z', timeFormattedCreatedOrUpdated || DEFAULT_TIME_FORMAT);
 
-  const imageWrap = createDiv('flex', 'flex-col', 'gap-1');
-  const imageLabel = createLabel('newListingImages', 'images:', 'capitalize');
-  const imgWrap = createDiv('flex', 'xsm:flex-col');
-  const imageInput = createInput('text', 'https://www.img.com/image.jpg', 'newListingImages', 'grow', 'xsm:rounded-t-xl', 'xsm:py-2.5', 'xsm:px-2', 'sm:rounded-s-xl', 'sm:ps-2', 'sm:shadow-customShadow');
-  const imageBtn = createBtn('save', 'uppercase', 'font-serif', 'font-semibold', 'bg-secondary', 'hover:bg-hoverSecondary', 'py-3', 'px-4', 'md:px-6', 'md:text-lg', 'text-white', 'shadow-customShadow', 'xsm:rounded-b-xl', 'sm:rounded-e-xl');
-  imageBtn.setAttribute('type', 'button');
-  const images = createDiv('mt-2', 'overflow-y-scroll', 'flex-grow', 'max-h-[264px]');
-  images.setAttribute('id', 'imagePreviewContainer');
+//   const auctionDetailsWrap = createSection('p-2.5', 'md:p-5', 'flex', 'flex-col', 'gap-2', 'pb-4');
+//   const auctionTitle = createHeading(2, title || DEFAULT_TITLE, 'font-serif', 'font-semibold', 'text-lg', 'capitalize');
+//   const auctionDescription = createParagraph(description);
 
-  const imageValidate = createDiv('relative');
-  imgWrap.append(imageInput, imageBtn);
-  imageWrap.append(imageLabel, imgWrap, images, imageValidate);
+//   auctionDetailsWrap.append(auctionTitle, auctionDescription);
+//   timeWrap2.append(timeCreatedOrUpdated);
+//   InfoWrap.append(headingMiddle, timeWrap2);
 
-  imageBtn.addEventListener('click', async () => {
-    try {
-      const imageUrl = sanitizeInput(imageInput.value.trim());
-      if (!imageUrl) {
-        setError(imageValidate, 'Please enter a valid and accessible image URL.');
-        return;
-      }
-      if (!isValidUrl(imageUrl) || !(await isImageAccessible(imageUrl))) {
-        setError(imageValidate, 'Please enter a valid and accessible image URL');
-        return;
-      }
+//   const interactionWrap = createSection('flex', 'flex-col', 'p-2.5', 'md:p-5', 'w-full', 'h-full');
 
-      clearError(imageValidate);
+//   const auctionEndingWrap = createSpan('font-serif', 'font-semibold', 'text-lg', 'flex', 'flex-col', 'text-center');
+//   auctionEndingWrap.textContent = 'Auction ends at ';
 
-      const imageElement = createDiv('flex', 'flex-wrap', 'gap-4', 'items-center', 'mb-2');
-      const imgPreview = createImg(imageUrl, 'image preview', 'w-20', 'h-20', 'object-cover', 'rounded-xl');
-      const altInput = createInput('text', 'Alt text', '', 'bg-white', 'rounded-xl', 'shadow-customShadow', 'py-3', 'px-4');
-      const removeBtn = createBtn('Remove', 'uppercase', 'font-serif', 'font-semibold', 'bg-error', 'hover:bg-opacity-90', 'py-3', 'px-4', 'text-white', 'rounded-xl');
+//   const timeFormattedFull = formatDateTime(endsAt);
+//   const auctionEndingTime = createTime(endsAt || '0000-00-00T00:00:00Z', timeFormattedFull || DEFAULT_TIME_FORMAT);
+//   auctionEndingWrap.append(auctionEndingTime);
 
-      imageElement.appendChild(imgPreview);
-      imageElement.appendChild(altInput);
-      imageElement.appendChild(removeBtn);
-      images.appendChild(imageElement);
+//   const callToAction = createHeading(3, 'Login to interact with this auction!', 'font-semibold', 'text-lg', 'mt-9', 'pb-10', 'text-center');
 
-      const imageObject = { url: imageUrl, alt: '' };
-      imageContainer.push(imageObject);
-      imageInput.value = '';
+//   const bidWrap = createForm('bid', 'place-bid', 'w-1/2', 'landscape:w-2/3', 'flex', 'mx-auto', 'mt-4', 'xsm:flex-col', 'xsm:items-center', 'md:landscape:px-5', 'xsm:w-2/3');
+//   const highestBid = getHighestBid(currentListing.data) || { amount: 0 };
 
-      altInput.addEventListener('input', (event) => {
-        const index = Array.from(images.children).indexOf(imageElement);
-        imageContainer[index].alt = event.target.value;
-      });
+//   const hasEnded = new Date(endsAt) < new Date();
 
-      removeBtn.addEventListener('click', () => {
-        const index = Array.from(images.children).indexOf(imageElement);
-        if (index > -1) {
-          imageContainer.splice(index, 1);
-          images.removeChild(imageElement);
-        }
-        applyScrollShadow(images);
-      });
-    } catch (error) {
-      console.error('Error while adding image:', error);
-      setError(imageValidate, 'Error while adding image');
-    }
+//   if (!hasEnded) {
+//     bidWrap.addEventListener('submit', async (event) => {
+//       handleBid(event, id, bidsContainer, highestBid.amount);
+//       setTimeout(getProfile, 500);
+//       setTimeout(async () => {
+//         const navElement = document.querySelector('nav');
+//         navElement.innerHTML = '';
+//         navElement.append(loggedInButton());
+//         const links = navLinks();
+//         navElement.append(links);
+//       }, 1000);
+//     });
+//   }
 
-    applyScrollShadow(images);
-  });
+//   const bidLabel = createLabel('bid', 'place bid', 'sr-only');
+//   const bidContainer = createInput('number ', '0 cr.', 'bid', 'bg-white', 'capitalize', 'w-1/2', 'xsm:px-4', 'xsm:py-2', 'xsm:rounded-t-xl', 'xsm:w-full', 'text-center', 'sm:rounded-s-xl', 'sm:shadow-customShadow');
+//   const submitBtn = createBtn(
+//     'place bid',
+//     'uppercase',
+//     'bg-secondary',
+//     'hover:bg-hoverSecondary',
+//     'text-white',
+//     'font-serif',
+//     'text-lg',
+//     'py-2',
+//     'px-4',
+//     'md:py-3',
+//     'md:px-6',
+//     'md:text-xl',
+//     'w-1/2',
+//     'xsm:rounded-b-xl',
+//     'xsm:w-full',
+//     'sm:rounded-e-xl',
+//     'shadow-customShadow',
+//   );
 
-  const container = createDiv('flex', 'flex-col', 'landscape:flex-row', 'h-full');
+//   const bidsContainer = createDiv('mt-8', 'flex', 'flex-col', 'landscape:max-h-56', 'overflow-y-scroll');
 
-  const cta = createBtn('create listing', 'uppercase', 'bg-secondary', 'hover:bg-hoverSecondary', 'py-3', 'px-4', 'md:px-6', 'md:text-lg', 'rounded-xl', 'text-white', 'shadow-customShadow', 'mx-auto', 'font-serif', 'font-medium');
+//   if (bids) {
+//     const reversedBids = [...bids].reverse();
+//     reversedBids.forEach((bid, index) => {
+//       const bidsList = createDiv('flex', 'flex-col', 'text-center', 'gap-0.5', 'py-2');
+//       if (index % 2 !== 1) {
+//         bidsList.classList.add('bg-white');
+//       }
 
-  const ctaWrap = createDiv('flex', 'pt-13', 'pb-8');
-  ctaWrap.append(cta);
+//       const slicedBidId = bid.id.slice(0, 8);
+//       const bidId = createSpan(`Bid#: ${slicedBidId}`);
 
-  bottomContainer.append(imageWrap);
+//       const bidFormatted = formatDateTime(bid.created);
+//       const bidPlaced = createTime(bid.created || '0000-00-00T00:00:00Z', bidFormatted || DEFAULT_TIME_FORMAT);
 
-  container.append(topContainer, bottomContainer);
+//       const bidSize = createSpan(`${bid.amount} Cr.`);
 
-  listingContents.append(container, ctaWrap);
-  element.append(btnContainer, listingContents);
-  return element;
-}
+//       bidsList.append(bidId, bidPlaced, bidSize);
+//       bidsContainer.append(bidsList);
+//     });
+//   }
+
+//   if (hasEnded) {
+//     auctionEndingWrap.classList.add('text-error');
+//     auctionEndingWrap.textContent = 'Auction has ended!';
+//   } else {
+//     bidWrap.append(bidLabel, bidContainer, submitBtn);
+//   }
+
+//   interactionWrap.append(auctionEndingWrap);
+
+//   if (!isActive) {
+//     interactionWrap.append(callToAction);
+//   }
+
+//   if (isActive) {
+//     if (!hasEnded) {
+//       interactionWrap.innerHTML = '';
+//       interactionWrap.append(bidWrap);
+//     }
+//     interactionWrap.append(bidsContainer);
+//   }
+
+//   const bottomWrap = createDiv('h-full', 'w-full', 'flex', 'pb-5', 'md:pb-8');
+//   bottomWrap.append(interactionWrap);
+
+//   bottomContainer.append(InfoWrap, auctionDetailsWrap, bottomWrap);
+
+//   const containers = createDiv('flex', 'flex-col', 'landscape:flex-row');
+//   containers.append(topContainer, bottomContainer);
+//   topWrap.append(btnContainer, subContainer);
+//   element.append(topWrap, containers);
+//   return element;
+// }
