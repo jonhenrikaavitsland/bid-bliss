@@ -5,7 +5,6 @@ import { createImg } from '../elements/createImg';
 import { createSection } from '../elements/createSection';
 import { createSpan } from '../elements/createSpan';
 import { createTime } from '../elements/createTime';
-import { save } from '../localStorage/save';
 import { runModal } from '../ui/modal/runModal';
 import { createArticle } from '../elements/createArticle';
 
@@ -57,7 +56,6 @@ export function listingCard(data) {
     if (isProcessing) return;
     isProcessing = true;
 
-    // save('listingID', id);
     runModal(true, 'listing', element.dataset.id);
 
     setTimeout(() => {
