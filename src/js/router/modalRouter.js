@@ -28,7 +28,7 @@ import { updateListingsIf } from './updateListingsIf';
  * });
  * ```
  */
-export async function modalRouter(modalValue) {
+export async function modalRouter(modalValue, listingId) {
   try {
     const listings = await updateListingsIf(modalValue);
 
@@ -39,6 +39,8 @@ export async function modalRouter(modalValue) {
         return registerModal();
       case 'listing':
         return listingModal(listings);
+      case 'listingID':
+        return listingModal(listingId);
       case 'gallery':
         return galleryModal();
       case 'profile':
