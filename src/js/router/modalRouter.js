@@ -25,7 +25,7 @@ import { newListingModal } from '../template/newListingModal';
  * // Fetch and display a specific listing modal
  * const listingElement = await modalRouter('listing', '12345-listing-id');
  */
-export async function modalRouter(modalValue, listingId) {
+export async function modalRouter(modalValue, listingId, media = {}) {
   try {
     switch (modalValue) {
       case 'login':
@@ -35,7 +35,7 @@ export async function modalRouter(modalValue, listingId) {
       case 'listing':
         return listingModal(listingId);
       case 'gallery':
-        return galleryModal();
+        return galleryModal(media);
       case 'profile':
         return profileModal();
       case 'newListing':
