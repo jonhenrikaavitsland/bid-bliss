@@ -16,8 +16,8 @@
  * }
  * ```
  */
-export function isOVerflowing(element) {
-  const isContentOverflowing = element.scrollHeight > 264;
+export function isOVerflowing(element, px) {
+  const isContentOverflowing = element.scrollHeight > +px;
   const isLandscape = window.matchMedia('(orientation: landscape)').matches;
   return isContentOverflowing && isLandscape;
 }

@@ -15,8 +15,8 @@ import { isOVerflowing } from './isOverflowing';
  * applyScrollShadow(contentDiv);
  * // Adds a shadow to indicate that the content is overflowing if applicable.
  */
-export function applyScrollShadow(element) {
-  if (isOVerflowing(element)) {
+export function applyScrollShadow(element, px) {
+  if (isOVerflowing(element, px)) {
     element.classList.add('shadow-scrollIndicator');
   } else {
     element.classList.remove('shadow-scrollIndicator');
