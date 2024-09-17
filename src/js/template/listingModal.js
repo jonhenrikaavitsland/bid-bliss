@@ -58,8 +58,6 @@ export async function listingModal(id) {
 
   const { created, description, endsAt, media, title, updated, _count, bids, seller } = currentListing.data;
 
-  save('media', media);
-
   const element = createArticle('relative', 'rounded-xl', 'grow', 'overflow-y-auto', 'max-h-[90%]', 'max-w-lg', 'md:max-w-2xl');
 
   const titleTop = createSection('bg-secondary', 'rounded-t-xl', 'text-lg', 'px-2.5', 'py-2.5', 'md:px-5', 'md:py-4');
@@ -76,7 +74,7 @@ export async function listingModal(id) {
 
   const imageWrap = createDiv('w-full', 'aspect-square', 'overflow-hidden', 'flex', 'items-center', 'justify-center');
   imageWrap.addEventListener('click', () => {
-    runModal(true, 'gallery');
+    runModal(true, 'gallery', '', media);
   });
 
   const image = createImg(media[0]?.url || DEFAULT_IMAGE_URL, media[0]?.alt || DEFAULT_IMAGE_ALT, 'cursor-pointer', 'object-cover', 'w-full', 'h-full');
