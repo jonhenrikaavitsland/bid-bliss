@@ -20,8 +20,9 @@ import { getProfile } from '../API/getProfile';
 import { loggedInButton } from './loggedInButton';
 import { navLinks } from './navLinks';
 import { closeModal } from '../ui/modal/closeModal';
-import { modal } from '../data/constants';
+import { API_Base, API_Listings, modal } from '../data/constants';
 import { closeSvg, placeholderItemImg } from '../data/images';
+import { fetchData } from '../API/fetchData';
 
 export const DEFAULT_TIME_FORMAT = 'invalid date';
 const DEFAULT_IMAGE_URL = placeholderItemImg;
@@ -48,77 +49,78 @@ const DEFAULT_TITLE = 'Unknown item';
  * ```
  */
 
-export function listingModal(listings) {
+export async function listingModal(id) {
   const isActive = load('profile');
-  const currentListingID = load('listingID');
-  const currentListing = listings.find((listing) => listing.id === currentListingID);
+
+  const currentListing = await fetchData(`${API_Base}${API_Listings}/${id}?_seller=true&_bids=true`);
 
   if (!currentListing) {
     console.error('Current listing not found');
     return createDiv('Error: Listing not found');
   }
 
-  save('media', currentListing.media);
+  const { created, description, endsAt, media, title, updated, _count, bids, seller } = currentListing.data;
+
+  save('media', media);
 
   const element = createArticle('relative', 'rounded-xl', 'grow', 'overflow-y-auto', 'max-h-[90%]', 'max-w-lg', 'md:max-w-2xl');
 
   const titleTop = createSection('bg-secondary', 'rounded-t-xl', 'text-lg', 'px-2.5', 'py-2.5', 'md:px-5', 'md:py-4');
-  const headingTop = createHeading(2, currentListing.title, 'font-serif', 'font-semibold', 'capitalize', 'md:text-lg', 'text-neutralBg');
+  const headingTop = createHeading(2, title, 'font-serif', 'font-semibold', 'capitalize', 'md:text-lg', 'text-neutralBg');
 
   const subTopContainer = createDiv('bg-primary', 'text-neutralBg', 'px-2.5', 'py-2', 'md:px-5', 'md:py-4', 'flex', 'justify-between');
   const timeWrap = createSpan();
   timeWrap.textContent = 'Ends: ';
 
-  const timeFormatted = formatDate(currentListing.endsAt);
-  const listEnding = createTime(currentListing.endsAt || '0000-00-00T00:00:00Z', timeFormatted || DEFAULT_TIME_FORMAT);
+  const timeFormatted = formatDate(endsAt);
+  const listEnding = createTime(endsAt || '0000-00-00T00:00:00Z', timeFormatted || DEFAULT_TIME_FORMAT);
 
-  const bidInfo = createSpan(`Bids: ${currentListing._count.bids || 0}`);
+  const bidInfo = createSpan(`Bids: ${_count.bids || 0}`);
 
   const imageWrap = createDiv('w-full', 'aspect-square', 'overflow-hidden', 'flex', 'items-center', 'justify-center');
   imageWrap.addEventListener('click', () => {
     runModal(true, 'gallery');
   });
 
-  const image = createImg(currentListing.media[0]?.url || DEFAULT_IMAGE_URL, currentListing.media[0]?.alt || DEFAULT_IMAGE_ALT, 'cursor-pointer', 'object-cover', 'w-full', 'h-full');
+  const image = createImg(media[0]?.url || DEFAULT_IMAGE_URL, media[0]?.alt || DEFAULT_IMAGE_ALT, 'cursor-pointer', 'object-cover', 'w-full', 'h-full');
 
   const InfoWrap = createSection('p-2.5', 'md:p-5', 'flex', 'flex-col', 'bg-neutralBg');
-  const headingMiddle = createHeading(3, `Auction# ${currentListing.id}`, 'font-serif');
+  const headingMiddle = createHeading(3, `Auction# ${id}`, 'font-serif');
 
   const timeWrap2 = createSpan();
   let timeFormattedCreatedOrUpdated;
 
-  if (currentListing.updated === currentListing.created) {
+  if (updated === created) {
     timeWrap2.textContent = 'Created: ';
-    timeFormattedCreatedOrUpdated = formatDate(currentListing.created);
+    timeFormattedCreatedOrUpdated = formatDate(created);
   } else {
     timeWrap2.textContent = 'Updated: ';
-    timeFormattedCreatedOrUpdated = formatDate(currentListing.updated);
+    timeFormattedCreatedOrUpdated = formatDate(updated);
   }
 
-  const timeCreatedOrUpdated = createTime(currentListing.endsAt || '0000-00-00T00:00:00Z', timeFormattedCreatedOrUpdated || DEFAULT_TIME_FORMAT);
+  const timeCreatedOrUpdated = createTime(endsAt || '0000-00-00T00:00:00Z', timeFormattedCreatedOrUpdated || DEFAULT_TIME_FORMAT);
 
   const auctionDetailsWrap = createSection('p-2.5', 'md:p-5', 'flex', 'flex-col', 'gap-2', 'bg-neutralBg', 'pb-4');
-  const auctionTitle = createHeading(2, currentListing.title || DEFAULT_TITLE, 'font-serif', 'font-semibold', 'text-lg', 'capitalize');
-  const auctionDescription = createParagraph(currentListing.description);
+  const auctionTitle = createHeading(2, title || DEFAULT_TITLE, 'font-serif', 'font-semibold', 'text-lg', 'capitalize');
+  const auctionDescription = createParagraph(description);
 
   const interactionWrap = createSection('flex', 'flex-col', 'p-2.5', 'md:p-5', 'bg-neutralBg');
 
   const auctionEndingWrap = createSpan('font-serif', 'font-semibold', 'text-lg', 'flex', 'flex-col', 'text-center');
   auctionEndingWrap.textContent = 'Auction ends at ';
 
-  const timeFormattedFull = formatDateTime(currentListing.endsAt);
-  const auctionEndingTime = createTime(currentListing.endsAt || '0000-00-00T00:00:00Z', timeFormattedFull || DEFAULT_TIME_FORMAT);
+  const timeFormattedFull = formatDateTime(endsAt);
+  const auctionEndingTime = createTime(endsAt || '0000-00-00T00:00:00Z', timeFormattedFull || DEFAULT_TIME_FORMAT);
 
   const callToAction = createHeading(3, 'Login to interact with this auction!', 'font-semibold', 'text-lg', 'mt-9', 'pb-10');
-  const listingID = load('listingID');
   const bidWrap = createForm('bid', 'place-bid', 'w-1/2', 'flex', 'mx-auto', 'mt-4', 'xsm:flex-col', 'xsm:items-center');
-  const highestBid = getHighestBid(currentListing) || { amount: 0 };
+  const highestBid = getHighestBid(currentListing.data) || { amount: 0 };
 
-  const hasEnded = new Date(currentListing.endsAt) < new Date();
+  const hasEnded = new Date(endsAt) < new Date();
 
   if (!hasEnded) {
     bidWrap.addEventListener('submit', async (event) => {
-      handleBid(event, listingID, bidsContainer, highestBid.amount);
+      handleBid(event, id, bidsContainer, highestBid.amount);
       setTimeout(getProfile, 500);
       setTimeout(async () => {
         const navElement = document.querySelector('nav');
@@ -153,8 +155,8 @@ export function listingModal(listings) {
 
   const bidsContainer = createDiv('mt-8', 'flex', 'flex-col', 'pb-10');
 
-  if (currentListing.bids) {
-    const reversedBids = [...currentListing.bids].reverse();
+  if (bids) {
+    const reversedBids = [...bids].reverse();
     reversedBids.forEach((bid, index) => {
       const bidsList = createDiv('flex', 'flex-col', 'text-center', 'gap-0.5', 'py-2');
       if (index % 2 !== 1) {
