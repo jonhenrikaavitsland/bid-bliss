@@ -26,8 +26,8 @@ import { openModal } from './openModal.js';
  * // Run a gallery modal for viewing images
  * runModal(true, 'gallery');
  */
-export async function runModal(state = 'false', modalValue, listingId) {
-  const currentModal = await modalRouter(modalValue, listingId);
+export async function runModal(state = 'false', modalValue, listingId, media = {}) {
+  const currentModal = await modalRouter(modalValue, listingId, media);
 
   if (state === true && modalValue === 'gallery') {
     openGallery(currentModal);
