@@ -8,43 +8,38 @@ import { createTime } from '../elements/createTime';
 import { save } from '../localStorage/save';
 import { runModal } from '../ui/modal/runModal';
 import { createArticle } from '../elements/createArticle';
-import { placeholderItemImg } from '../data/images';
 
 const DEFAULT_TITLE = 'Unknown item';
-const DEFAULT_IMAGE_URL = placeholderItemImg;
 const DEFAULT_IMAGE_ALT = 'listing item';
 const DEFAULT_TIME_FORMAT = 'invalid date';
 
 /**
- * Creates a listing card element based on the provided listing data.
+ * Creates a card element to display a listing's details, including its title, image, end time, and bid count.
  *
- * This function generates an article element representing a listing, including its title, image, end time, and bid count.
- * It applies special styles if the listing has ended and sets up click event handling to save the listing ID and trigger the listing modal.
- * If invalid data is provided, it returns a div with an error message.
+ * This function constructs a listing card based on the provided data. The card includes an image, title, and bid information.
+ * If the listing has ended, the image is displayed in grayscale and the end time is marked as past.
+ * Clicking on the card saves the listing ID and triggers a modal with further details about the listing.
  *
- * @param {Object} data The listing data object containing information such as title, end time, media, and bid count.
- * @param {string} [data.id=''] The unique identifier of the listing.
- * @param {string} [data.endsAt=''] The end date and time of the listing.
- * @param {string} [data.title='Unknown item'] The title of the listing.
- * @param {Array} [data.media=[]] An array of media objects for the listing.
- * @param {Object} [data._count={}] An object containing count information, including bid count.
- * @param {number} [data._count.bids=0] The number of bids on the listing.
- * @returns {HTMLElement} The constructed listing card element.
+ * @param {Object} data - The data object containing listing details.
+ * @param {string} [data.id=''] - The unique identifier for the listing.
+ * @param {string} [data.endsAt=''] - The end date and time of the listing in ISO format.
+ * @param {string} [data.title='Unknown item'] - The title of the listing.
+ * @param {Array} [data.media=[]] - An array containing media objects, typically images related to the listing.
+ * @param {Object} [data._count={}] - An object containing bid count data.
+ * @param {number} [data._count.bids=0] - The number of bids placed on the listing.
+ * @returns {HTMLElement} - The constructed card element representing the listing.
+ *
  * @example
- * ```js
- * // Create a listing card with sample data
- * const sampleData = {
+ * // Create a listing card with example data
+ * const card = listingCard({
  *   id: '123',
  *   endsAt: '2023-09-13T15:30:00Z',
  *   title: 'Sample Item',
  *   media: [{ url: 'https://example.com/image.jpg', alt: 'Sample image' }],
- *   _count: { bids: 5 },
- * };
- * const card = listingCard(sampleData);
+ *   _count: { bids: 5 }
+ * });
  * document.body.append(card);
- * ```
  */
-
 export function listingCard(data) {
   if (!data || typeof data !== 'object') {
     console.error('Invalid data provided for listing card');
@@ -57,7 +52,7 @@ export function listingCard(data) {
 
   let isProcessing = false;
 
-  element.addEventListener('click', () => {
+  element.addEventListener('click', async () => {
     if (isProcessing) return;
     isProcessing = true;
 
@@ -69,8 +64,7 @@ export function listingCard(data) {
     }, 1000);
   });
 
-  const image = createImg(media?.[0]?.url || DEFAULT_IMAGE_URL, media?.[0]?.alt || DEFAULT_IMAGE_ALT, 'rounded-xl', 'aspect-square', 'object-cover');
-  image.setAttribute('loading', 'lazy');
+  const image = createImg(media?.[0]?.url, media?.[0]?.alt || DEFAULT_IMAGE_ALT, 'rounded-xl', 'aspect-square', 'object-cover');
 
   const section = createSection('flex', 'flex-col', 'gap-1');
 
