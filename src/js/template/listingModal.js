@@ -24,30 +24,27 @@ import { API_Base, API_Listings, modal } from '../data/constants';
 import { closeSvg, placeholderItemImg } from '../data/images';
 import { fetchData } from '../API/fetchData';
 
+/**
+ * Creates and returns a detailed modal element for displaying information about a specific listing.
+ *
+ * This function fetches the details of a listing using its ID and constructs a detailed modal that includes
+ * information such as the listing's title, description, images, bid history, and interaction options like
+ * bidding if the auction is still active. The modal also handles different states such as showing a call to action
+ * for login if the user is not active.
+ *
+ * @async
+ * @param {string} id - The ID of the listing to fetch and display.
+ * @returns {Promise<HTMLElement>} The constructed modal element displaying the listing details.
+ *
+ * @example
+ * // Create and display a listing modal for a specific listing ID
+ * const listingModalElement = await listingModal('12345');
+ * document.body.append(listingModalElement);
+ */
 export const DEFAULT_TIME_FORMAT = 'invalid date';
 const DEFAULT_IMAGE_URL = placeholderItemImg;
 const DEFAULT_IMAGE_ALT = 'listing item';
 const DEFAULT_TITLE = 'Unknown item';
-
-/**
- * Creates and returns a modal element for displaying detailed information about a specific listing.
- *
- * This function constructs a detailed modal for a listing, including its title, description, images, bid information,
- * and interaction options such as bidding if the auction is still active. If the listing data is not found,
- * it returns an error message element.
- *
- * @param {Array} listings An array of listing objects to search for the current listing by ID.
- * @returns {HTMLElement} The constructed modal element displaying the listing details.
- * @example
- * ```js
- * // Create a listing modal with sample listings
- * const sampleListings = [
- *   { id: '123', title: 'Sample Item', endsAt: '2023-09-13T15:30:00Z', media: [{ url: 'https://example.com/image.jpg', alt: 'Sample image' }], _count: { bids: 5 } }
- * ];
- * const modal = listingModal(sampleListings);
- * document.body.append(modal);
- * ```
- */
 
 export async function listingModal(id) {
   const isActive = load('profile');

@@ -6,20 +6,25 @@ import { openGallery } from './openGallery.js';
 import { openModal } from './openModal.js';
 
 /**
- * Runs the modal functionality based on the provided state and modal type, routing to the appropriate content.
+ * Controls the display of modals based on the provided state and modal type.
  *
- * This function determines which modal to display based on the `modalValue` parameter, opening either a gallery or a standard modal.
- * It sets up specific listeners and actions based on the modal type, such as link listeners for login/register or upload listeners for profile.
+ * This function manages the opening of different types of modals such as gallery, register, login, and profile
+ * based on the provided `modalValue`. It also sets up necessary listeners or gathers data for specific modal types.
+ * For gallery modals, it opens the gallery view, while other modals are opened normally with their respective
+ * functionality set up.
  *
  * @async
- * @param {boolean} [state=false] The state indicating whether the modal should be opened (`true`) or not.
- * @param {string} modalValue The type of modal to be displayed (e.g., 'gallery', 'register', 'login', 'profile').
- * @returns {Promise<void>} No return value; modifies the DOM to display the appropriate modal and sets up event listeners.
+ * @param {boolean} state - The state to determine whether the modal should be opened (`true`) or not.
+ * @param {string} modalValue - The type of modal to display (e.g., 'gallery', 'register', 'login', 'profile').
+ * @param {string} [listingId] - Optional listing ID, used when fetching specific listing details for certain modals.
+ *
  * @example
- * ```js
- * // Run the modal with the login form
- * runModal(true, 'login');
- * ```
+ * // Run a profile modal with setup for avatar upload listener
+ * runModal(true, 'profile');
+ *
+ * @example
+ * // Run a gallery modal for viewing images
+ * runModal(true, 'gallery');
  */
 export async function runModal(state = 'false', modalValue, listingId) {
   const currentModal = await modalRouter(modalValue, listingId);
