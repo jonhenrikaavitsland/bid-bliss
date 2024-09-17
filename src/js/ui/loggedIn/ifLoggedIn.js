@@ -26,7 +26,11 @@ export async function ifLoggedIn() {
   const profile = load('profile');
 
   if (token && profile) {
-    await getProfile();
+    const profileObj = load('profile');
+
+    if (!profileObj.credits) {
+      await getProfile();
+    }
 
     addBtn();
 
