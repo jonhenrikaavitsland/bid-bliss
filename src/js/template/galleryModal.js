@@ -26,9 +26,7 @@ export const DEFAULT_IMAGE_ALT = 'listing item';
  * document.body.append(modal);
  * ```
  */
-export function galleryModal() {
-  const media = load('media');
-
+export function galleryModal(media) {
   if (!Array.isArray(media) || media.length === 0) {
     console.warn('No media available, using default image.');
   }
