@@ -21,8 +21,8 @@ import { openModal } from './openModal.js';
  * runModal(true, 'login');
  * ```
  */
-export async function runModal(state = 'false', modalValue) {
-  const currentModal = await modalRouter(modalValue);
+export async function runModal(state = 'false', modalValue, listingId) {
+  const currentModal = await modalRouter(modalValue, listingId);
 
   if (state === true && modalValue === 'gallery') {
     openGallery(currentModal);
