@@ -1,15 +1,11 @@
-import { gallery } from '../data/constants';
-import { closeSvg, placeholderItemImg } from '../data/images';
+import { DEFAULT_IMAGE_ALT, DEFAULT_IMAGE_URL, gallery } from '../data/constants';
+import { closeSvg } from '../data/images';
 import { createBtn } from '../elements/createBtn';
 import { createDiv } from '../elements/createDiv';
 import { createImg } from '../elements/createImg';
-import { load } from '../localStorage/load';
 import { initializeSwipeEvents } from '../ui/gallery/initializeSwipeEvents';
 import { updateActiveImage } from '../ui/gallery/updateActiveImage';
 import { closeGallery } from '../ui/modal/closeGallery';
-
-export const DEFAULT_IMAGE_URL = placeholderItemImg;
-export const DEFAULT_IMAGE_ALT = 'listing item';
 
 /**
  * Creates and returns a modal element for displaying a gallery of images.

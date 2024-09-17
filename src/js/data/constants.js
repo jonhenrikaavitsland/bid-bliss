@@ -1,3 +1,5 @@
+import { placeholderItemImg } from './images';
+
 export const modal = document.querySelector(`[data-modal="modalObject"]`);
 export const gallery = document.querySelector(`[data-modal="galleryObject"]`);
 
@@ -17,3 +19,4 @@ export const MSG_Password = 'Invalid password. Must be at least 8 characters lon
 export const DEFAULT_TIME_FORMAT = 'invalid date';
 export const DEFAULT_IMAGE_ALT = 'listing item';
 export const DEFAULT_TITLE = 'Unknown item';
+export const DEFAULT_IMAGE_URL = placeholderItemImg;
