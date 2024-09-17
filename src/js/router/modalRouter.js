@@ -10,11 +10,12 @@ import { newListingModal } from '../template/newListingModal';
  *
  * This function determines which modal component to render based on the `modalValue` provided. It handles different
  * modal types such as login, register, listing, gallery, profile, and new listing. For the listing modal, it also
- * accepts a `listingId` to fetch specific listing details.
+ * accepts a `listingId` to fetch specific listing details, and for the gallery modal, it accepts `media` data to display.
  *
  * @async
  * @param {string} modalValue - The type of modal to display (e.g., 'login', 'register', 'listing', 'gallery', 'profile', 'newListing').
  * @param {string} [listingId] - Optional listing ID, used when fetching specific listing details for the listing modal.
+ * @param {Object} [media={}] - Optional media object, used for the gallery modal to display images.
  * @returns {Promise<HTMLElement|null>} The modal element to be displayed, or `null` if an error occurs.
  *
  * @example
@@ -24,6 +25,10 @@ import { newListingModal } from '../template/newListingModal';
  * @example
  * // Fetch and display a specific listing modal
  * const listingElement = await modalRouter('listing', '12345-listing-id');
+ *
+ * @example
+ * // Fetch and display a gallery modal with media
+ * const galleryElement = await modalRouter('gallery', null, { images: [...] });
  */
 export async function modalRouter(modalValue, listingId, media = {}) {
   try {
