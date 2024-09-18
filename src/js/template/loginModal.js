@@ -96,7 +96,7 @@ export function loginModal() {
 
   const regCta = createAnchor('#', '', '', 'text-center', 'py-2');
   const regText1 = createTextNode('Not yet a member? ');
-  const regText2 = createSpan('Register', 'text-secondary', 'hover:text-hoverSecondary');
+  const regText2 = createSpan('Register', 'text-secondary', 'hover:text-hoverSecondary', 'font-semibold', 'text-xl');
   const regText3 = createTextNode(' now!');
   regCta.append(regText1, regText2, regText3);
 

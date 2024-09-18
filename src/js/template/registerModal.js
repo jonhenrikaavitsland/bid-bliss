@@ -97,7 +97,7 @@ export function registerModal() {
 
   const regCta = createAnchor('#', '', '', 'text-center', 'py-2');
   const regText1 = createTextNode('Already a member? ');
-  const regText2 = createSpan('Login', 'text-secondary', 'hover:text-hoverSecondary');
+  const regText2 = createSpan('Login', 'text-secondary', 'hover:text-hoverSecondary', 'font-semibold', 'text-xl');
   const regText3 = createTextNode(' here!');
   regCta.append(regText1, regText2, regText3);
 
