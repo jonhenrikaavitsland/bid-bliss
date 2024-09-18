@@ -1,5 +1,5 @@
 import { modal } from '../data/constants';
-import { auctioneerWelcomeImg, closeSvg } from '../data/images';
+import { auctioneerWelcomeImg, closingIcon } from '../data/images';
 import { createAnchor } from '../elements/createAnchor';
 import { createBtn } from '../elements/createBtn';
 import { createDiv } from '../elements/createDiv';
@@ -50,7 +50,7 @@ export function loginModal() {
   element.setAttribute('id', 'profileModal');
 
   const closeBtn = createBtn('', 'backdrop-invert', 'rounded-full', 'shadow-customShadow', 'hover:animate-pulse');
-  const closeImg = createImg(closeSvg, 'close', 'size-5', 'rounded-full');
+  const closeImg = createImg(closingIcon, 'close', 'size-5', 'rounded-full');
   closeBtn.append(closeImg);
   const btnWrap = createDiv('size-9', 'flex', 'justify-center', 'items-center', 'cursor-pointer');
   btnWrap.addEventListener('click', () => {

@@ -3,7 +3,7 @@ import { isImageAccessible } from '../API/isImageAccessible';
 import { applyScrollShadow } from '../data/applyScrollShadow';
 import { API_Base, API_Key, API_Listings, modal } from '../data/constants';
 import { getTimeAhead } from '../data/getTimeAhead';
-import { closeSvg } from '../data/images';
+import { closingIcon } from '../data/images';
 import { initializeListings } from '../data/initializeListings';
 import { isValidUrl } from '../data/isValidUrl';
 import { createBtn } from '../elements/createBtn';
@@ -41,7 +41,7 @@ export function newListingModal() {
   element.setAttribute('id', 'profileModal');
 
   const closeBtn = createBtn('', 'backdrop-invert', 'rounded-full', 'shadow-customShadow', 'hover:animate-pulse');
-  const closeImg = createImg(closeSvg, 'close', 'size-5', 'rounded-full');
+  const closeImg = createImg(closingIcon, 'close', 'size-5', 'rounded-full');
   closeBtn.append(closeImg);
   const btnWrap = createDiv('size-9', 'flex', 'justify-center', 'items-center', 'cursor-pointer');
   btnWrap.addEventListener('click', () => {

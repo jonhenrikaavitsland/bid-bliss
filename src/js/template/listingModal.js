@@ -3,7 +3,7 @@ import { getProfile } from '../API/getProfile';
 import { API_Base, API_Listings, DEFAULT_IMAGE_ALT, DEFAULT_TIME_FORMAT, DEFAULT_TITLE, modal } from '../data/constants';
 import { formatDateTime } from '../data/formatDateTime';
 import { formatDate } from '../data/formateDate';
-import { closeSvg } from '../data/images';
+import { closingIcon } from '../data/images';
 import { createBtn } from '../elements/createBtn';
 import { createDiv } from '../elements/createDiv';
 import { createForm } from '../elements/createForm';
@@ -55,7 +55,7 @@ export async function listingModal(id) {
   element.setAttribute('id', 'profileModal');
 
   const closeBtn = createBtn('', 'backdrop-invert', 'rounded-full', 'shadow-customShadow', 'hover:animate-pulse');
-  const closeImg = createImg(closeSvg, 'close', 'size-5', 'rounded-full');
+  const closeImg = createImg(closingIcon, 'close', 'size-5', 'rounded-full');
   closeBtn.append(closeImg);
   const btnWrap = createDiv('size-9', 'flex', 'justify-center', 'items-center', 'cursor-pointer');
   btnWrap.addEventListener('click', () => {
