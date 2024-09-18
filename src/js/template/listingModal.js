@@ -170,6 +170,7 @@ export async function listingModal(id) {
     'md:rounded-e-xl',
     'shadow-customShadow',
   );
+  submitBtn.setAttribute('id', 'bidBtn');
 
   const bidsContainer = createDiv('mt-8', 'flex', 'flex-col', 'landscape:max-h-56', 'overflow-y-scroll');
 

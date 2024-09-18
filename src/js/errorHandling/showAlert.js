@@ -47,7 +47,6 @@ export function showAlert(message, ...elementIDs) {
   const hideAlert = () => {
     alertContainer.classList.remove('flex', 'border-error', 'border-correct');
     alertContainer.classList.add('hidden');
-    document.body.classList.remove('overflow-hidden');
 
     console.clear();
 

@@ -102,15 +102,20 @@ export function newListingModal() {
     const payload = { title, description: description || '', tags, media: imageContainer, endsAt };
 
     try {
-      const response = await fetchData(`${API_Base}${API_Listings}`, {
-        method: 'POST',
-        headers: {
-          Authorization: `Bearer ${token}`,
-          'X-Noroff-API-Key': API_Key,
-          'Content-Type': 'application/json',
+      const response = await fetchData(
+        `${API_Base}${API_Listings}`,
+        {
+          method: 'POST',
+          headers: {
+            Authorization: `Bearer ${token}`,
+            'X-Noroff-API-Key': API_Key,
+            'Content-Type': 'application/json',
+          },
+          body: JSON.stringify(payload),
         },
-        body: JSON.stringify(payload),
-      });
+        'newListing',
+        'newListingBtn',
+      );
 
       listingContents.reset();
       imageContainer = [];
@@ -230,6 +235,7 @@ export function newListingModal() {
   const container = createDiv('flex', 'flex-col', 'landscape:flex-row', 'h-full');
 
   const cta = createBtn('create listing', 'uppercase', 'bg-secondary', 'hover:bg-hoverSecondary', 'py-3', 'px-4', 'md:px-6', 'md:text-lg', 'rounded-xl', 'text-white', 'shadow-customShadow', 'mx-auto', 'font-serif', 'font-medium');
+  cta.setAttribute('id', 'newListingBtn');
 
   const ctaWrap = createDiv('flex', 'pt-13', 'pb-8');
   ctaWrap.append(cta);

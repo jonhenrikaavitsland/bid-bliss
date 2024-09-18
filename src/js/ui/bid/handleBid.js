@@ -64,7 +64,7 @@ export async function handleBid(event, rawListingID, bidsContainer, currentHigh)
       body: JSON.stringify({ amount: parseFloat(sanitizedBidAmount) }),
     };
 
-    const response = await fetchData(url, options, 'bid');
+    const response = await fetchData(url, options, 'bid', 'id', 'bidBtn');
 
     if (response && response.data && Array.isArray(response.data.bids)) {
       response.data.bids.reverse();
