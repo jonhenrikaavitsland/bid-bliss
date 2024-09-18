@@ -85,7 +85,7 @@ export async function listingModal(id) {
 
   const topContainer = createDiv('flex', 'flex-col', 'landscape:w-1/2', 'flex-1');
 
-  const pointerBtn = pointerButton(media);
+  const pointerBtn = pointerButton();
 
   const imageWrap = createDiv('w-full', 'aspect-square', 'overflow-hidden', 'flex', 'items-center', 'justify-center', 'h-full', 'relative');
   imageWrap.addEventListener('click', () => {
