@@ -4,7 +4,6 @@ import { renderListings } from './render/renderListings';
 import { renderLoginBtn } from './render/renderLoginBtn';
 import { ifLoggedIn } from './ui/loggedIn/ifLoggedIn';
 import { search } from './ui/search/search';
-import closeIcon from '../../src/images/close_icon.png';
 
 runApp();
 
@@ -18,5 +17,3 @@ async function runApp() {
 
   console.log('Listings:', newListings);
 }
-
-console.log(closeIcon);
