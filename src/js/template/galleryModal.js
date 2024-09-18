@@ -58,7 +58,7 @@ export function galleryModal(media) {
   });
 
   const closeBtn = createBtn('', 'absolute', 'top-2.5', 'right-2.5', 'rounded-full', 'shadow-customShadow', 'hover:animate-pulse');
-  const closeImg = createImg(closeSvg, 'close', 'size-5');
+  const closeImg = createImg(closeSvg, 'close', 'size-5', 'rounded-full');
   closeBtn.append(closeImg);
   closeBtn.addEventListener('click', () => {
     closeGallery(gallery);
