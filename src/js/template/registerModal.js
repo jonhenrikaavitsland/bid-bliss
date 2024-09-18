@@ -91,7 +91,7 @@ export function registerModal() {
 
   const ctaGroup = createDiv('flex', 'flex-col', 'mx-auto', 'gap-5');
   const wrap = createDiv('mx-auto');
-  const cta = createInput('submit', '', '', 'uppercase', 'cursor-pointer', 'bg-primary', 'hover:bg-hoverPrimary', 'rounded-xl', 'py-3', 'px-4', 'md:px-6', 'font-serif', 'text-neutralBg', 'shadow-customShadow', 'font-medium', 'md:text-lg');
+  const cta = createInput('submit', '', 'registerBtn', 'uppercase', 'cursor-pointer', 'bg-primary', 'hover:bg-hoverPrimary', 'rounded-xl', 'py-3', 'px-4', 'md:px-6', 'font-serif', 'text-neutralBg', 'shadow-customShadow', 'font-medium', 'md:text-lg');
   cta.value = 'login';
   wrap.append(cta);
 
