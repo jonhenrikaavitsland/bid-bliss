@@ -33,7 +33,6 @@ export async function fetchData(url, object = {}, alertType, ...elementIDs) {
 
     alertUser(alertType, response.status, ...elementIDs);
     if (elementIDs.length > 0) {
-      console.log('FETCH2:', elementIDs);
       disableElements(...elementIDs);
     }
 
