@@ -30,8 +30,12 @@ export function showAlert(message) {
 
   if (message === 'Registration successful! Your profile has been created.') {
     alertContainer.classList.add('border-correct');
+    alertButton.classList.add('bg-correct', 'text-neutralTxt');
+    alertButton.classList.remove('bg-error', 'text-white');
   } else {
     alertContainer.classList.add('border-error');
+    alertButton.classList.add('bg-error', 'text-white');
+    alertButton.classList.remove('bg-correct', 'text-neutralTxt');
   }
 
   alertContainer.classList.remove('hidden');
