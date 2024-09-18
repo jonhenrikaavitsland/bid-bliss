@@ -1,3 +1,5 @@
+import { enableElements } from '../ui/forms/enableElement';
+
 /**
  * Displays a custom alert message in the DOM and handles the alert's visibility.
  *
@@ -16,7 +18,7 @@
  * showAlert('An unknown error occurred. Please try again.');
  * ```
  */
-export function showAlert(message) {
+export function showAlert(message, ...elementIDs) {
   const alertContainer = document.getElementById('custom-alert');
   const alertMessage = document.getElementById('alert-message');
   const alertButton = document.getElementById('alert-button');
@@ -45,9 +47,26 @@ export function showAlert(message) {
   const hideAlert = () => {
     alertContainer.classList.remove('flex', 'border-error', 'border-correct');
     alertContainer.classList.add('hidden');
+    document.body.classList.remove('overflow-hidden');
+
     console.clear();
+
     alertButton.removeEventListener('click', hideAlert);
+    document.removeEventListener('keydown', onkeydown);
+
+    if (elementIDs.length > 0) {
+      setTimeout(() => {
+        enableElements(...elementIDs);
+      }, 2000);
+    }
+  };
+
+  const onKeyDown = (event) => {
+    if (event.key === 'Enter') {
+      hideAlert();
+    }
   };
 
   alertButton.addEventListener('click', hideAlert);
+  document.addEventListener('keydown', onKeyDown);
 }
