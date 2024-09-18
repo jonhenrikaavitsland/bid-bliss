@@ -40,6 +40,9 @@ export async function loginUser(email, password) {
         body: JSON.stringify({ email, password }),
       },
       'login',
+      'loginBtn',
+      'email',
+      'password',
     );
 
     if (response?.data) {
