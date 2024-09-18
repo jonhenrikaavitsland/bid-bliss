@@ -37,13 +37,21 @@ export function createImg(src = '', alt = '', ...classes) {
     image.classList.add(...validClasses);
   }
 
-  image.onerror = () => handleImageError(image);
   image.loading = 'lazy';
 
-  image.onload = () => {
-    const exemptFolder = ['/src/images', '/assets/'];
+  image.onerror = () => handleImageError(image);
+  console.log('Image loaded:', image.src, 'Dimensions:', image.naturalWidth, image.naturalHeight);
 
-    const isExempt = exemptFolder.some((folder) => image.src.includes(folder));
+  image.onload = () => {
+    const exemptFolders = ['/src/images', '/assets/'];
+
+    // Normalize the URL to match against the exempt folders
+    const normalizedSrc = new URL(image.src, window.location.origin).pathname;
+
+    // Check if the image is exempt based on its path
+    const isExempt = exemptFolders.some((folder) => normalizedSrc.startsWith(folder));
+
+    console.log('Normalized Path:', normalizedSrc, 'Is Exempt:', isExempt);
 
     if (!isExempt && (image.naturalWidth < 327 || image.naturalHeight < 327)) {
       image.src = placeholderItemImg;
