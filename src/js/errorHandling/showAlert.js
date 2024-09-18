@@ -57,6 +57,7 @@ export function showAlert(message, ...elementIDs) {
     if (elementIDs.length > 0) {
       setTimeout(() => {
         enableElements(...elementIDs);
+        elementIDs = [];
       }, 2000);
     }
   };
