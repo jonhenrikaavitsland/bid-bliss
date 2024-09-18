@@ -47,6 +47,9 @@ export async function registerUser(name, email, password) {
         body: JSON.stringify({ name, email, password }),
       },
       'register',
+      'registerBtn',
+      'email',
+      'password',
     );
 
     if (!response?.data) {
