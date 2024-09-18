@@ -1,9 +1,5 @@
-import { defineConfig } from 'vite';
-import svgLoader from 'vite-plugin-svg-loader';
-
-export default defineConfig({
-  plugins: [svgLoader()],
+export default {
   esbuild: {
-    target: 'esnext', // Specifies the target environment for ESBuild
+    target: 'esnext',
   },
-});
+};
