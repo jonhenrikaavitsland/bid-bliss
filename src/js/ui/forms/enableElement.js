@@ -4,9 +4,8 @@ export function enableElements(...elementIds) {
     if (element) {
       if (element.disabled) {
         element.disabled = false;
+        elementIds = [];
       }
-    } else {
-      console.error(`Element with ID "${elementId}" not found.`);
     }
   });
 }
