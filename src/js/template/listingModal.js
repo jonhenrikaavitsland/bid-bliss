@@ -22,6 +22,7 @@ import { closeModal } from '../ui/modal/closeModal';
 import { runModal } from '../ui/modal/runModal';
 import { loggedInButton } from './loggedInButton';
 import { navLinks } from './navLinks';
+import { pointerButton } from './pointerButton';
 
 /**
  * Creates a detailed modal for displaying information about a specific listing.
@@ -83,13 +84,16 @@ export async function listingModal(id) {
 
   const topContainer = createDiv('flex', 'flex-col', 'landscape:w-1/2', 'flex-1');
 
-  const imageWrap = createDiv('w-full', 'aspect-square', 'overflow-hidden', 'flex', 'items-center', 'justify-center', 'h-full');
+  const imageWrap = createDiv('w-full', 'aspect-square', 'overflow-hidden', 'flex', 'items-center', 'justify-center', 'h-full', 'relative');
   imageWrap.addEventListener('click', () => {
     runModal(true, 'gallery', '', media);
   });
 
   const image = createImg(media[0]?.url, media[0]?.alt || DEFAULT_IMAGE_ALT, 'cursor-pointer', 'object-cover', 'w-full', 'h-full', 'landscape:rounded-bl-xl');
-  imageWrap.append(image);
+
+  const pointerBtn = pointerButton(media);
+
+  imageWrap.append(image, pointerBtn);
   topContainer.append(imageWrap);
 
   const bottomContainer = createDiv('flex', 'flex-col', 'landscape:w-1/2', 'bg-neutralBg', 'rounded-b-xl', 'landscape:rounded-s-none', 'flex-1');
