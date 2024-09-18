@@ -1,4 +1,5 @@
 import { alertUser } from '../errorHandling/alertUser';
+import { disableElements } from '../ui/forms/disableElements';
 
 /**
  * Fetches data from a specified URL with optional configuration object and alert type.
@@ -19,7 +20,7 @@ import { alertUser } from '../errorHandling/alertUser';
  *   .catch(error => console.error(error));
  * ```
  */
-export async function fetchData(url, object = {}, alertType) {
+export async function fetchData(url, object = {}, alertType, ...elementIDs) {
   if (typeof url !== 'string' || !url.trim()) {
     console.error('Invalid URL provided');
     throw new Error('Invalid URL');
@@ -30,7 +31,11 @@ export async function fetchData(url, object = {}, alertType) {
 
     const result = await response.json();
 
-    alertUser(alertType, response.status);
+    alertUser(alertType, response.status, ...elementIDs);
+    if (elementIDs.length > 0) {
+      console.log('FETCH2:', elementIDs);
+      disableElements(...elementIDs);
+    }
 
     if (!response.ok) {
       console.error('Error:', response.status, response.statusText);
