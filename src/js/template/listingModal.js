@@ -16,6 +16,7 @@ import { createSection } from '../elements/createSection';
 import { createSpan } from '../elements/createSpan';
 import { createTime } from '../elements/createTime';
 import { load } from '../localStorage/load';
+import { save } from '../localStorage/save';
 import { getHighestBid } from '../ui/bid/getHighestBid';
 import { handleBid } from '../ui/bid/handleBid';
 import { closeModal } from '../ui/modal/closeModal';
@@ -84,14 +85,16 @@ export async function listingModal(id) {
 
   const topContainer = createDiv('flex', 'flex-col', 'landscape:w-1/2', 'flex-1');
 
+  const pointerBtn = pointerButton(media);
+
   const imageWrap = createDiv('w-full', 'aspect-square', 'overflow-hidden', 'flex', 'items-center', 'justify-center', 'h-full', 'relative');
   imageWrap.addEventListener('click', () => {
     runModal(true, 'gallery', '', media);
+    save('pointerPulse', true);
+    pointerBtn.classList.add('hidden');
   });
 
   const image = createImg(media[0]?.url, media[0]?.alt || DEFAULT_IMAGE_ALT, 'cursor-pointer', 'object-cover', 'w-full', 'h-full', 'landscape:rounded-bl-xl');
-
-  const pointerBtn = pointerButton(media);
 
   imageWrap.append(image, pointerBtn);
   topContainer.append(imageWrap);
