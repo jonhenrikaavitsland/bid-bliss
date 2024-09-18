@@ -32,11 +32,11 @@ export async function fetchData(url, object = {}, alertType, ...elementIDs) {
     const result = await response.json();
 
     alertUser(alertType, response.status, ...elementIDs);
-    if (elementIDs.length > 0) {
-      disableElements(...elementIDs);
-    }
 
     if (!response.ok) {
+      if (elementIDs.length > 0) {
+        disableElements(...elementIDs);
+      }
       console.error('Error:', response.status, response.statusText);
       throw new Error(`Error: ${response.status} - ${response.statusText}`);
     }
