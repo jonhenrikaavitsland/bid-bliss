@@ -15,6 +15,7 @@ import { createInput } from '../elements/createInput';
 import { createLabel } from '../elements/createLabel';
 import { createTextarea } from '../elements/createTextarea';
 import { load } from '../localStorage/load';
+import { refreshListings } from '../render/refreshListings';
 import { renderListings } from '../render/renderListings';
 import { closeModal } from '../ui/modal/closeModal';
 import { clearError } from '../validate/clearError';
@@ -122,8 +123,7 @@ export function newListingModal() {
       const images = document.getElementById('imagePreviewContainer');
       if (images) images.innerHTML = '';
 
-      const newListings = await initializeListings();
-      renderListings(newListings);
+      await refreshListings();
     } catch (error) {
       console.error('Error during form submission:', error);
       generalFeedback.innerText = 'An error occurred during submission. Please try again.';
