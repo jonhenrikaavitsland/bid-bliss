@@ -1,13 +1,23 @@
 import { listingCard } from '../template/listingCard';
+import { createLoadingOverlay } from './createLoadingOverlay';
 
-export function renderNextBatch(parent, allListings, currentIndex, batchSize) {
-  const listingsToRender = allListings.slice(currentIndex, currentIndex + batchSize);
+export function renderNextBatch(state, listings, batchSize) {
+  const { currentIndex } = state;
+  let listingsToRender = listings.slice(0, currentIndex + batchSize);
 
-  // Debugging log to check what listings are rendered
-  console.log('Rendering next batch:', listingsToRender);
+  const parent = document.querySelector(`[data-modal="auctionModalDisplayListings"]`);
+  parent.innerHTML = '';
+  const overlay = createLoadingOverlay();
+  console.log('nextBatch:', overlay);
+
+  parent.appendChild(overlay);
 
   listingsToRender.forEach((listing) => {
     const card = listingCard(listing);
     parent.appendChild(card);
   });
+
+  state.currentIndex += batchSize;
+
+  sessionStorage.setItem('listingState', JSON.stringify(state));
 }

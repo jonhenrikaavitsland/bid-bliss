@@ -1,9 +1,11 @@
 import { setupScrollListener } from '../listeners/setupScrollListener';
-import { createLoadingOverlay } from './createLoadingOverlay';
 import { renderNextBatch } from './renderNextBatch';
 
 export function renderCards(listings) {
-  const state = { currentIndex: 0 };
+  let state = {
+    currentIndex: 0,
+  };
+
   let batchSize = 15;
 
   if (window.innerWidth < 1245) {
@@ -16,14 +18,14 @@ export function renderCards(listings) {
     } else {
       batchSize = 15; // or any other default batch size you want
     }
+
+    sessionStorage.setItem('batchSize', batchSize);
   });
 
-  const parent = document.querySelector(`[data-modal="auctionModalDisplayListings"]`);
-  const overlay = createLoadingOverlay();
-  parent.innerHTML = '';
-  parent.appendChild(overlay);
+  sessionStorage.setItem('listingState', JSON.stringify(state));
+  sessionStorage.setItem('batchSize', batchSize);
 
-  renderNextBatch(parent, listings, state.currentIndex, batchSize);
+  renderNextBatch(state, listings, batchSize);
 
-  setupScrollListener(renderNextBatch.bind(null, parent), overlay, listings, batchSize, state);
+  setupScrollListener(renderNextBatch, listings);
 }
