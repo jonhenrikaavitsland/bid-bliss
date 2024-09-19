@@ -9,7 +9,7 @@
     <script type="module" src="./src/js/index.js"></script>
     <title>Home | BidBliss</title>
   </head>
-  <body class="bg-neutralBg flex flex-col h-screen text-primary">
+  <body class="bg-neutralBg flex flex-col h-full text-primary">
     <div class="absolute bg-neutralTxt w-dvw h-dvh z-20 bg-opacity-50 hidden overflow-y-scroll items-center justify-center p-5 md:p-10" data-modal="modalObject"></div>
     <div class="absolute bg-neutralTxt w-dvw h-dvh z-30 hidden" data-modal="galleryObject"></div>
     <div class="fixed top-0 left-0 w-dvw h-dvh bg-neutralTxt bg-opacity-50 justify-center items-center border-2 z-50 hidden" id="custom-alert">
@@ -38,7 +38,7 @@
         </form>
         <div class="flex justify-end" data-buttons="newAuction"></div>
       </div>
-      <div class="flex flex-col md:flex-row flex-wrap gap-8 md:gap-10 mx-auto md:justify-center grow md:pb-5 lg:pb-0" data-modal="auctionModalDisplayListings">
+      <div class="relative flex flex-col md:flex-row flex-wrap gap-8 md:gap-10 mx-auto md:justify-center grow md:pb-5 lg:pb-0 min-h-screen" data-modal="auctionModalDisplayListings">
         <div class="lds-grid text-primary inline-block relative w-20 h-20">
           <div class="animation-properties animate-loaderAnimation animation-delay-0elay0 top-2 left-2"></div>
           <div class="animation-properties animate-loaderAnimation animation-delay-4 top-2 left-8"></div>
