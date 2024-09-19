@@ -23,6 +23,8 @@ export function pointerButton() {
 
   if (!load('pointerPulse')) {
     element.classList.add('animate-pulse');
+  } else {
+    element.classList.add('hidden');
   }
 
   element.addEventListener('click', () => {
