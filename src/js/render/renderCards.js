@@ -1,6 +1,21 @@
 import { setupScrollListener } from '../listeners/setupScrollListener';
 import { renderNextBatch } from './renderNextBatch';
 
+/**
+ * Renders auction listing cards in batches and sets up dynamic resizing behavior.
+ *
+ * This function initializes the state for rendering auction listings, including the
+ * current index and batch size. It adjusts the batch size based on the screen width
+ * and listens for window resizing events to ensure responsive rendering. It also saves
+ * the current state and batch size to session storage and renders the next batch of listings.
+ * Additionally, a scroll listener is set up to trigger rendering when the user scrolls.
+ *
+ * @function renderCards
+ * @param {Array} listings - An array of auction listing objects to render.
+ * @returns {void}
+ * @example
+ * renderCards(listings);
+ */
 export function renderCards(listings) {
   let state = {
     currentIndex: 0,
