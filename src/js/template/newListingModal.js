@@ -213,7 +213,7 @@ export function newListingModal() {
 
       altInput.addEventListener('input', (event) => {
         const index = Array.from(images.children).indexOf(imageElement);
-        imageContainer[index].alt = event.target.value;
+        imageContainer[index].alt = sanitizeInput(event.target.value);
       });
 
       removeBtn.addEventListener('click', () => {
