@@ -4,8 +4,8 @@
 
 This is my work for my Semester Project 2 delivery.
 The online auction marketplace that makes bidding blissful!
-An auction marketplace that keeps the buyers and sellers anonymous while maintaining a elegant design and layout.
-Upon registering users are given 1000 credits to use on the page.
+An auction marketplace that keeps the buyers and sellers anonymous while maintaining an elegant design and layout.
+Upon registering, users are given 1000 credits to use on the page.
 
 ## User Stories:
 
