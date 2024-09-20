@@ -84,8 +84,8 @@ export function loginModal() {
   const passwordGroup = createDiv('flex', 'flex-col', 'gap-1.5');
   const labelPassword = createLabel('password', 'Password:', 'md:text-xl');
   const passwordInput = createInput('password', '*****', 'password', 'h-8', 'md:h-10', 'pl-2', 'rounded-xl', 'shadow-customShadow');
-  const passwordValidate = createDiv('text-sm', 'min-h-3.5', 'text-error');
-  passwordValidate.setAttribute('data-validate', 'password');
+  const passwordValidate = createDiv('text-sm', 'min-h-3.5');
+  passwordValidate.setAttribute('data-counter', 'password');
   passwordGroup.append(labelPassword, passwordInput, passwordValidate);
 
   const ctaGroup = createDiv('flex', 'flex-col', 'mx-auto', 'gap-5');
