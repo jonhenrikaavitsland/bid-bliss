@@ -1,4 +1,5 @@
 import { isValidUrl } from '../../data/isValidUrl';
+import { sanitizeInput } from '../../validate/sanitize/sanitizeInput';
 import { resetInputStyles } from './resetInputStyles';
 import { updateInputStyles } from './updateInputStyles';
 
@@ -25,7 +26,7 @@ export function handleInputChange() {
     return;
   }
 
-  const url = uploadInput.value.trim();
+  const url = sanitizeInput(uploadInput.value.trim());
 
   if (!url) {
     resetInputStyles();

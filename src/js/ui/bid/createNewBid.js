@@ -27,7 +27,7 @@ import { DEFAULT_TIME_FORMAT } from '../../data/constants';
 export function createNewBid(bidData, bidAmount) {
   const bidsList = createDiv('flex', 'flex-col', 'text-center', 'gap-0.5', 'py-2', 'bg-correct', 'bg-opacity-50');
 
-  const bidId = createSpan(bidData.id);
+  const bidId = createSpan(`Bid#: ${bidData.id.slice(0, 8)}`);
   const bidSize = createSpan(`${bidAmount} Cr.`);
 
   const bidFormatted = formatDateTime(bidData.created);

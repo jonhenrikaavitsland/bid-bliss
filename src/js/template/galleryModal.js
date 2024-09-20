@@ -1,5 +1,5 @@
 import { DEFAULT_IMAGE_ALT, DEFAULT_IMAGE_URL, gallery } from '../data/constants';
-import { closeSvg } from '../data/images';
+import { closingIcon } from '../data/images';
 import { createBtn } from '../elements/createBtn';
 import { createDiv } from '../elements/createDiv';
 import { createImg } from '../elements/createImg';
@@ -58,7 +58,7 @@ export function galleryModal(media) {
   });
 
   const closeBtn = createBtn('', 'absolute', 'top-2.5', 'right-2.5', 'rounded-full', 'shadow-customShadow', 'hover:animate-pulse');
-  const closeImg = createImg(closeSvg, 'close', 'size-5');
+  const closeImg = createImg(closingIcon, 'close', 'size-5', 'rounded-full');
   closeBtn.append(closeImg);
   closeBtn.addEventListener('click', () => {
     closeGallery(gallery);

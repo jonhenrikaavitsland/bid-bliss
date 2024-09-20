@@ -1,6 +1,7 @@
 import { fetchData } from './fetchData';
 import { API_Base, API_Key, API_Profiles } from '../data/constants';
 import { load } from '../localStorage/load';
+import { save } from '../localStorage/save';
 
 /**
  * Updates the user's profile with a new avatar URL.
@@ -62,6 +63,10 @@ export async function updateProfile(url) {
 
   try {
     const response = await fetchData(`${API_Base}${API_Profiles}/${name}`, options);
+
+    const { email, bio, banner, credits, _count } = profile;
+
+    save('profile', { name, email, bio, avatar: { url, alt: name }, banner, credits, _count });
 
     if (response && !response.error) {
       return true;

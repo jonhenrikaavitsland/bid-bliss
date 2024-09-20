@@ -3,7 +3,7 @@ import { getProfile } from '../API/getProfile';
 import { API_Base, API_Listings, DEFAULT_IMAGE_ALT, DEFAULT_TIME_FORMAT, DEFAULT_TITLE, modal } from '../data/constants';
 import { formatDateTime } from '../data/formatDateTime';
 import { formatDate } from '../data/formateDate';
-import { closeSvg } from '../data/images';
+import { closingIcon } from '../data/images';
 import { createBtn } from '../elements/createBtn';
 import { createDiv } from '../elements/createDiv';
 import { createForm } from '../elements/createForm';
@@ -16,12 +16,14 @@ import { createSection } from '../elements/createSection';
 import { createSpan } from '../elements/createSpan';
 import { createTime } from '../elements/createTime';
 import { load } from '../localStorage/load';
+import { save } from '../localStorage/save';
 import { getHighestBid } from '../ui/bid/getHighestBid';
 import { handleBid } from '../ui/bid/handleBid';
 import { closeModal } from '../ui/modal/closeModal';
 import { runModal } from '../ui/modal/runModal';
 import { loggedInButton } from './loggedInButton';
 import { navLinks } from './navLinks';
+import { pointerButton } from './pointerButton';
 
 /**
  * Creates a detailed modal for displaying information about a specific listing.
@@ -55,7 +57,7 @@ export async function listingModal(id) {
   element.setAttribute('id', 'profileModal');
 
   const closeBtn = createBtn('', 'backdrop-invert', 'rounded-full', 'shadow-customShadow', 'hover:animate-pulse');
-  const closeImg = createImg(closeSvg, 'close', 'size-5');
+  const closeImg = createImg(closingIcon, 'close', 'size-5', 'rounded-full');
   closeBtn.append(closeImg);
   const btnWrap = createDiv('size-9', 'flex', 'justify-center', 'items-center', 'cursor-pointer');
   btnWrap.addEventListener('click', () => {
@@ -83,13 +85,18 @@ export async function listingModal(id) {
 
   const topContainer = createDiv('flex', 'flex-col', 'landscape:w-1/2', 'flex-1');
 
-  const imageWrap = createDiv('w-full', 'aspect-square', 'overflow-hidden', 'flex', 'items-center', 'justify-center', 'h-full');
+  const pointerBtn = pointerButton();
+
+  const imageWrap = createDiv('w-full', 'aspect-square', 'overflow-hidden', 'flex', 'items-center', 'justify-center', 'h-full', 'relative');
   imageWrap.addEventListener('click', () => {
     runModal(true, 'gallery', '', media);
+    save('pointerPulse', true);
+    pointerBtn.classList.add('hidden');
   });
 
   const image = createImg(media[0]?.url, media[0]?.alt || DEFAULT_IMAGE_ALT, 'cursor-pointer', 'object-cover', 'w-full', 'h-full', 'landscape:rounded-bl-xl');
-  imageWrap.append(image);
+
+  imageWrap.append(image, pointerBtn);
   topContainer.append(imageWrap);
 
   const bottomContainer = createDiv('flex', 'flex-col', 'landscape:w-1/2', 'bg-neutralBg', 'rounded-b-xl', 'landscape:rounded-s-none', 'flex-1');
@@ -170,6 +177,7 @@ export async function listingModal(id) {
     'md:rounded-e-xl',
     'shadow-customShadow',
   );
+  submitBtn.setAttribute('id', 'bidBtn');
 
   const bidsContainer = createDiv('mt-8', 'flex', 'flex-col', 'landscape:max-h-56', 'overflow-y-scroll');
 

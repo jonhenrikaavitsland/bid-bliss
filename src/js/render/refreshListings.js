@@ -1,21 +1,24 @@
-import { listingService } from '../data/listingService';
+import { initializeListings } from '../data/initializeListings';
+import { rerenderListings } from './rerenderListings';
 
 /**
- * Refreshes the listings by fetching the latest data from the listing service.
+ * Refreshes and re-renders auction listings in the modal.
  *
- * This function calls the `fetchListings` method of the `listingService` to update the listings data.
- * It performs the fetch operation asynchronously to ensure the latest data is loaded.
+ * This function fetches the latest listings using `initializeListings()` and updates the
+ * displayed listings in the modal. It retrieves the current render state (e.g., `currentIndex`)
+ * from session storage, ensuring the listings are rendered from the correct index.
  *
  * @async
- * @returns {Promise<void>} No return value; refreshes the listings by fetching new data.
+ * @function refreshListings
+ * @returns {Promise<void>}
  * @example
- * ```js
- * // Refresh the listings by fetching the latest data
- * refreshListings()
- *   .then(() => console.log('Listings refreshed successfully'))
- *   .catch(error => console.error('Error refreshing listings:', error));
- * ```
+ * await refreshListings();
  */
 export async function refreshListings() {
-  await listingService.fetchListings();
+  const parent = document.querySelector(`[data-modal="auctionModalDisplayListings"]`);
+  const listings = await initializeListings();
+
+  let state = JSON.parse(sessionStorage.getItem('listingState'));
+
+  rerenderListings(parent, listings, state.currentIndex);
 }

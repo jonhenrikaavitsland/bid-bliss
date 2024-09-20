@@ -1,5 +1,5 @@
 import { modal } from '../data/constants';
-import { closeSvg, placeholderImg } from '../data/images';
+import { closingIcon, placeholderImg } from '../data/images';
 import { createBtn } from '../elements/createBtn';
 import { createDiv } from '../elements/createDiv';
 import { createForm } from '../elements/createForm';
@@ -64,7 +64,7 @@ export function profileModal() {
   element.setAttribute('id', 'profileModal');
 
   const closeBtn = createBtn('', 'backdrop-invert', 'rounded-full', 'shadow-customShadow', 'hover:animate-pulse');
-  const closeImg = createImg(closeSvg, 'close', 'size-5');
+  const closeImg = createImg(closingIcon, 'close', 'size-5', 'rounded-full');
   closeBtn.append(closeImg);
   const btnWrap = createDiv('size-9', 'flex', 'justify-center', 'items-center', 'cursor-pointer');
   btnWrap.addEventListener('click', () => {

@@ -3,7 +3,7 @@ import { isImageAccessible } from '../API/isImageAccessible';
 import { applyScrollShadow } from '../data/applyScrollShadow';
 import { API_Base, API_Key, API_Listings, modal } from '../data/constants';
 import { getTimeAhead } from '../data/getTimeAhead';
-import { closeSvg } from '../data/images';
+import { closingIcon } from '../data/images';
 import { initializeListings } from '../data/initializeListings';
 import { isValidUrl } from '../data/isValidUrl';
 import { createBtn } from '../elements/createBtn';
@@ -15,6 +15,7 @@ import { createInput } from '../elements/createInput';
 import { createLabel } from '../elements/createLabel';
 import { createTextarea } from '../elements/createTextarea';
 import { load } from '../localStorage/load';
+import { refreshListings } from '../render/refreshListings';
 import { renderListings } from '../render/renderListings';
 import { closeModal } from '../ui/modal/closeModal';
 import { clearError } from '../validate/clearError';
@@ -41,7 +42,7 @@ export function newListingModal() {
   element.setAttribute('id', 'profileModal');
 
   const closeBtn = createBtn('', 'backdrop-invert', 'rounded-full', 'shadow-customShadow', 'hover:animate-pulse');
-  const closeImg = createImg(closeSvg, 'close', 'size-5');
+  const closeImg = createImg(closingIcon, 'close', 'size-5', 'rounded-full');
   closeBtn.append(closeImg);
   const btnWrap = createDiv('size-9', 'flex', 'justify-center', 'items-center', 'cursor-pointer');
   btnWrap.addEventListener('click', () => {
@@ -102,23 +103,27 @@ export function newListingModal() {
     const payload = { title, description: description || '', tags, media: imageContainer, endsAt };
 
     try {
-      const response = await fetchData(`${API_Base}${API_Listings}`, {
-        method: 'POST',
-        headers: {
-          Authorization: `Bearer ${token}`,
-          'X-Noroff-API-Key': API_Key,
-          'Content-Type': 'application/json',
+      const response = await fetchData(
+        `${API_Base}${API_Listings}`,
+        {
+          method: 'POST',
+          headers: {
+            Authorization: `Bearer ${token}`,
+            'X-Noroff-API-Key': API_Key,
+            'Content-Type': 'application/json',
+          },
+          body: JSON.stringify(payload),
         },
-        body: JSON.stringify(payload),
-      });
+        'newListing',
+        'newListingBtn',
+      );
 
       listingContents.reset();
       imageContainer = [];
       const images = document.getElementById('imagePreviewContainer');
       if (images) images.innerHTML = '';
 
-      const newListings = await initializeListings();
-      renderListings(newListings);
+      await refreshListings();
     } catch (error) {
       console.error('Error during form submission:', error);
       generalFeedback.innerText = 'An error occurred during submission. Please try again.';
@@ -208,7 +213,7 @@ export function newListingModal() {
 
       altInput.addEventListener('input', (event) => {
         const index = Array.from(images.children).indexOf(imageElement);
-        imageContainer[index].alt = event.target.value;
+        imageContainer[index].alt = sanitizeInput(event.target.value);
       });
 
       removeBtn.addEventListener('click', () => {
@@ -230,6 +235,7 @@ export function newListingModal() {
   const container = createDiv('flex', 'flex-col', 'landscape:flex-row', 'h-full');
 
   const cta = createBtn('create listing', 'uppercase', 'bg-secondary', 'hover:bg-hoverSecondary', 'py-3', 'px-4', 'md:px-6', 'md:text-lg', 'rounded-xl', 'text-white', 'shadow-customShadow', 'mx-auto', 'font-serif', 'font-medium');
+  cta.setAttribute('id', 'newListingBtn');
 
   const ctaWrap = createDiv('flex', 'pt-13', 'pb-8');
   ctaWrap.append(cta);

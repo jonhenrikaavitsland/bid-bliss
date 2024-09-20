@@ -25,7 +25,7 @@ import { showAlert } from './showAlert';
  * alertUser('unsupportedType', 500); // Logs: Unsupported alert type: unsupportedType
  * ```
  */
-export function alertUser(alertType, alertStatus) {
+export function alertUser(alertType, alertStatus, ...elementIDs) {
   let message;
 
   switch (alertType) {
@@ -50,6 +50,6 @@ export function alertUser(alertType, alertStatus) {
   }
 
   if (message) {
-    showAlert(message);
+    showAlert(message, ...elementIDs);
   }
 }

@@ -1,5 +1,5 @@
 import { modal } from '../data/constants';
-import { auctioneerSignupImg, closeSvg } from '../data/images';
+import { auctioneerSignupImg, closingIcon } from '../data/images';
 import { createAnchor } from '../elements/createAnchor';
 import { createBtn } from '../elements/createBtn';
 import { createDiv } from '../elements/createDiv';
@@ -51,7 +51,7 @@ export function registerModal() {
   element.setAttribute('id', 'profileModal');
 
   const closeBtn = createBtn('', 'backdrop-invert', 'rounded-full', 'shadow-customShadow', 'hover:animate-pulse');
-  const closeImg = createImg(closeSvg, 'close', 'size-5');
+  const closeImg = createImg(closingIcon, 'close', 'size-5', 'rounded-full');
   closeBtn.append(closeImg);
   const btnWrap = createDiv('size-9', 'flex', 'justify-center', 'items-center', 'cursor-pointer');
   btnWrap.addEventListener('click', () => {
@@ -85,19 +85,19 @@ export function registerModal() {
   const passwordGroup = createDiv('flex', 'flex-col', 'gap-1.5');
   const labelPassword = createLabel('password', 'Password:', 'md:text-xl');
   const passwordInput = createInput('password', '*****', 'password', 'h-8', 'md:h-10', 'pl-2', 'rounded-xl', 'shadow-customShadow');
-  const passwordValidate = createDiv('text-sm', 'min-h-3.5', 'text-error');
-  passwordValidate.setAttribute('data-validate', 'password');
+  const passwordValidate = createDiv('text-sm', 'min-h-3.5');
+  passwordValidate.setAttribute('data-counter', 'password');
   passwordGroup.append(labelPassword, passwordInput, passwordValidate);
 
   const ctaGroup = createDiv('flex', 'flex-col', 'mx-auto', 'gap-5');
   const wrap = createDiv('mx-auto');
-  const cta = createInput('submit', '', '', 'uppercase', 'cursor-pointer', 'bg-primary', 'hover:bg-hoverPrimary', 'rounded-xl', 'py-3', 'px-4', 'md:px-6', 'font-serif', 'text-neutralBg', 'shadow-customShadow', 'font-medium', 'md:text-lg');
-  cta.value = 'login';
+  const cta = createInput('submit', '', 'registerBtn', 'uppercase', 'cursor-pointer', 'bg-primary', 'hover:bg-hoverPrimary', 'rounded-xl', 'py-3', 'px-4', 'md:px-6', 'font-serif', 'text-neutralBg', 'shadow-customShadow', 'font-medium', 'md:text-lg');
+  cta.value = 'register';
   wrap.append(cta);
 
   const regCta = createAnchor('#', '', '', 'text-center', 'py-2');
   const regText1 = createTextNode('Already a member? ');
-  const regText2 = createSpan('Login', 'text-secondary', 'hover:text-hoverSecondary');
+  const regText2 = createSpan('Login', 'text-secondary', 'hover:text-hoverSecondary', 'font-semibold', 'text-xl');
   const regText3 = createTextNode(' here!');
   regCta.append(regText1, regText2, regText3);
 

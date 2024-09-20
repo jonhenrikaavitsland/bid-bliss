@@ -2,6 +2,7 @@ import { loginUser } from '../../API/loginUser';
 import { registerUser } from '../../API/registerUser';
 import { modal, MSG_Email, MSG_Password } from '../../data/constants';
 import { addLiveValidation } from '../../validate/addLiveValidation';
+import { sanitizeInput } from '../../validate/sanitize/sanitizeInput';
 import { updateValidation } from '../../validate/updateValidation';
 import { validateEmail } from '../../validate/validateEmail';
 import { validatePassword } from '../../validate/validatePassword';
@@ -36,8 +37,8 @@ export async function gatherUserData() {
     registerForm.addEventListener('submit', async (event) => {
       event.preventDefault();
 
-      const email = event.target.email.value.toLowerCase().trim();
-      const name = event.target.email.value.replace(/@.*$/, '').trim();
+      const email = sanitizeInput(event.target.email.value.toLowerCase().trim());
+      const name = sanitizeInput(event.target.email.value.replace(/@.*$/, '').trim());
       const password = event.target.password.value.trim();
 
       isEmailValid = validateEmail(email);
@@ -60,8 +61,8 @@ export async function gatherUserData() {
     loginForm.addEventListener('submit', async (event) => {
       event.preventDefault();
 
-      const email = event.target.email.value.toLowerCase().trim();
-      const password = event.target.password.value.trim();
+      const email = sanitizeInput(event.target.email.value.toLowerCase().trim());
+      const password = sanitizeInput(event.target.password.value.trim());
 
       isEmailValid = validateEmail(email);
       isPasswordValid = validatePassword(password);

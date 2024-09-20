@@ -8,6 +8,7 @@ import { createNewBid } from './createNewBid';
 import { cleanListingID } from '../../data/cleanListingID';
 import { renderListings } from '../../render/renderListings';
 import { initializeListings } from '../../data/initializeListings';
+import { refreshListings } from '../../render/refreshListings';
 
 /**
  * Handles the bidding process by validating and submitting a bid for a specified listing.
@@ -64,7 +65,7 @@ export async function handleBid(event, rawListingID, bidsContainer, currentHigh)
       body: JSON.stringify({ amount: parseFloat(sanitizedBidAmount) }),
     };
 
-    const response = await fetchData(url, options, 'bid');
+    const response = await fetchData(url, options, 'bid', 'id', 'bidBtn');
 
     if (response && response.data && Array.isArray(response.data.bids)) {
       response.data.bids.reverse();
@@ -73,8 +74,7 @@ export async function handleBid(event, rawListingID, bidsContainer, currentHigh)
     const newBid = createNewBid(response.data.bids[0], sanitizedBidAmount);
     bidsContainer.prepend(newBid);
 
-    const newListings = await initializeListings();
-    renderListings(newListings);
+    await refreshListings();
 
     bid.value = '';
     bid.classList.remove('border-correct');
