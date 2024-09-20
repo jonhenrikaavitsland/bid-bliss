@@ -93,19 +93,23 @@ npm run dev
 
 ### To run tests:
 
-```runs both Jest and Cypress
+runs both Jest and Cypress
+```
 npm run test
 ```
 
-```runs Jest in terminal
+runs Jest in terminal
+```
 npm run test-unit
 ```
 
-```runs Cypress in terminal
+runs Cypress in terminal
+```
 npm run test-e2e-cli
 ```
 
-```opens Cypress in external window
+opens Cypress in external window
+```
 npm run test-e2e
 ```
 
